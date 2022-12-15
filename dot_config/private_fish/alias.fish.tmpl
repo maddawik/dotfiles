@@ -1,0 +1,69 @@
+if status --is-interactive
+  # fancy pants
+  alias git   hub
+  alias ls    'exa --icons'
+  alias watch viddy
+  abbr nv     nvim
+
+  # copy/pasta
+{{- if eq .chezmoi.os "darwin" }}
+  alias c pbcopy
+  alias v pbpaste
+{{- else }}
+  alias c 'xclip -selection clipboard'
+  alias v 'xclip -selection clipboard -o'
+{{- end }}
+
+  # tmux
+  abbr tm  tmux
+  abbr tma tmux at
+  abbr tml tmux ls
+
+  # ls
+  abbr l   ls
+  abbr ll  ls -l
+  abbr la  ls -a
+  abbr lla ls -la
+  abbr lt  ls -l --tree
+  abbr lt2 ls -l --tree --level=2
+  abbr lt3 ls -l --tree --level=3
+
+  # git
+  abbr gs  git status
+  abbr gco git checkout
+  abbr gsw git switch
+  abbr gbr git switch -c
+  abbr ga  git add
+  abbr gc  git commit -m
+  abbr gf  git fetch
+  abbr gp  git pull
+  abbr gP  git push
+
+  # dotfiles
+  abbr cm   chezmoi
+  abbr cma  chezmoi add
+  abbr cme  chezmoi edit
+  abbr cmE  chezmoi edit --apply
+  abbr cms  chezmoi status
+  abbr cmd  chezmoi diff
+  abbr cmA  chezmoi -v apply
+  abbr cmcd chezmoi cd
+
+  # lazygit
+  alias lz  lazygit
+  # lazychezmoi
+  alias lzc "lz --path {{ .chezmoi.homeDir }}/.dotfiles"
+
+  # github cli
+  abbr ghb gh browse
+  abbr ghd gh dash
+  abbr ghp gh pr create
+
+  # taskwarrior
+  alias tt taskwarrior-tui
+  abbr ta  task add
+  abbr tl  task list
+
+  # other
+  alias reload 'exec fish'
+end
