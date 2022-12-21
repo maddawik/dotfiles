@@ -112,7 +112,6 @@ return packer.startup(function(use)
 
   -- Treesitter
   use "nvim-treesitter/nvim-treesitter"
-  use "blankname/vim-fish"
 
   -- Keep this at the end
   if PACKER_BOOTSTRAP then
