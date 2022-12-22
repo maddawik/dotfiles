@@ -23,7 +23,7 @@ if status --is-interactive
   abbr l   ls
   abbr ll  ls -l
   abbr la  ls -a
-  abbr lla ls -la
+  abbr lla ls -al
   abbr lt  ls -l --tree
   abbr lt2 ls -l --tree --level=2
   abbr lt3 ls -l --tree --level=3
@@ -42,12 +42,11 @@ if status --is-interactive
   # dotfiles
   abbr cm   chezmoi
   abbr cma  chezmoi add
-  abbr cme  chezmoi edit
-  abbr cmE  chezmoi edit --apply
+  abbr cme  chezmoi edit --apply
   abbr cms  chezmoi status
   abbr cmd  chezmoi diff
   abbr cmA  chezmoi -v apply
-  abbr cmcd chezmoi cd
+  abbr cmcd cd {{ .chezmoi.homeDir }}/.dotfiles
 
   # lazygit
   alias lz  lazygit
