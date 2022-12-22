@@ -156,7 +156,8 @@ local mappings = {
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     C = { "<cmd>Telescope commands<cr>", "Commands" },
     f = { "<cmd>Telescope find_files<cr>", "Files", },
-    w = { "<cmd>Telescope live_grep theme=ivy<cr>", "Words" },
+    w = { "<cmd>Telescope grep_string<cr>", "Word" },
+    g = { "<cmd>Telescope live_grep<cr>", "Grep" },
     n = { "<cmd>Telescope noice wrap_results=true theme=dropdown<cr>", "Notifications" },
     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
     S = {

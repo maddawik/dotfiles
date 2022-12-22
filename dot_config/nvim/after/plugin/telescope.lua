@@ -12,7 +12,10 @@ telescope.setup {
     selection_caret = " ",
     path_display = { "smart" },
     file_ignore_patterns = { ".git/", "node_modules" },
-    layout_config = { horizontal = { preview_width = 0.7 }},
+    layout_strategy = "vertical",
+    layout_config = {
+      vertical = { width = 0.7 }
+    },
 
     mappings = {
       i = {
