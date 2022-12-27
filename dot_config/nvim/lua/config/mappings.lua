@@ -142,12 +142,12 @@ local leader = {
 	s = {
 		name = "Search",
 		c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-		r = { "<cmd>Telescope oldfiles theme=dropdown<cr>", "Recent File" },
+		r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
 		R = { "<cmd>Telescope registers<cr>", "Registers" },
 		f = { "<cmd>Telescope find_files<cr>", "Files" },
 		w = { "<cmd>Telescope grep_string<cr>", "Word" },
 		g = { "<cmd>Telescope live_grep<cr>", "Grep" },
-		n = { "<cmd>Telescope noice wrap_results=true<cr>", "Notifications" },
+		n = { "<cmd>Telescope noice<cr>", "Notifications" },
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
 		S = {
 			"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
