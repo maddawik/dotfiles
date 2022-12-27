@@ -1,3 +1,6 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -13,7 +16,6 @@ vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.swapfile = false
 vim.opt.undofile = true
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 vim.opt.wrap = false
 vim.opt.linebreak = true
@@ -32,7 +34,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 
-vim.opt.showmode = true
+vim.opt.showmode = false
 vim.opt.showcmd = true
 vim.opt.cmdheight = 1
 
@@ -49,5 +51,5 @@ vim.opt.laststatus = 3
 vim.opt.numberwidth = 4
 vim.opt.pumheight = 10
 
--- vim.opt.guifont = "monospace:h17"
--- vim.opt.whichwrap = "bs<>[]hl"
+vim.opt.guifont = "FiraCode Nerd Font:h11"
+vim.opt.grepprg = "rg --vimgrep"
