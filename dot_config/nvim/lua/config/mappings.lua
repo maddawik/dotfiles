@@ -40,20 +40,20 @@ wk.setup({
 local opts = { silent = true }
 
 -- Better window navigation
-vim.keymap.set("n", "<C-h>", ":SmartCursorMoveLeft<CR>", opts)
-vim.keymap.set("n", "<C-j>", ":SmartCursorMoveDown<CR>", opts)
-vim.keymap.set("n", "<C-k>", ":SmartCursorMoveUp<CR>", opts)
-vim.keymap.set("n", "<C-l>", ":SmartCursorMoveRight<CR>", opts)
+vim.keymap.set("n", "<C-h>", ":SmartCursorMoveLeft<cr>", opts)
+vim.keymap.set("n", "<C-j>", ":SmartCursorMoveDown<cr>", opts)
+vim.keymap.set("n", "<C-k>", ":SmartCursorMoveUp<cr>", opts)
+vim.keymap.set("n", "<C-l>", ":SmartCursorMoveRight<cr>", opts)
 
 -- Resize with arrows
-vim.keymap.set("n", "<C-Up>", ":SmartResizeUp<CR>", opts)
-vim.keymap.set("n", "<C-Down>", ":SmartResizeDown<CR>", opts)
-vim.keymap.set("n", "<C-Left>", ":SmartResizeLeft<CR>", opts)
-vim.keymap.set("n", "<C-Right>", ":SmartResizeRight<CR>", opts)
+vim.keymap.set("n", "<C-Up>", ":SmartResizeUp<cr>", opts)
+vim.keymap.set("n", "<C-Down>", ":SmartResizeDown<cr>", opts)
+vim.keymap.set("n", "<C-Left>", ":SmartResizeLeft<cr>", opts)
+vim.keymap.set("n", "<C-Right>", ":SmartResizeRight<cr>", opts)
 
 -- Navigate buffers
-vim.keymap.set("n", "<S-l>", ":bnext<CR>", opts)
-vim.keymap.set("n", "<S-h>", ":bprevious<CR>", opts)
+vim.keymap.set("n", "<S-l>", ":bnext<cr>", opts)
+vim.keymap.set("n", "<S-h>", ":bprevious<cr>", opts)
 
 -- Press jk fast to enter
 vim.keymap.set("i", "jk", "<ESC>", opts)
@@ -70,15 +70,15 @@ vim.keymap.set("i", "<C-s>", "<cmd>:w<cr><esc>", opts)
 vim.keymap.set("n", "<C-s>", "<cmd>:w<cr><esc>", opts)
 
 local leader = {
-	[" "] = { "<cmd>Telescope find_files<CR>", "Find Files" },
-	["c"] = { "<cmd>Bdelete<CR>", "Close Buffer" },
-	["C"] = { "<cmd>Bdelete!<CR>", "Nuke Buffer" },
+	[" "] = { "<cmd>Telescope find_files<cr>", "Find Files" },
+	["c"] = { "<cmd>Bdelete<cr>", "Close Buffer" },
+	["C"] = { "<cmd>Bdelete!<cr>", "Nuke Buffer" },
 	["d"] = { "<cmd>Alpha<cr>", "Dashboard" },
 	["e"] = { "<cmd>Neotree toggle<cr>", "Filetree" },
 	["u"] = { "<cmd>UndotreeToggle<cr>", "Undotree" },
-	["w"] = { "<cmd>w!<CR>", "Save" },
-	["q"] = { "<cmd>q!<CR>", "Quit" },
-	-- ["r"] = { "<cmd>Telescope oldfiles theme=dropdown<cr>", "Recent" },
+	["n"] = { "<cmd>ene<cr>", "New File" },
+	["w"] = { "<cmd>w!<cr>", "Save" },
+	["q"] = { "<cmd>q!<cr>", "Quit" },
 
 	--b = {
 	--	name = "Buffer",
@@ -96,20 +96,21 @@ local leader = {
 		f = { "<cmd>:Telescope filetypes<cr>", "File Types" },
 		o = { "<cmd>:Telescope vim_options<cr>", "Options" },
 		a = { "<cmd>:Telescope autocommands<cr>", "Auto Commands" },
-		p = {
-			name = "Packages",
-			c = { "<cmd>Lazy check<cr>", "Lazy Check" },
-			x = { "<cmd>Lazy clean<cr>", "Lazy Clean" },
-			h = { "<cmd>Lazy home<cr>", "Lazy Home" },
-			d = { "<cmd>Lazy debug<cr>", "Lazy Debug" },
-			i = { "<cmd>Lazy install<cr>", "Lazy Install" },
-			l = { "<cmd>Lazy log<cr>", "Lazy Log" },
-			p = { "<cmd>Lazy profile<cr>", "Lazy Profile" },
-			r = { "<cmd>Lazy restore<cr>", "Lazy Restore" },
-			s = { "<cmd>Lazy sync<cr>", "Lazy Sync" },
-			u = { "<cmd>Lazy update<cr>", "Lazy Update" },
-			m = { "<cmd>Mason<cr>", "Mason" },
-		},
+	},
+
+	p = {
+		name = "Packages",
+		c = { "<cmd>Lazy check<cr>", "Lazy Check" },
+		x = { "<cmd>Lazy clean<cr>", "Lazy Clean" },
+		h = { "<cmd>Lazy home<cr>", "Lazy Home" },
+		d = { "<cmd>Lazy debug<cr>", "Lazy Debug" },
+		i = { "<cmd>Lazy install<cr>", "Lazy Install" },
+		l = { "<cmd>Lazy log<cr>", "Lazy Log" },
+		p = { "<cmd>Lazy profile<cr>", "Lazy Profile" },
+		r = { "<cmd>Lazy restore<cr>", "Lazy Restore" },
+		s = { "<cmd>Lazy sync<cr>", "Lazy Sync" },
+		u = { "<cmd>Lazy update<cr>", "Lazy Update" },
+		m = { "<cmd>Mason<cr>", "Mason" },
 	},
 
 	g = {
@@ -139,11 +140,11 @@ local leader = {
 		},
 	},
 
-	s = {
-		name = "Search",
+	f = {
+		name = "Find",
 		c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-		r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
-		R = { "<cmd>Telescope registers<cr>", "Registers" },
+		o = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
+		r = { "<cmd>Telescope registers<cr>", "Registers" },
 		f = { "<cmd>Telescope find_files<cr>", "Files" },
 		w = { "<cmd>Telescope grep_string<cr>", "Word" },
 		g = { "<cmd>Telescope live_grep<cr>", "Grep" },
@@ -157,7 +158,7 @@ local leader = {
 
 	t = {
 		name = "Toggle",
-		h = { "<cmd>nohlsearch<CR>", "No Highlight" },
+		h = { "<cmd>nohlsearch<cr>", "No Highlight" },
 		f = {
 			require("config.plugins.lsp.formatting").toggle,
 			"Format on Save",
