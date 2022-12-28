@@ -16,6 +16,7 @@ local M = {
 
 function M.config()
 	local cmp = require("cmp")
+	local luasnip = require("luasnip")
 
 	cmp.setup({
 		completion = {
@@ -42,19 +43,12 @@ function M.config()
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif luasnip.expandable() then
-					luasnip.expand()
 				elseif luasnip.expand_or_jumpable() then
 					luasnip.expand_or_jump()
-				elseif check_backspace() then
-					fallback()
 				else
 					fallback()
 				end
-			end, {
-				"i",
-				"s",
-			}),
+			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_prev_item()
@@ -63,10 +57,7 @@ function M.config()
 				else
 					fallback()
 				end
-			end, {
-				"i",
-				"s",
-			}),
+			end, { "i", "s" }),
 		}),
 		sources = cmp.config.sources({
 			{ name = "nvim_lsp" },
@@ -107,5 +98,7 @@ function M.config()
 		}),
 	})
 end
+
+function test() end
 
 return M
