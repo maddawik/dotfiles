@@ -6,7 +6,7 @@ function M.config()
   require("notify").setup({
     timeout = 2000,
     level = vim.log.levels.INFO,
-    fps = 60,
+    fps = 20,
     max_height = function()
       return math.floor(vim.o.lines * 0.75)
     end,
