@@ -1,14 +1,13 @@
 local M = {
-  "rebelot/kanagawa.nvim",
+  -- "rebelot/kanagawa.nvim",
+  "folke/tokyonight.nvim",
   lazy = false
 }
 
 function M.config()
-  require("kanagawa").setup({
-    transparent = false,
-  })
+  require("tokyonight").setup({})
 
-  vim.cmd("colorscheme kanagawa")
+  vim.cmd("colorscheme tokyonight-moon")
 end
 
 return M
