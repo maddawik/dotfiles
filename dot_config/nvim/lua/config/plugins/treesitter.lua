@@ -15,6 +15,7 @@ function M.config()
 			"markdown",
 			"markdown_inline",
 			"python",
+			"rust",
 			"yaml",
 			"vhs"
 		},

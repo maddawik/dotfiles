@@ -5,6 +5,7 @@ local M = {
 
 M.tools = {
   "prettierd",
+  "rustfmt",
   "stylua",
   "shellcheck",
   "shfmt",
