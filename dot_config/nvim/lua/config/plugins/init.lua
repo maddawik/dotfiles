@@ -27,7 +27,6 @@ return {
     cmd =  "SymbolsOutline",
     config = function() require('symbols-outline').setup() end
   },
-
   {
     "mrjones2014/smart-splits.nvim",
     event = "VeryLazy"
