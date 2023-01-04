@@ -34,8 +34,9 @@ wk.setup({
 		spacing = 3, -- spacing between columns
 		align = "center", -- align columns left, center or right
 	},
-	key_labels = { ["<leader>"] = "SPC" },
+	key_labels = { ["<leader>"] = "Space" },
 })
+
 
 local opts = { silent = true }
 
