@@ -168,6 +168,8 @@ local leader = {
 		name = "Toggle",
 		h = { "<cmd>nohlsearch<cr>", "No Highlight" },
 		t = { "<cmd>ToggleTerm<cr>", "Terminal" },
+    ["-"] = { "<cmd>ToggleTerm direction=horizontal<cr>", "Horizontal Terminal" },
+    ["\\"] = { "<cmd>ToggleTerm direction=vertical<cr>", "Vertical Terminal" },
 		l = { "<cmd>lua _lazygit_toggle()<cr>", "Lazygit" },
 		f = {
 			require("config.plugins.lsp.formatting").toggle,
