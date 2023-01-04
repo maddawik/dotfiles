@@ -4,8 +4,8 @@ local util = require("util")
 vim.o.timeoutlen = 300
 
 wk.setup({
-	show_help = false,
-	show_keys = false,
+	show_help = true,
+	show_keys = true,
 	triggers = "auto",
 	plugins = {
 		spelling = {
@@ -106,7 +106,7 @@ local leader = {
 	},
 
 	p = {
-		name = "Packages",
+		name = "Plugins",
 		c = { "<cmd>Lazy check<cr>", "Lazy Check" },
 		x = { "<cmd>Lazy clean<cr>", "Lazy Clean" },
 		h = { "<cmd>Lazy home<cr>", "Lazy Home" },
