@@ -45,6 +45,13 @@ vim.keymap.set("n", "<C-j>", ":SmartCursorMoveDown<cr>", opts)
 vim.keymap.set("n", "<C-k>", ":SmartCursorMoveUp<cr>", opts)
 vim.keymap.set("n", "<C-l>", ":SmartCursorMoveRight<cr>", opts)
 
+vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
+vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
+vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
+vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
+vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
+
 -- Resize with arrows
 vim.keymap.set("n", "<C-Up>", ":SmartResizeUp<cr>", opts)
 vim.keymap.set("n", "<C-Down>", ":SmartResizeDown<cr>", opts)
@@ -118,6 +125,7 @@ local leader = {
 		c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
 		s = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+		g = { "<cmd>lua _lazygit_toggle()<cr>", "Lazygit" },
 		d = {
 			"<cmd>Gitsigns diffthis HEAD<cr>",
 			"Diff",
@@ -159,6 +167,8 @@ local leader = {
 	t = {
 		name = "Toggle",
 		h = { "<cmd>nohlsearch<cr>", "No Highlight" },
+		t = { "<cmd>ToggleTerm<cr>", "Terminal" },
+		l = { "<cmd>lua _lazygit_toggle()<cr>", "Lazygit" },
 		f = {
 			require("config.plugins.lsp.formatting").toggle,
 			"Format on Save",
