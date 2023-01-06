@@ -126,7 +126,7 @@ local leader = {
 		c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
 		s = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-		g = { "<cmd>lua _lazygit_toggle()<cr>", "Lazygit" },
+		g = { "<cmd>lua _Lazygit_toggle()<cr>", "Lazygit" },
 		d = {
 			"<cmd>Gitsigns diffthis HEAD<cr>",
 			"Diff",
@@ -171,7 +171,7 @@ local leader = {
 		t = { "<cmd>ToggleTerm<cr>", "Terminal" },
     ["-"] = { "<cmd>ToggleTerm direction=horizontal<cr>", "Horizontal Terminal" },
     ["\\"] = { "<cmd>ToggleTerm direction=vertical<cr>", "Vertical Terminal" },
-		l = { "<cmd>lua _lazygit_toggle()<cr>", "Lazygit" },
+		l = { "<cmd>lua _Lazygit_toggle()<cr>", "Lazygit" },
 		f = {
 			require("config.plugins.lsp.formatting").toggle,
 			"Format on Save",
