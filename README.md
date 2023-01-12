@@ -1,15 +1,30 @@
-# Dotfiles
+# dots
 
 These are my dotfiles, managed using [chezmoi](https://www.chezmoi.io/)
 
-## Fish
+## Setup
 
-[Fish Config](./dot_config/private_fish/)
+With chezmoi:
 
-## Neovim
+```sh
+chezmoi init Mawdac
+```
 
-[Neovim Config](./dot_config/nvim/)
+Batteries included:
 
-## Tmux
+```sh
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply Mawdac
+```
 
-[Tmux Config](./dot_tmux.conf.local)
+Transitory environments:
+
+```sh
+# Install dotfiles - then remove chezmoi, its source-dir and its config-dir
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --one-shot Mawdac
+```
+
+1Password integration:
+
+```sh
+eval $(op signin)
+```
