@@ -406,8 +406,8 @@ set -g renumber-windows on
 set -gu prefix
 unbind C-a
 unbind C-b
-set -g prefix C-space
-bind C-space send-prefix
+set -g prefix C-a
+bind C-a send-prefix
 
 # Better split commands
 bind | split-window -hc "#{pane_current_path}"
