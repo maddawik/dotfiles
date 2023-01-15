@@ -46,6 +46,7 @@ vim.keymap.set("n", "<C-j>", ":SmartCursorMoveDown<cr>", opts)
 vim.keymap.set("n", "<C-k>", ":SmartCursorMoveUp<cr>", opts)
 vim.keymap.set("n", "<C-l>", ":SmartCursorMoveRight<cr>", opts)
 
+-- Better terminal navigation
 vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
 vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
 vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
@@ -127,12 +128,6 @@ local leader = {
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
 		s = { "<cmd>Telescope git_status<cr>", "Open changed file" },
 		g = { "<cmd>lua _Lazygit_toggle()<cr>", "Lazygit" },
-		d = {
-			"<cmd>Gitsigns diffthis HEAD<cr>",
-			"Diff",
-		},
-		-- https://github.com/sindrets/diffview.nvim
-		-- d = { "<cmd>DiffviewOpen<cr>", "DiffView" },
 		h = {
 			name = "Hunk",
 			j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },

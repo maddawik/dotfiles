@@ -4,7 +4,6 @@ local M = {
 
 	dependencies = {
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-		--{ "nvim-telescope/telescope-file-browser.nvim" },
 	},
 }
 
@@ -50,7 +49,6 @@ function M.config()
 		},
 	})
 	telescope.load_extension("fzf")
-	--telescope.load_extension("file_browser")
 	telescope.load_extension("noice")
 end
 
