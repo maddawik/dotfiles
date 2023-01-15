@@ -26,6 +26,10 @@ function mini.pairs()
   require("mini.pairs").setup({})
 end
 
+function mini.move()
+  require("mini.move").setup()
+end
+
 function mini.comment()
   require("mini.comment").setup({
     hooks = {
@@ -39,6 +43,7 @@ end
 function mini.config()
   mini.pairs()
   mini.comment()
+  mini.move()
   mini.animate()
 end
 
