@@ -1,7 +1,7 @@
 local M = {
   -- "rebelot/kanagawa.nvim",
   "folke/tokyonight.nvim",
-  lazy = false
+  lazy = false,
 }
 
 function M.config()

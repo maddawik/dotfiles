@@ -27,7 +27,7 @@ function M.toggle(option, silent)
   end
 end
 
-local Terminal  = require('toggleterm.terminal').Terminal
+local Terminal = require("toggleterm.terminal").Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
 
 function _Lazygit_toggle()

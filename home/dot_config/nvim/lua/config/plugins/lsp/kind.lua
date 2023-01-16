@@ -1,4 +1,3 @@
-
 local M = {}
 
 M.icons = {
@@ -11,22 +10,22 @@ M.icons = {
   Keyword = " ",
   Method = "ƒ ",
   Value = " ",
-	Text = " ",
-	Variable = " ",
-	Class = " ",
-	Interface = " ",
-	Module = " ",
-	Property = " ",
-	Unit = " ",
-	Snippet = " ",
-	Color = " ",
-	File = " ",
-	Reference = " ",
-	Folder = " ",
-	Struct = " ",
-	Event = " ",
-	Operator = " ",
-	TypeParameter = " ",
+  Text = " ",
+  Variable = " ",
+  Class = " ",
+  Interface = " ",
+  Module = " ",
+  Property = " ",
+  Unit = " ",
+  Snippet = " ",
+  Color = " ",
+  File = " ",
+  Reference = " ",
+  Folder = " ",
+  Struct = " ",
+  Event = " ",
+  Operator = " ",
+  TypeParameter = " ",
 }
 
 function M.cmp_format()
@@ -36,13 +35,13 @@ function M.cmp_format()
       vim_item.kind = M.icons[vim_item.kind] .. vim_item.kind
     end
     vim_item.menu = ({
-				nvim_lsp = "",
-				nvim_lua = "",
-				luasnip = "",
-				buffer = "",
-				path = "",
-				emoji = "",
-			})[entry.source.name]
+      nvim_lsp = "",
+      nvim_lua = "",
+      luasnip = "",
+      buffer = "",
+      path = "",
+      emoji = "",
+    })[entry.source.name]
     return vim_item
   end
 end

@@ -6,19 +6,19 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("config.plugins", {
-	defaults = { lazy = true },
-	install = { colorscheme = { "tokyonight", "habamax" } },
-	checker = { enabled = true },
-	performance = {
-		rtp = {
-			disabled_plugins = {
-				"gzip",
-				"netrwPlugin",
-				"tarPlugin",
-				"tohtml",
-				"tutor",
-				"zipPlugin",
-			},
-		},
-	},
+  defaults = { lazy = true },
+  install = { colorscheme = { "tokyonight", "habamax" } },
+  checker = { enabled = true },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
 })
