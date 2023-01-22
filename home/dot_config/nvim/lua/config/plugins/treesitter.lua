@@ -16,6 +16,7 @@ function M.config()
       "markdown_inline",
       "python",
       "rust",
+      "terraform",
       "yaml",
       "vhs",
     },
