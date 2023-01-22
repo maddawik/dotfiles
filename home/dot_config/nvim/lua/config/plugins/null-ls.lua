@@ -12,7 +12,6 @@ function M.setup()
       nls.builtins.formatting.stylua,
       nls.builtins.formatting.fish_indent,
       nls.builtins.formatting.shfmt,
-      nls.builtins.diagnostics.markdownlint,
     },
   })
 end
