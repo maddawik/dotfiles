@@ -19,12 +19,10 @@ function M.config()
     [[                                                                       ]],
   }
   dashboard.section.buttons.val = {
-    dashboard.button("<Leader>n", " " .. " New file", ":ene <CR>"),
-    dashboard.button("<Leader><Space>", " " .. " Find file", ":Telescope find_files <CR>"),
-    dashboard.button("<Leader>fg", " " .. " Find grep", ":Telescope live_grep <CR>"),
-    dashboard.button("<Leader>fp", " " .. " Find project", ":Telescope projects<CR>"),
-    dashboard.button("<Leader>fo", " " .. " Recent files", ":Telescope oldfiles <CR>"),
-    dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+    dashboard.button("<Leader>n", " " .. " New file", "<cmd>ene<cr>"),
+    dashboard.button("<Leader><Space>", " " .. " Find file", "<cmd>Telescope find_files<cr>"),
+    dashboard.button("<Leader>fg", " " .. " Find grep", "<cmd>Telescope live_grep<cr>"),
+    dashboard.button("<Leader>fo", " " .. " Recent files", "<cmd>Telescope oldfiles<cr>"),
   }
 
   dashboard.section.footer.opts.hl = "Type"

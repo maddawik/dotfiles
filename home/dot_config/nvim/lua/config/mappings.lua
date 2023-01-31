@@ -63,7 +63,7 @@ vim.keymap.set("n", "<C-Right>", ":SmartResizeRight<cr>", opts)
 vim.keymap.set("n", "<S-l>", ":bnext<cr>", opts)
 vim.keymap.set("n", "<S-h>", ":bprevious<cr>", opts)
 
--- Press jk fast to enter
+-- Exit insert mode with jk
 vim.keymap.set("i", "jk", "<ESC>", opts)
 
 -- Stay in indent mode
@@ -86,7 +86,6 @@ local leader = {
   ["u"] = { "<cmd>UndotreeToggle<cr>", "Undotree" },
   ["n"] = { "<cmd>ene<cr>", "New File" },
   ["w"] = { "<cmd>w!<cr>", "Save" },
-  ["q"] = { "<cmd>q!<cr>", "Quit" },
 
   --b = {
   --	name = "Buffer",
@@ -108,15 +107,8 @@ local leader = {
 
   p = {
     name = "Plugins",
-    c = { "<cmd>Lazy check<cr>", "Lazy Check" },
-    x = { "<cmd>Lazy clean<cr>", "Lazy Clean" },
     h = { "<cmd>Lazy home<cr>", "Lazy Home" },
-    d = { "<cmd>Lazy debug<cr>", "Lazy Debug" },
-    i = { "<cmd>Lazy install<cr>", "Lazy Install" },
-    l = { "<cmd>Lazy log<cr>", "Lazy Log" },
-    p = { "<cmd>Lazy profile<cr>", "Lazy Profile" },
     r = { "<cmd>Lazy restore<cr>", "Lazy Restore" },
-    s = { "<cmd>Lazy sync<cr>", "Lazy Sync" },
     u = { "<cmd>Lazy update<cr>", "Lazy Update" },
     m = { "<cmd>Mason<cr>", "Mason" },
   },
@@ -157,6 +149,11 @@ local leader = {
       "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
       "Workspace Symbols",
     },
+  },
+
+  q = {
+    name = "Quit",
+    q = { "<cmd>qa<cr>", "Quit All" },
   },
 
   t = {
