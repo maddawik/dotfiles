@@ -1,72 +1,64 @@
-command_timeout = 2000
+format = """
+[](#a3aed2)\
+[  ](bg:#a3aed2 fg:#090c0c)\
+[](bg:#769ff0 fg:#a3aed2)\
+$directory\
+[](fg:#769ff0 bg:#394260)\
+$git_branch\
+$git_status\
+[](fg:#394260 bg:#212736)\
+$nodejs\
+$rust\
+$golang\
+$php\
+[](fg:#212736 bg:#1d2230)\
+$time\
+[ ](fg:#1d2230)\
+\n$character"""
 
-# Don't print a new line at the start of the prompt
-add_newline = true
+[directory]
+style = "fg:#e3e5e5 bg:#769ff0"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
 
-# makes prompt a single line
-# [line_break]
-# disabled = true
+[directory.substitutions]
+"Documents" = " "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
 
-# Disable the package module, hiding it from the prompt completely
-[package]
-disabled = true
-
-[cmd_duration]
-min_time = 3_000                    # Show command duration over 10,000 milliseconds (= 10 sec)
-format = "took [$duration]($style)"
-
-# These symbols will only show when battery levels are 20% or less
-[battery]
-charging_symbol = "⚡️"
-discharging_symbol = "💀"
-
-[[battery.display]] # "bold red" style when capacity is between 0% and 20%
-threshold = 20
-style = "bold red"
-
-# Clear visibility for exit codes
-[status]
-style = "bg:red"
-symbol = "💣"
-format = '[\[$symbol$status\]]($style) '
-map_symbol = true
-pipestatus = true
-disabled = false
-
-[character]
-error_symbol = "[X](bold red) "
-
-# Git branch
 [git_branch]
-symbol = "🌱 "
+symbol = ""
+style = "bg:#394260"
+format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
 
-# Git commit hash
-[git_commit]
-commit_hash_length = 4
-tag_symbol = "🔖 "
-
-# Git state
-[git_state]
-format = '[\($state( $progress_current of $progress_total)\)]($style) '
-cherry_pick = "[🍒 PICKING](bold red)"
-
-# Git status icons
 [git_status]
-conflicted = "🏳"
-ahead = "🏎💨"
-behind = "😰"
-diverged = "😵"
-untracked = "🤷"
-stashed = "📦"
-modified = "📝"
-staged = '[++\($count\)](green)'
-renamed = "👅"
-deleted = "🗑"
+style = "bg:#394260"
+format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[golang]
+symbol = "ﳑ"
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[php]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [time]
 disabled = false
-# format = '🕙 $time($style) '
-# time_format = "%T"
-# use_12hr = true
-# utc_time_offset = "-5"
-# time_range = "10:00:00-14:00:00"
+time_format = "%R" # Hour:Minute Format
+style = "bg:#1d2230"
+format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
