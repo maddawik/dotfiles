@@ -21,6 +21,9 @@ if status is-interactive
 
     # 1password
     op completion fish | source
+
+    # starship
+    starship init fish | source
 end
 
 # alias and abbr
