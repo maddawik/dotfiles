@@ -83,7 +83,6 @@ local leader = {
   ["C"] = { "<cmd>Bdelete!<cr>", "Nuke Buffer" },
   ["d"] = { "<cmd>Alpha<cr>", "Dashboard" },
   ["e"] = { "<cmd>Neotree toggle<cr>", "Filetree" },
-  ["u"] = { "<cmd>UndotreeToggle<cr>", "Undotree" },
   ["n"] = { "<cmd>ene<cr>", "New File" },
   ["w"] = { "<cmd>w!<cr>", "Save" },
 
@@ -153,7 +152,7 @@ local leader = {
 
   q = {
     name = "Quit",
-    q = { "<cmd>qa<cr>", "Quit All" },
+    q = { "<cmd>q!<cr>", "Quit!" },
   },
 
   t = {

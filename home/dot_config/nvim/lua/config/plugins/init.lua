@@ -5,8 +5,6 @@ return {
   "williamboman/mason-lspconfig.nvim",
   "folke/which-key.nvim",
   "stevearc/dressing.nvim",
-  "catppuccin/nvim",
-  "folke/tokyonight.nvim",
   {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
@@ -17,10 +15,6 @@ return {
         },
       })
     end,
-  },
-  {
-    "mbbill/undotree",
-    cmd = "UndotreeToggle",
   },
   {
     "simrat39/symbols-outline.nvim",

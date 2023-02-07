@@ -99,6 +99,4 @@ function M.config()
   })
 end
 
-function test() end
-
 return M
