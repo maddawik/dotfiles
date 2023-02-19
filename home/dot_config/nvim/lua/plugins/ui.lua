@@ -5,6 +5,7 @@ return {
   { "folke/tokyonight.nvim", lazy = false },
   { "overcache/NeoSolarized", lazy = false },
   { "rebelot/kanagawa.nvim", lazy = false },
+  { "nyoom-engineering/oxocarbon.nvim", lazy = false },
 
   -- better splits and tmux navigation
   {
