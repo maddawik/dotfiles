@@ -12,7 +12,6 @@ vim.keymap.set("n", "<C-k>", "<cmd>SmartCursorMoveUp<cr>", opts)
 vim.keymap.set("n", "<C-l>", "<cmd>SmartCursorMoveRight<cr>", opts)
 
 -- Better terminal navigation
-vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
 vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
 vim.keymap.set("t", "<C-h>", [[<cmd>wincmd h<CR>]], opts)
 vim.keymap.set("t", "<C-j>", [[<cmd>wincmd j<CR>]], opts)
