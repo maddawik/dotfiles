@@ -23,3 +23,7 @@ vim.keymap.set("n", "<C-Up>", "<cmd>SmartResizeUp<cr>", opts)
 vim.keymap.set("n", "<C-Down>", "<cmd>SmartResizeDown<cr>", opts)
 vim.keymap.set("n", "<C-Left>", "<cmd>SmartResizeLeft<cr>", opts)
 vim.keymap.set("n", "<C-Right>", "<cmd>SmartResizeRight<cr>", opts)
+
+-- Code-folding
+vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
