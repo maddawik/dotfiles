@@ -1,15 +1,16 @@
 return {
-  -- colors
-  { "catppuccin/nvim", lazy = false },
+  -- colorschemes
   { "ellisonleao/gruvbox.nvim", lazy = false },
   { "folke/tokyonight.nvim", lazy = false },
   { "overcache/NeoSolarized", lazy = false },
   { "rebelot/kanagawa.nvim", lazy = false },
   { "nyoom-engineering/oxocarbon.nvim", lazy = false },
 
-  -- better splits and tmux navigation
+  -- set default colors
   {
-    "mrjones2014/smart-splits.nvim",
-    event = "VeryLazy",
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "catppuccin-mocha",
+    },
   },
 }
