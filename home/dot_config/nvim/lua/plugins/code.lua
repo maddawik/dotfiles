@@ -51,13 +51,18 @@ return {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "ansible-lint",
         "stylua",
         "shellcheck",
         "shfmt",
         "flake8",
       },
     },
+  },
+
+  -- ansible-lint
+  {
+    "pearofducks/ansible-vim",
+    lazy = false,
   },
 
   -- Use <tab> for completion and snippets (supertab)
