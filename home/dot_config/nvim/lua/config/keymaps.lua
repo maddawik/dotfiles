@@ -33,7 +33,3 @@ map("n", "<C-Up>", "<cmd>SmartResizeUp<cr>")
 map("n", "<C-Down>", "<cmd>SmartResizeDown<cr>")
 map("n", "<C-Left>", "<cmd>SmartResizeLeft<cr>")
 map("n", "<C-Right>", "<cmd>SmartResizeRight<cr>")
-
--- Code-folding
-map("n", "zR", require("ufo").openAllFolds)
-map("n", "zM", require("ufo").closeAllFolds)
