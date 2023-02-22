@@ -46,11 +46,25 @@ return {
     end,
   },
 
+  -- null-ls
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    opts = function()
+      local nls = require("null-ls")
+      return {
+        sources = {
+          nls.builtins.diagnostics.actionlint,
+        },
+      }
+    end,
+  },
+
   -- mason
   {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
+        "actionlint",
         "stylua",
         "shellcheck",
         "shfmt",
@@ -62,7 +76,10 @@ return {
   -- ansible-lint
   {
     "pearofducks/ansible-vim",
-    lazy = false,
+    event = {
+      "BufReadPre",
+      "BufNewFile",
+    },
   },
 
   -- Use <tab> for completion and snippets (supertab)
@@ -108,8 +125,8 @@ return {
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
+          elseif luasnip.jumpable( -1) then
+            luasnip.jump( -1)
           else
             fallback()
           end

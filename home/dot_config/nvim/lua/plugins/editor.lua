@@ -45,14 +45,27 @@ return {
     "sindrets/diffview.nvim",
     cmd = { "DiffviewOpen" },
     config = true,
-    keys = { { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "DiffView" } },
+    keys = {
+      { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "DiffView" }
+    },
   },
 
   -- Symbol outline
   {
     "simrat39/symbols-outline.nvim",
     cmd = "SymbolsOutline",
-    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
+    keys = {
+      { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" }
+    },
     config = true,
+  },
+
+  {
+    "m4xshen/smartcolumn.nvim",
+    opts = {},
+    event = {
+      "BufReadPre",
+      "BufNewFile",
+    },
   },
 }

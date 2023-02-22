@@ -1,5 +1,6 @@
 -- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Default keymaps that are always set:
+-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
@@ -12,7 +13,7 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
--- Exit insert mode with jk
+-- Exit insert and terminal mode with jk
 map("i", "jk", "<ESC>")
 map("t", "jk", [[<C-\><C-n>]])
 
