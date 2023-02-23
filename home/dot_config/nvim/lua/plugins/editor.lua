@@ -32,12 +32,34 @@ return {
     },
     opts = {
       defaults = {
-        -- layout_strategy = "horizontal",
-        -- layout_config = { prompt_position = "top" },
-        -- sorting_strategy = "ascending",
         winblend = 7,
       },
     },
+    keys = {
+      -- switch the keymap to grep files and words
+      { "<leader>/",  false },
+      { "<leader>sg", false },
+      { "<leader>sG", false },
+      { "<leader>sw", false },
+      { "<leader>sW", false },
+      { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Find word" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>",   desc = "Find grep" },
+      -- add a keymap to browse plugin files
+      {
+        "<leader>fp",
+        function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
+        desc = "Find Plugin File",
+      },
+    },
+  },
+
+  -- Which-key
+  {
+    "folke/which-key.nvim",
+    opts = {
+      window = { winblend = 9 },
+      layout = { align = "center", },
+    }
   },
 
   -- Diffview
@@ -60,6 +82,7 @@ return {
     config = true,
   },
 
+  -- Smart cursor column
   {
     "m4xshen/smartcolumn.nvim",
     opts = {},
