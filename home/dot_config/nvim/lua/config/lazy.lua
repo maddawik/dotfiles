@@ -16,17 +16,12 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
-    {
-      "LazyVim/LazyVim",
-      import = "lazyvim.plugins"
-    },
-    { import = "lazyvim.plugins.extras.lang.typescript" },
-    { import = "lazyvim.plugins.extras.lang.json" },
+    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     { import = "plugins" },
   },
   defaults = {
     lazy = true,
-    version = false, -- always use the latest git commit, likely to break stuff
+    version = false, -- always use the latest release, likely to break stuff
     -- version = "*", -- latest stable
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
