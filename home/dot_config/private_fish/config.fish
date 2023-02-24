@@ -2,7 +2,7 @@ if status is-interactive
     # env
     set -gx EDITOR nvim
     set -gx MANPAGER bat
-    set -gx BAT_THEME gruvbox-dark
+    set -gx BAT_THEME Catppuccin-mocha
 
     # fzf
     set -gx FZF_DEFAULT_OPTS "--height=70% --layout=reverse --inline-info \
