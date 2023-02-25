@@ -36,12 +36,9 @@ return {
       },
     },
     keys = {
-      -- switch the keymap to grep files and words
+      -- disable some keymaps
       { "<leader>/",  false },
-      { "<leader>sg", false },
-      { "<leader>sG", false },
-      { "<leader>sw", false },
-      { "<leader>sW", false },
+      -- add live grep and word search keymaps
       { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Find word" },
       { "<leader>fg", "<cmd>Telescope live_grep<cr>",   desc = "Find grep" },
       -- add a keymap to browse plugin files

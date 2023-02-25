@@ -53,7 +53,10 @@ return {
   -- inkle's ink
   {
     "ahayworth/ink-syntax-vim",
-    lazy = false,
+    event = {
+      "BufReadPre",
+      "BufNewFile",
+    },
   },
 
   -- null-ls
