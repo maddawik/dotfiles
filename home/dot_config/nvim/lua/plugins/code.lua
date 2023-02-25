@@ -50,6 +50,12 @@ return {
     end,
   },
 
+  -- inkle's ink
+  {
+    "ahayworth/ink-syntax-vim",
+    lazy = false,
+  },
+
   -- null-ls
   {
     "jose-elias-alvarez/null-ls.nvim",
