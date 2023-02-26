@@ -79,6 +79,25 @@ return {
     config = true,
   },
 
+  -- Noice
+  {
+    "folke/noice.nvim",
+    opts = {
+      views = {
+        mini = {
+          win_options = {
+            winblend = 100
+          }
+        },
+      },
+      format = {
+        spinner = {
+          name = "moon"
+        }
+      }
+    },
+  },
+
   -- Smart cursor column
   {
     "m4xshen/smartcolumn.nvim",

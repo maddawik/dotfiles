@@ -50,15 +50,6 @@ return {
     end,
   },
 
-  -- inkle's ink
-  {
-    "ahayworth/ink-syntax-vim",
-    event = {
-      "BufReadPre",
-      "BufNewFile",
-    },
-  },
-
   -- null-ls
   {
     "jose-elias-alvarez/null-ls.nvim",
@@ -88,6 +79,15 @@ return {
   -- ansible-lint
   {
     "pearofducks/ansible-vim",
+    event = {
+      "BufReadPre",
+      "BufNewFile",
+    },
+  },
+
+  -- inkle's ink
+  {
+    "ahayworth/ink-syntax-vim",
     event = {
       "BufReadPre",
       "BufNewFile",
