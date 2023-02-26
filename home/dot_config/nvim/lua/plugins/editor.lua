@@ -55,6 +55,29 @@ return {
     opts = {
       defaults = {
         winblend = 7,
+        layout_config = {
+          preview_width = 0.5,
+        },
+        mappings = {
+          i = {
+            ["<C-u>"] = require("telescope.actions").preview_scrolling_up,
+            ["<C-d>"] = require("telescope.actions").preview_scrolling_down,
+
+            ["<C-j>"] = require("telescope.actions").move_selection_next,
+            ["<C-k>"] = require("telescope.actions").move_selection_previous,
+
+            ["<C-c>"] = require("telescope.actions").close,
+          },
+          n = {
+            ["<C-u>"] = require("telescope.actions").preview_scrolling_up,
+            ["<C-d>"] = require("telescope.actions").preview_scrolling_down,
+
+            ["<C-j>"] = require("telescope.actions").move_selection_next,
+            ["<C-k>"] = require("telescope.actions").move_selection_previous,
+
+            ["<C-c>"] = require("telescope.actions").close,
+          },
+        },
       },
     },
     keys = {
