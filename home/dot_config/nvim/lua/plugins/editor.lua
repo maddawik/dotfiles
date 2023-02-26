@@ -1,3 +1,5 @@
+local Util = require("lazyvim.util")
+
 return {
   -- better splits and tmux navigation
   {
@@ -38,9 +40,15 @@ return {
     keys = {
       -- disable some keymaps
       { "<leader>/",  false },
+      { "<leader>sg", false },
+      { "<leader>sG", false },
+      { "<leader>sw", false },
+      { "<leader>sW", false },
       -- add live grep and word search keymaps
-      { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Find word" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>",   desc = "Find grep" },
+      { "<leader>fg", Util.telescope("live_grep"),                    desc = "Grep (root dir)" },
+      { "<leader>fG", Util.telescope("live_grep", { cwd = false }),   desc = "Grep (cwd)" },
+      { "<leader>fw", Util.telescope("grep_string"),                  desc = "Word (root dir)" },
+      { "<leader>fW", Util.telescope("grep_string", { cwd = false }), desc = "Word (cwd)" },
       -- add a keymap to browse plugin files
       {
         "<leader>fp",
