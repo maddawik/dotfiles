@@ -1,6 +1,26 @@
 local Util = require("lazyvim.util")
 
 return {
+  -- Custom dashboard
+  {
+    "goolord/alpha-nvim",
+    opts = function()
+      local dashboard = require("alpha.themes.dashboard")
+      local logo = [[
+███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+
+      ]]
+
+      dashboard.section.header.val = vim.split(logo, "\n")
+      return dashboard
+    end
+  },
+
   -- better splits and tmux navigation
   {
     "mrjones2014/smart-splits.nvim",
