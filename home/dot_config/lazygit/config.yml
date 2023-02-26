@@ -1,9 +1,9 @@
 gui:
   theme:
     selectedLineBgColor:
-      - default
+      - reverse
     selectedRangeBgColor:
-      - default
+      - reverse
   showIcons: true
   branchColors:
     'main': 'blue'
