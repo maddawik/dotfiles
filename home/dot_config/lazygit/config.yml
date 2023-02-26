@@ -1,0 +1,13 @@
+gui:
+  theme:
+    selectedLineBgColor:
+      - default
+    selectedRangeBgColor:
+      - default
+  showIcons: true
+  branchColors:
+    'main': 'blue'
+    'master': 'blue'
+    'feature': 'green'
+    'release': 'yellow'
+    'hotfix': 'red'
