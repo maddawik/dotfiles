@@ -1,3 +1,4 @@
+-- Plugins and settings updates related to LSP, completion, etc.
 return {
   -- LazyVim plugins
   { import = "lazyvim.plugins.extras.lang.typescript" },

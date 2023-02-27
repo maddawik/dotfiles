@@ -1,5 +1,5 @@
+-- Colors
 return {
-  -- colorschemes
   { "ellisonleao/gruvbox.nvim",         lazy = false },
   { "folke/tokyonight.nvim",            lazy = false },
   { "overcache/neosolarized",           lazy = false },

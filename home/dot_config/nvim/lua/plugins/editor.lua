@@ -1,3 +1,4 @@
+-- Editor settings not related to LSP, completion, etc.
 local Util = require("lazyvim.util")
 
 return {
@@ -55,9 +56,6 @@ return {
     opts = {
       defaults = {
         winblend = 7,
-        layout_config = {
-          preview_width = 0.5,
-        },
         mappings = {
           i = {
             ["<C-u>"] = require("telescope.actions").preview_scrolling_up,
