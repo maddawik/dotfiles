@@ -9,4 +9,4 @@ truncation_symbol = "…/"
 "Pictures" = " "
 
 [git_branch]
-symbol = ""
+symbol = " "
