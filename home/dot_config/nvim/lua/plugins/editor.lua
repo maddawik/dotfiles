@@ -106,7 +106,7 @@ return {
   -- Diffview
   {
     "sindrets/diffview.nvim",
-    cmd = { "DiffviewOpen" },
+    cmd = "DiffviewOpen",
     config = true,
     keys = {
       { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "DiffView" }
