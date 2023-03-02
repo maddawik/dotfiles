@@ -5,12 +5,13 @@ if status is-interactive
 
     # fzf
     set -gx FZF_DEFAULT_OPTS "--height=70% --layout=reverse --inline-info \
-      --bind 'ctrl-u:down' --bind 'ctrl-i:up' \
-      --bind 'ctrl-f:preview-half-page-down' --bind 'ctrl-b:preview-half-page-up' \
-      --bind 'ctrl-y:accept' --bind 'ctrl-o:toggle'"
+      --bind 'ctrl-f:preview-half-page-down' 
+      --bind 'ctrl-b:preview-half-page-up' \
+      --bind 'tab:toggle'"
 
     # fzf.fish
-    fzf_configure_bindings --directory=\cf --git_log=\cg --git_status=\cs --processes=\cp
+    fzf_configure_bindings --directory=\cf \
+      --git_log=\cg --git_status=\cs --processes=\cp
 
     # rbenv
     rbenv init - fish | source
