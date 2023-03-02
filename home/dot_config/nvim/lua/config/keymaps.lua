@@ -2,7 +2,6 @@
 
 -- Exit insert and terminal mode with jk
 vim.keymap.set("i", "jk", "<ESC>")
-vim.keymap.set("t", "jk", [[<C-\><C-n>]])
 
 -- Better terminal navigation
 vim.keymap.set("t", "<C-h>", [[<cmd>wincmd h<CR>]])
