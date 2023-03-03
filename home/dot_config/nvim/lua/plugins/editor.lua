@@ -2,6 +2,18 @@
 local Util = require("lazyvim.util")
 
 return {
+  -- Telekasten - wiki
+  {
+    'renerocksai/telekasten.nvim',
+    dependencies = {
+      "renerocksai/calendar-vim"
+    },
+    cmd = "Telekasten",
+    opts = {
+      home = vim.fn.expand("~/wiki")
+    },
+  },
+
   -- Custom dashboard
   {
     "goolord/alpha-nvim",
