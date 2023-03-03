@@ -165,7 +165,17 @@ return {
   -- Smart cursor column
   {
     "m4xshen/smartcolumn.nvim",
-    opts = {},
+    opts = {
+      disabled_filetypes = {
+        "Lazy",
+        "mason",
+        "neo-tree",
+        "alpha",
+        "help",
+        "text",
+        "markdown",
+      },
+    },
     event = {
       "BufReadPre",
       "BufNewFile",
