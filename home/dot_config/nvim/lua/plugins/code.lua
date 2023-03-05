@@ -1,4 +1,4 @@
--- Plugins and settings updates related to LSP, completion, etc.
+-- Plugins and settings related to LSP, completion, etc.
 return {
   -- LazyVim plugins
   { import = "lazyvim.plugins.extras.lang.typescript" },
@@ -13,6 +13,7 @@ return {
       servers = {
         ansiblels = {},
         bashls = {},
+        gdscript = {},
         gopls = {},
         marksman = {},
         terraformls = {},
@@ -29,6 +30,7 @@ return {
       vim.list_extend(opts.ensure_installed, {
         "bash",
         "fish",
+        "gdscript",
         "go",
         "help",
         "html",
