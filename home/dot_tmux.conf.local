@@ -397,11 +397,6 @@ setw -g pane-base-index 1
 # Enable automatic renumbering of windows
 set -g renumber-windows on
 
-# force Vi mode
-#   really you should export VISUAL or EDITOR environment variable, see manual
-# set -g status-keys vi
-# set -g mode-keys vi
-
 # replace C-b by C-a instead of using both prefixes
 set -gu prefix
 unbind C-a
@@ -431,18 +426,19 @@ bind-key C-Space switch-client -l
 bind-key n command-prompt 'rename-window %%'
 bind-key N command-prompt 'rename-session %%'
 
-# Resize windows with vim arrows
-# bind -r j resize-pane -D 2
-# bind -r k resize-pane -U 2
-# bind -r h resize-pane -L 2
-# bind -r l resize-pane -R 2
-
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind v new-window -c #{pane_current_path} #!important
 
 # move status line to top
 #set -g status-position top
 
+# -- Pane border
+set -wg pane-border-status off # top
+set -wg pane-border-format '#[align=right] #{?#{&&:#{pane_active},#{client_prefix}},#[underscore],}\
+#{pane_current_command}  #{pane_tty} #{?pane_active,❐ #S:#I/#{session_windows} ,}\
+#{?window_zoomed_flag,⬢,❄} #P '
+set -wg pane-active-border-style '#{?pane_in_mode,fg=#cc6633,\
+#{?synchronize-panes,fg=#c586c0#,bold,#{?#{==:#{client_key_table},resize},fg=#c72e0f,fg=#16825d#,bold}}}'
 
 # -- tpm -----------------------------------------------------------------------
 
