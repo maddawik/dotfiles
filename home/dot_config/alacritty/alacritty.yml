@@ -1,5 +1,5 @@
 import:
-  - ~/.config/alacritty/kanagawa.yml
+  - ~/.config/alacritty/tokyonight_moon.yml
 
 live_config_reload: true
 
@@ -23,6 +23,3 @@ font:
   bold:
     style: Bold
   size: 18
-
-shell:
-  program: /usr/bin/fish
