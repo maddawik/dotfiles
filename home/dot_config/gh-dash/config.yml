@@ -1,0 +1,5 @@
+defaults:
+  preview:
+    width: 80
+pager:
+  diff: "delta"
