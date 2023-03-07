@@ -16,7 +16,12 @@ if status is-interactive
     set -gx tide_git_icon ""
 
     # fzf
-    set -gx FZF_DEFAULT_OPTS "--height=70% --layout=reverse --inline-info \
+    set -gx FZF_DEFAULT_OPTS \
+        "--color=fg:#c0caf5,hl:#ff9e64 \
+        --color=fg+:#c0caf5,hl+:#ff9e64 \
+        --color=info:#7aa2f7,prompt:#7aa2f7,pointer:#db4b4b \
+        --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a \
+        --height=70% --layout=reverse --inline-info \
         --bind 'ctrl-f:preview-half-page-down' \
         --bind 'ctrl-b:preview-half-page-up' \
         --bind 'tab:toggle'"
