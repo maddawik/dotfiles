@@ -10,7 +10,10 @@ return {
     },
     cmd = "Telekasten",
     opts = {
-      home = vim.fn.expand("~/wiki")
+      home = vim.fn.expand("~/zettelkasten/"),
+      template_new_note = vim.fn.expand("~/zettelkasten/templates/basenote.md"),
+      template_new_daily = vim.fn.expand("~/zettelkasten/templates/daily.md"),
+      template_new_weekly = vim.fn.expand("~/zettelkasten/templates/weekly.md"),
     },
   },
 
@@ -20,12 +23,12 @@ return {
     opts = function()
       local dashboard = require("alpha.themes.dashboard")
       local logo = [[
- ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
- ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
- ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
- ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
       ]]
 
       dashboard.section.header.val = vim.split(logo, "\n")
@@ -169,6 +172,7 @@ return {
         "help",
         "text",
         "markdown",
+        "md",
       },
     },
     event = {
