@@ -33,7 +33,10 @@ return {
 
       dashboard.section.header.val = vim.split(logo, "\n")
       return dashboard
-    end
+    end,
+    keys = {
+      { "<leader>d", "<cmd>Alpha<cr>", desc = "Dashboard" }
+    },
   },
 
   -- better splits and tmux navigation
@@ -98,6 +101,7 @@ return {
     keys = {
       -- disable some keymaps
       { "<leader>/",  false },
+      { "<leader>,",  false },
       -- add live grep and word search keymaps
       { "<leader>fg", Util.telescope("live_grep"),                    desc = "Grep (root dir)" },
       { "<leader>fG", Util.telescope("live_grep", { cwd = false }),   desc = "Grep (cwd)" },
@@ -118,7 +122,7 @@ return {
     opts = {
       window = { winblend = 9 },
       layout = { align = "center", },
-    }
+    },
   },
 
   -- Diffview
