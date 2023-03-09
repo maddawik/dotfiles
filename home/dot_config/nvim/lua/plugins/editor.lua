@@ -157,6 +157,15 @@ return {
     },
   },
 
+  -- Git good
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      current_line_blame = true,
+      current_line_blame_formatter = "<abbrev_sha> (<author_time:%Y-%m-%d>) <summary>"
+    },
+  },
+
   -- Smart cursor column
   {
     "m4xshen/smartcolumn.nvim",
