@@ -4,6 +4,7 @@ return {
   { "folke/tokyonight.nvim",            lazy = false },
   { "overcache/neosolarized",           lazy = false },
   { "rebelot/kanagawa.nvim",            lazy = false },
+  { "catppuccin/nvim",                  lazy = false },
   { "nyoom-engineering/oxocarbon.nvim", lazy = false },
   { "whatyouhide/vim-gotham",           lazy = false },
 

@@ -166,6 +166,113 @@ return {
     },
   },
 
+  -- Lualine
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    opts = function()
+      local icons = require("lazyvim.config").icons
+
+      local function fg(name)
+        return function()
+          ---@type {foreground?:number}?
+          local hl = vim.api.nvim_get_hl_by_name(name, true)
+          return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
+        end
+      end
+
+      return {
+        options = {
+          theme = "auto",
+          globalstatus = true,
+          disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
+          component_separators = '',
+          -- section_separators = '',
+        },
+        extensions = { "neo-tree", "man", "symbols-outline" },
+        sections = {
+          lualine_b = { "branch" },
+          lualine_c = {
+            {
+              "filetype",
+              icon_only = true,
+              separator = "",
+              padding = {
+                left = 1, right = 0
+              }
+            },
+            {
+              "filename",
+              symbols = {
+                modified = "  ",
+                readonly = " ",
+                unnamed = ""
+              }
+            },
+            {
+              "diagnostics",
+              symbols = {
+                error = icons.diagnostics.Error,
+                warn = icons.diagnostics.Warn,
+                info = icons.diagnostics.Info,
+                hint = icons.diagnostics.Hint,
+              },
+            },
+            "%=",
+            {
+              -- Lsp server name .
+              function()
+                local msg = ''
+                local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+                local clients = vim.lsp.get_active_clients()
+                if next(clients) == nil then
+                  return msg
+                end
+                for _, client in ipairs(clients) do
+                  local filetypes = client.config.filetypes
+                  if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                    return client.name
+                  end
+                end
+                return msg
+              end,
+              icon = '  LSP:',
+              color = fg("Special"),
+            },
+          },
+          lualine_x = {
+            {
+              "diff",
+              symbols = {
+                added = icons.git.added,
+                modified = icons.git.modified,
+                removed = icons.git.removed,
+              },
+            },
+            -- stylua: ignore
+            {
+              function() return require("noice").api.status.mode.get() end,
+              cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+              color = fg("Constant"),
+            },
+            { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = fg("Statement") },
+            { "fileformat" },
+          },
+        }
+      }
+    end,
+  },
+
+  -- Winbar
+  {
+    "utilyre/barbecue.nvim",
+    event = {
+      "BufReadPre",
+      "BufNewFile",
+    },
+    opts = {},
+  },
+
   -- Smart cursor column
   {
     "m4xshen/smartcolumn.nvim",
