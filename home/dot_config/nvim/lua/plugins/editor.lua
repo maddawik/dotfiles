@@ -101,7 +101,6 @@ return {
     keys = {
       -- disable some keymaps
       { "<leader>/",  false },
-      { "<leader>,",  false },
       -- add live grep and word search keymaps
       { "<leader>fg", Util.telescope("live_grep"),                    desc = "Grep (root dir)" },
       { "<leader>fG", Util.telescope("live_grep", { cwd = false }),   desc = "Grep (cwd)" },
@@ -194,28 +193,11 @@ return {
           lualine_b = { "branch" },
           lualine_c = {
             {
-              "filetype",
-              icon_only = true,
-              separator = "",
-              padding = {
-                left = 1, right = 0
-              }
-            },
-            {
-              "filename",
+              "diff",
               symbols = {
-                modified = "  ",
-                readonly = " ",
-                unnamed = ""
-              }
-            },
-            {
-              "diagnostics",
-              symbols = {
-                error = icons.diagnostics.Error,
-                warn = icons.diagnostics.Warn,
-                info = icons.diagnostics.Info,
-                hint = icons.diagnostics.Hint,
+                added = icons.git.added,
+                modified = icons.git.modified,
+                removed = icons.git.removed,
               },
             },
             "%=",
@@ -242,11 +224,12 @@ return {
           },
           lualine_x = {
             {
-              "diff",
+              "diagnostics",
               symbols = {
-                added = icons.git.added,
-                modified = icons.git.modified,
-                removed = icons.git.removed,
+                error = icons.diagnostics.Error,
+                warn = icons.diagnostics.Warn,
+                info = icons.diagnostics.Info,
+                hint = icons.diagnostics.Hint,
               },
             },
             -- stylua: ignore
