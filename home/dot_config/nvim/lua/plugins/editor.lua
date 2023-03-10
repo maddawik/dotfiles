@@ -191,6 +191,15 @@ return {
         },
         extensions = { "neo-tree", "man", "symbols-outline" },
         sections = {
+          lualine_a = {
+            {
+              -- mode component
+              function()
+                return ''
+              end,
+              padding = { left = 2, right = 2 },
+            }
+          },
           lualine_b = { "branch" },
           lualine_c = {
             {
@@ -240,7 +249,10 @@ return {
               color = fg("Constant"),
             },
             { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = fg("Statement") },
-            { "fileformat" },
+            {
+              "fileformat",
+              padding = { left = 1, right = 2 },
+            },
           },
         }
       }
