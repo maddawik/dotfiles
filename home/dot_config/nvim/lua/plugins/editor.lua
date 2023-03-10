@@ -10,7 +10,7 @@ return {
     },
     cmd = "Telekasten",
     opts = {
-      home = vim.fn.expand("~/zettelkasten/"),
+      home = vim.fn.expand("~/zettelkasten"),
       template_new_note = vim.fn.expand("~/zettelkasten/templates/basenote.md"),
       template_new_daily = vim.fn.expand("~/zettelkasten/templates/daily.md"),
       template_new_weekly = vim.fn.expand("~/zettelkasten/templates/weekly.md"),
@@ -119,8 +119,9 @@ return {
   {
     "folke/which-key.nvim",
     opts = {
-      window = { winblend = 9 },
+      -- window = { winblend = 10 },
       layout = { align = "center", },
+      show_help = false,
     },
   },
 
