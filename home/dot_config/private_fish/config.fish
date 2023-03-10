@@ -14,8 +14,8 @@ if status is-interactive
     set -gx tide_right_prompt_items status cmd_duration context jobs time \
         newline node virtual_env rustc java go terraform aws private_mode
     set -gx tide_git_icon ""
-    set -gx tide_pwd_color_dirs cyan
-    set -gx tide_pwd_color_anchors blue
+    set -gx tide_pwd_color_dirs blue
+    set -gx tide_pwd_color_anchors cyan
 
     # fzf
     set -gx FZF_DEFAULT_OPTS \
