@@ -52,8 +52,8 @@ return {
       close_if_last_window = true,
       window = {
         mappings = {
-              ["<space>"] = "none",
-              ["<tab>"] = "toggle_node",
+          ["<space>"] = "none",
+          ["<tab>"] = "toggle_node",
         },
         width = 30,
       },
@@ -82,18 +82,18 @@ return {
       defaults = {
         mappings = {
           i = {
-                ["<C-u>"] = require("telescope.actions").preview_scrolling_up,
-                ["<C-d>"] = require("telescope.actions").preview_scrolling_down,
-                ["<C-j>"] = require("telescope.actions").move_selection_next,
-                ["<C-k>"] = require("telescope.actions").move_selection_previous,
-                ["<C-c>"] = require("telescope.actions").close,
+            ["<C-u>"] = require("telescope.actions").preview_scrolling_up,
+            ["<C-d>"] = require("telescope.actions").preview_scrolling_down,
+            ["<C-j>"] = require("telescope.actions").move_selection_next,
+            ["<C-k>"] = require("telescope.actions").move_selection_previous,
+            ["<C-c>"] = require("telescope.actions").close,
           },
           n = {
-                ["<C-u>"] = require("telescope.actions").preview_scrolling_up,
-                ["<C-d>"] = require("telescope.actions").preview_scrolling_down,
-                ["<C-j>"] = require("telescope.actions").move_selection_next,
-                ["<C-k>"] = require("telescope.actions").move_selection_previous,
-                ["<C-c>"] = require("telescope.actions").close,
+            ["<C-u>"] = require("telescope.actions").preview_scrolling_up,
+            ["<C-d>"] = require("telescope.actions").preview_scrolling_down,
+            ["<C-j>"] = require("telescope.actions").move_selection_next,
+            ["<C-k>"] = require("telescope.actions").move_selection_previous,
+            ["<C-c>"] = require("telescope.actions").close,
           },
         },
       },
@@ -262,18 +262,28 @@ return {
     opts = {
       disabled_filetypes = {
         "Lazy",
-        "mason",
-        "neo-tree",
         "alpha",
         "help",
-        "text",
         "markdown",
+        "mason",
         "md",
+        "neo-tree",
+        "text",
       },
     },
     event = {
       "BufReadPre",
       "BufNewFile",
+    },
+  },
+
+  -- Smart sort
+  {
+    "sQVe/sort.nvim",
+    config = true,
+    keys = {
+      { "<leader>S", "<esc><cmd>Sort<cr>",   desc = "Sort",        mode = "v" },
+      { "<leader>U", "<esc><cmd>Sort u<cr>", desc = "Unique Sort", mode = "v" },
     },
   },
 }
