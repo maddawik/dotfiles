@@ -1,12 +1,12 @@
 -- Colors
 return {
-  { "ellisonleao/gruvbox.nvim",         lazy = false },
-  { "folke/tokyonight.nvim",            lazy = false },
-  { "overcache/neosolarized",           lazy = false },
-  { "rebelot/kanagawa.nvim",            lazy = false },
-  { "catppuccin/nvim",                  lazy = false },
-  { "nyoom-engineering/oxocarbon.nvim", lazy = false },
-  { "whatyouhide/vim-gotham",           lazy = false },
+  { "ellisonleao/gruvbox.nvim",         event = "VeryLazy" },
+  { "folke/tokyonight.nvim",            event = "VeryLazy" },
+  { "overcache/neosolarized",           event = "VeryLazy" },
+  { "rebelot/kanagawa.nvim",            event = "VeryLazy" },
+  { "catppuccin/nvim",                  event = "VeryLazy" },
+  { "nyoom-engineering/oxocarbon.nvim", event = "VeryLazy" },
+  { "whatyouhide/vim-gotham",           event = "VeryLazy" },
 
   -- set default colors
   {

@@ -145,6 +145,21 @@ return {
     config = true,
   },
 
+  -- Smart scrollbar
+  {
+    "lewis6991/satellite.nvim",
+    opts = {
+      winblend = 10,
+      excluded_filetypes = {
+        "lazy",
+        "alpha",
+        "mason",
+        "neo-tree",
+      },
+    },
+    event = "VeryLazy",
+  },
+
   -- Noice
   {
     "folke/noice.nvim",
@@ -274,7 +289,7 @@ return {
     "m4xshen/smartcolumn.nvim",
     opts = {
       disabled_filetypes = {
-        "Lazy",
+        "lazy",
         "alpha",
         "help",
         "markdown",
