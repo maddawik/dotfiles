@@ -13,12 +13,11 @@ return {
       servers = {
         ansiblels = {},
         bashls = {},
-        gdscript = {},
         gopls = {},
-        marksman = {},
-        terraformls = {},
-        pyright = {},
         lua_ls = {},
+        marksman = {},
+        pyright = {},
+        terraformls = {},
       },
     },
   },
@@ -29,6 +28,8 @@ return {
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
         "bash",
+        "clojure",
+        "dockerfile",
         "fish",
         "gdscript",
         "go",
@@ -42,13 +43,14 @@ return {
         "python",
         "query",
         "regex",
+        "ruby",
         "rust",
         "terraform",
         "tsx",
         "typescript",
+        "vhs",
         "vim",
         "yaml",
-        "vhs",
       })
     end,
   },
@@ -136,9 +138,9 @@ return {
         }
       ))
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
-            ["<C-k>"] = cmp.mapping.select_prev_item(),
-            ["<C-j>"] = cmp.mapping.select_next_item(),
-            ["<Tab>"] = cmp.mapping(function(fallback)
+        ["<C-k>"] = cmp.mapping.select_prev_item(),
+        ["<C-j>"] = cmp.mapping.select_next_item(),
+        ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
           elseif luasnip.expand_or_jumpable() then
@@ -149,7 +151,7 @@ return {
             fallback()
           end
         end, { "i", "s" }),
-            ["<S-Tab>"] = cmp.mapping(function(fallback)
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           elseif luasnip.jumpable(-1) then

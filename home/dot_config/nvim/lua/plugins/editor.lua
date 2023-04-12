@@ -198,15 +198,15 @@ return {
         },
         extensions = { "neo-tree", "man", "symbols-outline" },
         sections = {
-          lualine_a = {
-            {
-              -- mode component
-              function()
-                return ''
-              end,
-              padding = { left = 2, right = 2 },
-            }
-          },
+          -- lualine_a = {
+          --   {
+          --     -- mode component
+          --     function()
+          --       return ''
+          --     end,
+          --     padding = { left = 2, right = 2 },
+          --   }
+          -- },
           lualine_b = { "branch" },
           lualine_c = {
             {
@@ -219,7 +219,7 @@ return {
             },
             "%=",
             {
-              -- Lsp server name .
+              -- Lsp server name
               function()
                 local msg = ''
                 local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
@@ -249,21 +249,17 @@ return {
                 hint = icons.diagnostics.Hint,
               },
             },
-            -- stylua: ignore
+          },
+          lualine_y = {
             {
-              function() return require("noice").api.status.mode.get() end,
-              cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-              color = fg("Constant"),
+              "progress",
             },
-            { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = fg("Statement") },
-            { "encoding", },
-            { "fileformat", },
           },
           lualine_z = {
-            function()
-              local time = os.date("%I:%M %p")
-              return " " .. time
-            end,
+            {
+              "fileformat",
+              padding = { left = 2, right = 2 },
+            },
           },
         }
       }
@@ -318,21 +314,9 @@ return {
     opts = {},
   },
 
-  -- Smart cursor column
+  -- Super smart column status
   {
-    "m4xshen/smartcolumn.nvim",
-    opts = {
-      disabled_filetypes = {
-        "lazy",
-        "alpha",
-        "help",
-        "markdown",
-        "mason",
-        "md",
-        "neo-tree",
-        "text",
-      },
-    },
+    "Bekaboo/deadcolumn.nvim",
     event = {
       "BufReadPre",
       "BufNewFile",
