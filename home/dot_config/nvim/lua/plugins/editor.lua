@@ -29,9 +29,9 @@ return {
       }
       return dashboard
     end,
-    keys = {
-      { "<leader>d", "<cmd>Alpha<cr>", desc = "Dashboard" }
-    },
+    -- keys = {
+    --   { "<leader>d", "<cmd>Alpha<cr>", desc = "Dashboard" }
+    -- },
   },
 
   -- Better splits and tmux navigation
