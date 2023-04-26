@@ -9,14 +9,6 @@ if status is-interactive
         else; set fish_bind_mode default; \
         commandline -f backward-char repaint-mode; end"
 
-    # tide prompt
-    set -gx tide_left_prompt_items os pwd git newline character
-    set -gx tide_right_prompt_items status cmd_duration context jobs time \
-        newline node virtual_env rustc java go terraform aws private_mode
-    set -gx tide_git_icon ""
-    set -gx tide_pwd_color_dirs blue
-    set -gx tide_pwd_color_anchors cyan
-
     # fzf
     set -gx FZF_DEFAULT_OPTS \
         "--color=fg:#c0caf5,hl:#ff9e64 \
@@ -40,6 +32,10 @@ if status is-interactive
 
     # 1password
     op completion fish | source
+
+    # starship
+    starship init fish | source
+    enable_transience
 end
 
 # alias and abbr
