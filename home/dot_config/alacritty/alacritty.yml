@@ -7,10 +7,12 @@ env:
   TERM: alacritty
 
 window:
+  decorations: buttonless
   padding:
     x: 5
     y: 5
-  # opacity: 0.8
+  opacity: 0.95
+  startup_mode: Windowed
 
 scrolling:
   history: 10000
@@ -22,4 +24,4 @@ font:
     style: Medium
   bold:
     style: Bold
-  size: 18
+  size: 21

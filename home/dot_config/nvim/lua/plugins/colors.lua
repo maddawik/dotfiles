@@ -1,7 +1,13 @@
 -- Colors
 return {
   { "ellisonleao/gruvbox.nvim",         event = "VeryLazy" },
-  { "folke/tokyonight.nvim",            event = "VeryLazy" },
+  {
+    "folke/tokyonight.nvim",
+    opts = {
+      transparent = true,
+    },
+    event = "VeryLazy"
+  },
   { "overcache/neosolarized",           event = "VeryLazy" },
   { "rebelot/kanagawa.nvim",            event = "VeryLazy" },
   { "catppuccin/nvim",                  event = "VeryLazy" },
