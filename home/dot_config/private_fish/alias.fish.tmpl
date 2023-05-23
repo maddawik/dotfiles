@@ -55,7 +55,6 @@ if status --is-interactive
 
   # lazygit
   alias lz  lazygit
-  # lazychezmoi
   alias lzc "lz --path {{ .chezmoi.homeDir }}/.dotfiles"
 
   # github cli
@@ -63,10 +62,8 @@ if status --is-interactive
   abbr ghd gh dash
   abbr ghp gh pr create
 
-  # taskwarrior
-  alias tt taskwarrior-tui
-  abbr ta  task add
-  abbr tl  task list
+  # godot
+  alias gd nvim --listen ./godothost .
 
   # other
   alias reload 'exec fish'
