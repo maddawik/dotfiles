@@ -8,7 +8,7 @@ gui:
       - reverse
     selectedRangeBgColor:
       - reverse
-  showIcons: true
+  showIcons: false
   branchColors:
     'main': 'blue'
     'master': 'blue'
