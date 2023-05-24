@@ -65,6 +65,15 @@ return {
       return {
         sources = {
           nls.builtins.diagnostics.actionlint,
+          nls.builtins.diagnostics.gdlint.with({
+            command = vim.fn.expand("~/.pyenv/shims/gdlint"),
+            filetypes = { "gd", "gdscript" },
+          }),
+          nls.builtins.formatting.gdformat.with({
+            command = vim.fn.expand("~/.pyenv/shims/gdformat"),
+            extra_args = { "--line-length", "80" },
+            filetypes = { "gd", "gdscript" },
+          })
         },
       }
     end,
@@ -95,6 +104,15 @@ return {
   -- inkle's ink
   {
     "ahayworth/ink-syntax-vim",
+    event = {
+      "BufReadPre",
+      "BufNewFile",
+    },
+  },
+
+  -- godot
+  {
+    "habamax/vim-godot",
     event = {
       "BufReadPre",
       "BufNewFile",
