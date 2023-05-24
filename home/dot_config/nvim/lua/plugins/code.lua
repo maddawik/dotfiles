@@ -3,6 +3,8 @@ return {
   -- LazyVim plugins
   { import = "lazyvim.plugins.extras.lang.typescript" },
   { import = "lazyvim.plugins.extras.lang.json" },
+  { import = "lazyvim.plugins.extras.util.project" },
+  { import = "lazyvim.plugins.extras.vscode" },
   { import = "lazyvim.plugins.extras.dap" },
 
   -- nvim-lspconfig

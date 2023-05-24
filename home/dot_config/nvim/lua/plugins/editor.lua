@@ -24,6 +24,7 @@ return {
         dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
         dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
         dashboard.button("s", " " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
+        dashboard.button("p", " " .. " Projects", ":Telescope projects <CR>"),
         dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
         dashboard.button("q", " " .. " Quit", ":qa<CR>"),
       }
@@ -47,11 +48,18 @@ return {
       close_if_last_window = true,
       window = {
         mappings = {
-          ["<space>"] = "none",
-          ["<tab>"] = "toggle_node",
+              ["<space>"] = "none",
+              ["<tab>"] = "toggle_node",
         },
         width = 30,
       },
+      default_component_configs = {
+        git_status = {
+          symbols = {
+            unstaged = "⦿",
+          }
+        }
+      }
     },
   },
 
