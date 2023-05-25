@@ -37,7 +37,6 @@ return {
         "fish",
         "gdscript",
         "go",
-        "help",
         "html",
         "javascript",
         "json",
