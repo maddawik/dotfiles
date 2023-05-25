@@ -1,0 +1,44 @@
+[user]
+  name = Mawdac
+{{- if eq .chezmoi.hostname "ereilly-mbp" }}
+  email = ereilly@lookingglasscyber.com
+{{- else }}
+  email = edwardreillycomputers@gmail.com
+{{- end }}
+[core]
+  editor = nvim
+  pager = delta
+[alias]
+  la = !git config -l | grep alias | cut -c 7-
+  l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  lll = log -u
+[pull]
+  rebase = false
+[interactive]
+  diffFilter = delta --color-only
+[add.interactive]
+  useBuiltin = false
+[delta]
+  light = false
+  navigate = true
+  side-by-side = true
+  line-number = true
+  # Tokyonight Moon
+  minus-style                   = syntax "#3a273a"
+  minus-non-emph-style          = syntax "#3a273a"
+  minus-emph-style              = syntax "#6b2e43"
+  minus-empty-line-marker-style = syntax "#3a273a"
+  line-numbers-minus-style      = "#b55a67"
+  plus-style                    = syntax "#273849"
+  plus-non-emph-style           = syntax "#273849"
+  plus-emph-style               = syntax "#305f6f"
+  plus-empty-line-marker-style  = syntax "#273849"
+  line-numbers-plus-style       = "#627259"
+  line-numbers-zero-style       = "#3b4261"
+[merge]
+  conflictstyle = diff3
+[diff]
+  colorMoved = default
+[init]
+  defaultBranch = main
