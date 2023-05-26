@@ -150,7 +150,7 @@ return {
   {
     "lewis6991/satellite.nvim",
     opts = {
-      winblend = 10,
+      winblend = 50,
       excluded_filetypes = {
         "lazy",
         "alpha",
@@ -169,7 +169,18 @@ return {
         spinner = {
           name = "moon"
         }
-      }
+      },
+    },
+  },
+
+  -- Notifications
+  {
+    "rcarriga/nvim-notify",
+    opts = {
+      background_colour = "#000000",
+      -- level = vim.log.levels.WARN, -- help vim.log.levels
+      render = "simple",
+      stages = "static",
     },
   },
 

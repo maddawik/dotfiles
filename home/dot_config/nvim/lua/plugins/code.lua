@@ -58,6 +58,11 @@ return {
     end,
   },
 
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    lazy = false, -- TODO: make it lazy
+  },
+
   -- null-ls
   {
     "jose-elias-alvarez/null-ls.nvim",
@@ -146,12 +151,12 @@ return {
       local luasnip = require("luasnip")
       local cmp = require("cmp")
 
-      cmp.setup {
-        window = {
-          -- completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-      }
+      -- cmp.setup {
+      --   window = {
+      --     completion = cmp.config.window.bordered(),
+      --     documentation = cmp.config.window.bordered(),
+      --   },
+      -- }
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources,
         {
           { name = "emoji" },
