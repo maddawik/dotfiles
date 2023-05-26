@@ -10,3 +10,15 @@ vim.opt.cursorline = true
 vim.opt.foldlevel = 20
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+vim.opt.listchars = {
+  space = ".",
+  eol = "↲",
+  nbsp = "␣",
+  trail = "·",
+  precedes = "←",
+  extends = "→",
+  tab = "¬ ",
+  conceal = "※",
+}
+vim.opt.list = true

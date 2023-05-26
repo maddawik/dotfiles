@@ -7,6 +7,12 @@ return {
   { "nyoom-engineering/oxocarbon.nvim", event = "VeryLazy" },
   { "whatyouhide/vim-gotham",           event = "VeryLazy" },
   {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "tokyonight-moon",
+    },
+  },
+  {
     "folke/tokyonight.nvim",
     opts = {
       transparent = true,
@@ -14,13 +20,6 @@ return {
         sidebars = "transparent",
         floats = "transparent",
       },
-    },
-  },
-  -- set default colors
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "tokyonight-moon",
     },
   },
 }
