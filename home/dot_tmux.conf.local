@@ -442,6 +442,9 @@ bind-key C-Space switch-client -l
 bind-key n command-prompt 'rename-window %%'
 bind-key N command-prompt 'rename-session %%'
 
+# nb cli shortcut
+bind-key k split-window -h "nb shell"
+
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind v new-window -c #{pane_current_path} #!important
 
