@@ -35,7 +35,6 @@ if status is-interactive
 
     # starship
     starship init fish | source
-    enable_transience
 end
 
 # alias and abbr
