@@ -307,7 +307,6 @@ return {
       { "<leader>zN", "<cmd>Telekasten new_templated_note<CR>", desc = "Templated Note" },
       { "<leader>zp", "<cmd>Telekasten panel<CR>",              desc = "Command Palette" },
       { "<leader>zr", "<cmd>Telekasten rename_note<CR>",        desc = "Rename Note" },
-      { "<leader>zt", "<cmd>Telekasten toggle_todo<CR>",        desc = "Toggle Todo" },
       { "<leader>zw", "<cmd>Telekasten goto_thisweek<CR>",      desc = "Weeks Note" },
       { "<leader>zy", "<cmd>Telekasten yank_link_to_note<CR>",  desc = "Yank Link" },
       { "<leader>zz", "<cmd>Telekasten follow_link<CR>",        desc = "Follow Link" },
@@ -316,10 +315,10 @@ return {
       require("which-key").register({ z = { name = "+zettelkasten", }, }, { prefix = "<leader>" })
     end,
     opts = {
-      home = vim.fn.expand("~/zettelkasten"),
-      template_new_note = vim.fn.expand("~/zettelkasten/templates/basenote.md"),
-      template_new_daily = vim.fn.expand("~/zettelkasten/templates/daily.md"),
-      template_new_weekly = vim.fn.expand("~/zettelkasten/templates/weekly.md"),
+      home = vim.fn.expand("~/.nb/zettelkasten"),
+      template_new_note = vim.fn.expand("~/.nb/zettelkasten/templates/basenote.md"),
+      template_new_daily = vim.fn.expand("~/.nb/zettelkasten/templates/daily.md"),
+      template_new_weekly = vim.fn.expand("~/.nb/zettelkasten/templates/weekly.md"),
     },
   },
 
