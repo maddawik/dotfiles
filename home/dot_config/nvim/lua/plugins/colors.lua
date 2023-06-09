@@ -1,9 +1,13 @@
 -- Colors
 return {
-  { "ellisonleao/gruvbox.nvim",         event = "VeryLazy" },
-  { "overcache/neosolarized",           event = "VeryLazy" },
-  { "rebelot/kanagawa.nvim",            event = "VeryLazy" },
-  { "catppuccin/nvim",                  event = "VeryLazy" },
+  { "ellisonleao/gruvbox.nvim", event = "VeryLazy" },
+  { "overcache/neosolarized",   event = "VeryLazy" },
+  { "rebelot/kanagawa.nvim",    event = "VeryLazy" },
+  {
+    "catppuccin/nvim",
+    event = "VeryLazy",
+    name = "catppuccin"
+  },
   { "nyoom-engineering/oxocarbon.nvim", event = "VeryLazy" },
   { "whatyouhide/vim-gotham",           event = "VeryLazy" },
   {
@@ -14,12 +18,12 @@ return {
   },
   {
     "folke/tokyonight.nvim",
-    opts = {
-      transparent = true,
-      styles = {
-        sidebars = "transparent",
-        floats = "transparent",
-      },
-    },
+    -- opts = {
+    --   transparent = true,
+    --   styles = {
+    --     sidebars = "transparent",
+    --     floats = "transparent",
+    --   },
+    -- },
   },
 }
