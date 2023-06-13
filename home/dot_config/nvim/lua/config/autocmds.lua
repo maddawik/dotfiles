@@ -6,12 +6,23 @@ end
 local create_autocmd = vim.api.nvim_create_autocmd
 
 create_autocmd("FileType", {
-  group = augroup("commentstring"),
-  pattern = { "gd", "gdscript" },
+  group = augroup("comment_string"),
+  pattern = { "gdscript" },
   callback = function()
     vim.b.commentstring = "# %s"
   end,
   desc = "Change commentstring for gdscript files",
+})
+
+create_autocmd("FileType", {
+  group = augroup("indent"),
+  pattern = { "fish" },
+  callback = function()
+    vim.opt.shiftwidth = 4
+    vim.opt.softtabstop = 4
+    vim.opt.expandtab = true
+  end,
+  desc = "Change indenting for fish files",
 })
 
 local set_toggle = augroup("set_toggle")

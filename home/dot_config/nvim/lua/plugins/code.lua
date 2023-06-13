@@ -72,14 +72,14 @@ return {
       return {
         sources = {
           nls.builtins.diagnostics.actionlint,
+          nls.builtins.diagnostics.fish,
+          nls.builtins.formatting.fish_indent,
           nls.builtins.diagnostics.gdlint.with({
             command = vim.fn.expand("~/.pyenv/shims/gdlint"),
-            filetypes = { "gd", "gdscript" },
           }),
           nls.builtins.formatting.gdformat.with({
             command = vim.fn.expand("~/.pyenv/shims/gdformat"),
             extra_args = { "--line-length", "80" },
-            filetypes = { "gd", "gdscript" },
           })
         },
       }
@@ -97,6 +97,12 @@ return {
         "shfmt",
       },
     },
+  },
+
+  -- fish
+  {
+    "mtoohey31/cmp-fish",
+    ft = "fish"
   },
 
   -- ansible-lint
@@ -160,6 +166,7 @@ return {
       -- }
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources,
         {
+          { name = "fish" },
           { name = "emoji" },
           { name = "nerdfont" }
         }
