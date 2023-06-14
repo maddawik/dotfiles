@@ -117,19 +117,13 @@ return {
   -- inkle's ink
   {
     "ahayworth/ink-syntax-vim",
-    event = {
-      "BufReadPre",
-      "BufNewFile",
-    },
+    ft = "ink",
   },
 
   -- godot
   {
     "habamax/vim-godot",
-    event = {
-      "BufReadPre",
-      "BufNewFile",
-    },
+    ft = "gdscript",
   },
 
   -- Use <tab> for completion and snippets (supertab)
