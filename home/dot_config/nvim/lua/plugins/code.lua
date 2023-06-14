@@ -3,6 +3,7 @@ return {
   -- LazyVim plugins
   { import = "lazyvim.plugins.extras.lang.typescript" },
   { import = "lazyvim.plugins.extras.lang.json" },
+  { import = "lazyvim.plugins.extras.lang.go" },
   { import = "lazyvim.plugins.extras.util.project" },
   -- { import = "lazyvim.plugins.extras.ui.edgy" },
   { import = "lazyvim.plugins.extras.vscode" },
@@ -17,12 +18,12 @@ return {
       servers = {
         ansiblels = {},
         bashls = {},
+        gdscript = {},
         gopls = {},
         lua_ls = {},
         marksman = {},
         pyright = {},
         terraformls = {},
-        gdscript = {},
       },
     },
   },
@@ -96,6 +97,19 @@ return {
         "shellcheck",
         "shfmt",
       },
+    },
+  },
+
+  -- go tools
+  {
+    "olexsmir/gopher.nvim",
+    ft = "go",
+    config = true,
+    build = function()
+      vim.cmd([[silent! GoInstallDeps]])
+    end,
+    keys = {
+      { "<leader>ge", "<cmd> GoIfErr <cr>", desc = "GoIfErr" }
     },
   },
 
