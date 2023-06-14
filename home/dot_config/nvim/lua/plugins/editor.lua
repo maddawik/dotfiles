@@ -49,6 +49,21 @@ return {
     },
   },
 
+  -- Colors
+  {
+    "NvChad/nvim-colorizer.lua",
+    lazy = false,
+    config = true,
+    opts = {
+      filetypes = {
+        "css",
+        "javascript",
+        "typescript",
+        html = { mode = "foreground" },
+      },
+    },
+  },
+
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
