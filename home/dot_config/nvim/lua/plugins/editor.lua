@@ -34,18 +34,11 @@ return {
       close_if_last_window = true,
       window = {
         mappings = {
-              ["<space>"] = "none",
-              ["<tab>"] = "toggle_node",
+          ["<space>"] = "none",
+          ["<tab>"] = "toggle_node",
         },
         width = 30,
       },
-      default_component_configs = {
-        git_status = {
-          symbols = {
-            unstaged = "⦿",
-          }
-        }
-      }
     },
   },
 
