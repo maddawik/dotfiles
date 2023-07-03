@@ -1,5 +1,3 @@
--- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
-
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_config_" .. name, { clear = true })
 end
@@ -30,10 +28,13 @@ create_autocmd("InsertEnter", {
   callback = function()
     if vim.bo.filetype ~= "alpha"
         and vim.bo.filetype ~= "neo-tree"
+        and vim.bo.filetype ~= "TelescopePrompt"
         and vim.bo.filetype ~= "mason"
+        and vim.bo.filetype ~= "help"
+        and vim.bo.filetype ~= "Trouble"
         and vim.bo.filetype ~= "Navbuddy"
         and vim.bo.filetype ~= "SidebarNvim" then
-      vim.opt.relativenumber = false
+      vim.opt.relativenumber = true
       vim.opt.list = true
     end
   end,
@@ -44,10 +45,13 @@ create_autocmd({ "VimEnter", "BufEnter", "InsertLeave" }, {
   callback = function()
     if vim.bo.filetype ~= "alpha"
         and vim.bo.filetype ~= "neo-tree"
+        and vim.bo.filetype ~= "TelescopePrompt"
         and vim.bo.filetype ~= "mason"
+        and vim.bo.filetype ~= "help"
+        and vim.bo.filetype ~= "Trouble"
         and vim.bo.filetype ~= "Navbuddy"
         and vim.bo.filetype ~= "SidebarNvim" then
-      vim.opt.relativenumber = true
+      vim.opt.relativenumber = false
       vim.opt.list = false
     end
   end,

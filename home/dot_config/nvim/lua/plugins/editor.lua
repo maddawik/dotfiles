@@ -49,10 +49,12 @@ return {
     config = true,
     opts = {
       filetypes = {
+        html = { mode = "foreground" },
         "css",
         "javascript",
         "typescript",
-        html = { mode = "foreground" },
+        lua = { names = false },
+        vim = { names = false },
       },
     },
   },
@@ -140,21 +142,6 @@ return {
     config = true,
   },
 
-  -- Smart scrollbar
-  {
-    "lewis6991/satellite.nvim",
-    opts = {
-      winblend = 50,
-      excluded_filetypes = {
-        "lazy",
-        "alpha",
-        "mason",
-        "neo-tree",
-      },
-    },
-    event = "VeryLazy",
-  },
-
   -- Noice
   {
     "folke/noice.nvim",
@@ -196,6 +183,7 @@ return {
 
       local function fg(name)
         return function()
+          ---@diagnostic disable-next-line: undefined-field
           local hl = vim.api.nvim_get_hl_by_name(name, true)
           return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
         end
@@ -282,16 +270,8 @@ return {
   -- Zettelkasten
   {
     'renerocksai/telekasten.nvim',
-    dependencies = {
-      {
-        "renerocksai/calendar-vim",
-        event = "VeryLazy"
-      }
-    },
     keys = {
       { "<leader>zb", "<cmd>Telekasten show_backlinks<CR>",     desc = "Show Backlinks" },
-      { "<leader>zc", "<cmd>Telekasten show_calendar<CR>",      desc = "Show Calendar" },
-      { "<leader>zC", "<cmd>CalendarT<CR>",                     desc = "Full Calendar" },
       { "<leader>zd", "<cmd>Telekasten goto_today<CR>",         desc = "Todays Note" },
       { "<leader>zf", "<cmd>Telekasten find_notes<CR>",         desc = "Find Notes" },
       { "<leader>zF", "<cmd>Telekasten find_friend_notes<CR>",  desc = "Friend Notes" },

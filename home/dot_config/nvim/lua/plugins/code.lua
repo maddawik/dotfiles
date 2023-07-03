@@ -1,14 +1,16 @@
 -- Plugins and settings related to LSP, completion, etc.
 return {
   -- LazyVim plugins
-  { import = "lazyvim.plugins.extras.lang.typescript" },
-  { import = "lazyvim.plugins.extras.lang.json" },
-  { import = "lazyvim.plugins.extras.lang.go" },
-  { import = "lazyvim.plugins.extras.util.project" },
+  -- { import = "lazyvim.plugins.extras.coding.yanky" },
+  -- { import = "lazyvim.plugins.extras.dap" },
   { import = "lazyvim.plugins.extras.editor.flash" },
+  { import = "lazyvim.plugins.extras.lang.go" },
+  { import = "lazyvim.plugins.extras.lang.json" },
+  { import = "lazyvim.plugins.extras.lang.rust" },
+  { import = "lazyvim.plugins.extras.lang.typescript" },
   -- { import = "lazyvim.plugins.extras.ui.edgy" },
-  { import = "lazyvim.plugins.extras.vscode" },
-  { import = "lazyvim.plugins.extras.dap" },
+  { import = "lazyvim.plugins.extras.util.project" },
+  -- { import = "lazyvim.plugins.extras.vscode" },
 
   -- nvim-lspconfig
   {
@@ -127,10 +129,13 @@ return {
   },
 
   -- fish
-  {
-    "mtoohey31/cmp-fish",
-    ft = "fish"
-  },
+  { "mtoohey31/cmp-fish",       ft = "fish" },
+
+  -- inkle's ink
+  { "ahayworth/ink-syntax-vim", ft = "ink", },
+
+  -- godot
+  { "habamax/vim-godot",        ft = "gdscript", },
 
   -- ansible-lint
   {
@@ -139,18 +144,6 @@ return {
       "BufReadPre",
       "BufNewFile",
     },
-  },
-
-  -- inkle's ink
-  {
-    "ahayworth/ink-syntax-vim",
-    ft = "ink",
-  },
-
-  -- godot
-  {
-    "habamax/vim-godot",
-    ft = "gdscript",
   },
 
   -- Use <tab> for completion and snippets (supertab)
