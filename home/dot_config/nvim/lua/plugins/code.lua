@@ -36,7 +36,9 @@ return {
         gdscript = {},
         gopls = {},
         lua_ls = {},
-        marksman = {},
+        marksman = {
+          filetypes = { "markdown", "telekasten" },
+        },
         pyright = {},
         terraformls = {},
       },
@@ -72,6 +74,7 @@ return {
         "vim",
         "yaml",
       })
+      vim.treesitter.language.register("markdown", "telekasten")
     end,
   },
 
@@ -146,15 +149,15 @@ return {
     },
   },
 
-  -- Use <tab> for completion and snippets (supertab)
-  -- first: disable default <tab> and <s-tab> behavior in LuaSnip
   {
     "L3MON4D3/LuaSnip",
-    keys = function()
-      return {}
+    config = function()
+      require('luasnip').filetype_extend("telekasten", { "markdown" })
     end,
   },
-  -- then: setup supertab in cmp
+
+
+  -- nvim-cmp
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -163,12 +166,6 @@ return {
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
-      local has_words_before = function()
-        unpack = unpack or table.unpack
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      end
-
       local luasnip = require("luasnip")
       local cmp = require("cmp")
 
@@ -185,30 +182,6 @@ return {
           { name = "nerdfont" }
         }
       ))
-      opts.mapping = vim.tbl_extend("force", opts.mapping, {
-        ["<C-k>"] = cmp.mapping.select_prev_item(),
-        ["<C-j>"] = cmp.mapping.select_next_item(),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-      })
     end,
   },
 }
