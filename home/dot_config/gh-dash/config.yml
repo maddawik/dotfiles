@@ -1,5 +1,15 @@
-defaults:
-  preview:
-    width: 80
+# defaults:
+#   preview:
+#     width: 80
+repoPaths:
+  Mawdac/*: ~/projects/*
+  Lookingglass/*: ~/work/lookingglass/*
 pager:
   diff: "delta"
+keybindings:
+  prs:
+    - key: e
+      command: >
+        tmux new-window -c {{.RepoPath}} '
+          nvim -c ":Octo pr edit {{.PrNumber}}"
+        '
