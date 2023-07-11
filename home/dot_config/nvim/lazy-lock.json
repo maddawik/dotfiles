@@ -1,4 +1,5 @@
 {
+  "Hypersonic.nvim": { "branch": "main", "commit": "a98dbd6b5ac1aac3cd895990e08d1ea40e67a9e3" },
   "LazyVim": { "branch": "main", "commit": "b660b51718387a1c10d8edf1fe9807b6c7a9f0e0" },
   "LuaSnip": { "branch": "master", "commit": "a658ae2906344a1d2b9c507738e585cf68e685c7" },
   "SchemaStore.nvim": { "branch": "main", "commit": "2c14f75d92d2e68392b4b9957a02040b28004779" },

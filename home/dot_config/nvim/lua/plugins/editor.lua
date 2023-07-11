@@ -338,4 +338,15 @@ return {
       { "<leader>U", "<esc><cmd>Sort u<cr>", desc = "Unique Sort", mode = "v" },
     },
   },
+
+  -- Regex explainer
+  {
+    "tomiis4/Hypersonic.nvim",
+    event = "CmdlineEnter",
+    cmd = "Hypersonic",
+    keys = {
+      { "<leader>r", "<esc><cmd>Hypersonic<cr>", desc = "Explain Regex", mode = "v" },
+    },
+    config = true,
+  },
 }
