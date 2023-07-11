@@ -15,18 +15,6 @@ return {
   -- nvim-lspconfig
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      {
-        "SmiteshP/nvim-navbuddy",
-        dependencies = {
-          "SmiteshP/nvim-navic",
-        },
-        keys = {
-          { "<leader>cn", "<cmd>Navbuddy<cr>", desc = "Symbol Nav" }
-        },
-        opts = { lsp = { auto_attach = true }, }
-      }
-    },
     ---@class PluginLspOpts
     opts = {
       ---@type lspconfig.options

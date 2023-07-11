@@ -32,7 +32,6 @@ create_autocmd("InsertEnter", {
         and vim.bo.filetype ~= "mason"
         and vim.bo.filetype ~= "help"
         and vim.bo.filetype ~= "Trouble"
-        and vim.bo.filetype ~= "Navbuddy"
         and vim.bo.filetype ~= "SidebarNvim" then
       vim.opt.relativenumber = true
       vim.opt.list = true
@@ -49,7 +48,6 @@ create_autocmd({ "VimEnter", "BufEnter", "InsertLeave" }, {
         and vim.bo.filetype ~= "mason"
         and vim.bo.filetype ~= "help"
         and vim.bo.filetype ~= "Trouble"
-        and vim.bo.filetype ~= "Navbuddy"
         and vim.bo.filetype ~= "SidebarNvim" then
       vim.opt.relativenumber = false
       vim.opt.list = false
