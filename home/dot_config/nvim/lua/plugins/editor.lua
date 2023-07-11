@@ -339,17 +339,6 @@ return {
     },
   },
 
-  -- Regex explainer
-  {
-    "tomiis4/Hypersonic.nvim",
-    event = "CmdlineEnter",
-    cmd = "Hypersonic",
-    keys = {
-      { "<leader>r", "<esc><cmd>Hypersonic<cr>", desc = "Explain Regex", mode = "v" },
-    },
-    config = true,
-  },
-
   {
     "pwntester/octo.nvim",
     config = true,
