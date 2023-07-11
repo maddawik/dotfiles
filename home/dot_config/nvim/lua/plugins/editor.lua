@@ -349,4 +349,10 @@ return {
     },
     config = true,
   },
+
+  {
+    "pwntester/octo.nvim",
+    config = true,
+    cmd = "Octo",
+  },
 }
