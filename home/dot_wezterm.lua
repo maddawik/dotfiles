@@ -16,7 +16,7 @@ end
 config.color_scheme = 'tokyonight_moon'
 -- config.color_scheme = 'Catppuccin Mocha'
 -- config.color_scheme = 'Solarized Dark (Gogh)'
-config.font = wezterm.font 'Fira Code'
+config.font = wezterm.font 'JetBrains Mono'
 config.font_size = 20
 config.enable_tab_bar = false
 config.window_padding = {
