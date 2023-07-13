@@ -21,8 +21,12 @@ if status is-interactive
         --bind 'tab:toggle'"
 
     # fzf.fish
+    set -gx fzf_history_time_format "%m-%d-%y %H:%M"
     fzf_configure_bindings --directory=\cf \
-      --git_log=\cg --git_status=\cs --processes=\cp
+        --git_log=\cg --git_status=\cs --processes=\cp
+
+    # pnpm
+    set -gx PNPM_HOME "$HOME/Library/pnpm"
 
     # rbenv
     rbenv init - fish | source
@@ -39,10 +43,3 @@ end
 
 # alias and abbr
 source ~/.config/fish/alias.fish
-
-# pnpm
-set -gx PNPM_HOME "$HOME/Library/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
-# pnpm end
