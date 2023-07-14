@@ -439,8 +439,13 @@ bind-key Space next-layout
 
 # Toggle last session
 bind-key C-Space switch-client -l
+
+# Rename sessions
 bind-key n command-prompt 'rename-window %%'
 bind-key N command-prompt 'rename-session %%'
+
+# Toggle synchronize panes
+bind-key p set -g synchronize-panes
 
 # nb cli shortcut
 bind-key k split-window -v "nb shell"
