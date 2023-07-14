@@ -3,7 +3,6 @@ return {
   -- LazyVim plugins
   -- { import = "lazyvim.plugins.extras.coding.yanky" },
   -- { import = "lazyvim.plugins.extras.dap" },
-  { import = "lazyvim.plugins.extras.editor.flash" },
   { import = "lazyvim.plugins.extras.lang.go" },
   { import = "lazyvim.plugins.extras.lang.json" },
   { import = "lazyvim.plugins.extras.lang.rust" },
@@ -119,9 +118,6 @@ return {
     },
   },
 
-  -- fish
-  { "mtoohey31/cmp-fish",       ft = "fish" },
-
   -- inkle's ink
   { "ahayworth/ink-syntax-vim", ft = "ink", },
 
@@ -151,6 +147,7 @@ return {
     dependencies = {
       "hrsh7th/cmp-emoji",
       "chrisgrieser/cmp-nerdfont",
+      { "mtoohey31/cmp-fish", ft = "fish" },
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
