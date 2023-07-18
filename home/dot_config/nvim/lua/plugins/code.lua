@@ -65,11 +65,6 @@ return {
     end,
   },
 
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    lazy = false, -- TODO: make it lazy
-  },
-
   -- null-ls
   {
     "jose-elias-alvarez/null-ls.nvim",
