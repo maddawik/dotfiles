@@ -359,6 +359,24 @@ return {
       { "<leader>mp", "<esc><cmd>MarkdownPreview<cr>",       desc = "Preview" },
       { "<leader>mt", "<esc><cmd>MarkdownPreviewToggle<cr>", desc = "Toggle" },
       { "<leader>ms", "<esc><cmd>MarkdownPreviewStop<cr>",   desc = "Stop" },
+    },
+  },
+
+  -- Code Map
+  {
+    "gorbit99/codewindow.nvim",
+    config = true,
+    keys = {
+      { "<leader>um", "<esc><cmd>lua require(\"codewindow\").toggle_minimap()<cr>", desc = "Toggle Minimap" },
+    },
+    opts = {
+      window_border = "none",
+      minimap_width = 15,
+      show_cursor = false,
+      screen_bounds = "background",
+    },
+  },
+
     }
   }
 }
