@@ -377,6 +377,15 @@ return {
     },
   },
 
+  -- Flash
+  {
+    "folke/flash.nvim",
+    opts = {
+      label = {
+        rainbow = {
+          enabled = true
+        }
+      }
     }
-  }
+  },
 }
