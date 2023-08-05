@@ -28,6 +28,16 @@ return {
     end,
   },
 
+  -- Bufferline
+  {
+    "akinsho/bufferline.nvim",
+    opts = {
+      options = {
+        show_buffer_close_icons = false,
+      },
+    },
+  },
+
   -- Better splits and tmux navigation
   {
     "mrjones2014/smart-splits.nvim",
