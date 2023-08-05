@@ -31,11 +31,20 @@ return {
   -- Bufferline
   {
     "akinsho/bufferline.nvim",
+    lazy = false,
     opts = {
       options = {
         show_buffer_close_icons = false,
+        always_show_bufferline = true,
       },
     },
+  },
+
+  -- Scoped buffers
+  {
+    "tiagovla/scope.nvim",
+    event = "VeryLazy",
+    config = true,
   },
 
   -- Better splits and tmux navigation
