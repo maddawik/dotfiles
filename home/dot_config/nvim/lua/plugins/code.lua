@@ -43,6 +43,7 @@ return {
         "fish",
         "gdscript",
         "go",
+        "hcl",
         "html",
         "javascript",
         "json",
