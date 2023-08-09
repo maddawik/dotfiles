@@ -1,7 +1,7 @@
 [user]
   name = Mawdac
 {{- if eq .chezmoi.hostname "ereilly-mbp" }}
-  email = ereilly@lookingglasscyber.com
+  email = ereilly@zerofox.com
 {{- else }}
   email = edwardreillycomputers@gmail.com
 {{- end }}
@@ -42,3 +42,5 @@
   colorMoved = default
 [init]
   defaultBranch = main
+[url "git@github.com:"]
+  insteadOf = https://github.com/
