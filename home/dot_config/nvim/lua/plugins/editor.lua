@@ -28,22 +28,6 @@ return {
     end,
   },
 
-  {
-    "shellRaining/hlchunk.nvim",
-    event = { "UIEnter" },
-    config = true,
-    opts = {
-      blank = {
-        enable = false,
-      },
-    },
-    dependencies = {
-      "echasnovski/mini.indentscope",
-      enabled = false
-    },
-  },
-
-
   -- Bufferline
   {
     "akinsho/bufferline.nvim",
