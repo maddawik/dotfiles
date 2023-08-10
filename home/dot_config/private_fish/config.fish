@@ -4,6 +4,10 @@ if status is-interactive
     set -gx MANPAGER bat
 
     # vi-mode
+    set fish_vi_force_cursor 1
+    set fish_cursor_default block
+    set fish_cursor_insert line
+    set fish_cursor_replace_one underscore
     bind --user -M insert jk \
         "if commandline -P; commandline -f cancel; \
         else; set fish_bind_mode default; \
