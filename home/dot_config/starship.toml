@@ -7,3 +7,6 @@ symbol = " "
 
 [time]
 disabled = false
+
+[gcloud]
+disabled = true
