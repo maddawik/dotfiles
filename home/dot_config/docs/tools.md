@@ -7,5 +7,6 @@
 `jless` An interactive JSON processor.
 `jq` A command-line JSON processor that uses a domain-specific language.
 `ncdu` Disk usage analyzer with an ncurses interface.
+`rip` Send files to the graveyard.
 `viddy` Execute a program periodically, showing output fullscreen.
 `xh` Friendly and fast tool for sending HTTP requests.
