@@ -1,0 +1,70 @@
+# fancy pants
+alias git="hub"
+alias vim="nvim"
+alias ls="exa --icons"
+alias watch="viddy"
+alias nv="nvim"
+alias pn="pnpm"
+alias yless="jless --yaml"
+
+# copy/pasta
+alias c="pbcopy"
+alias v="pbpaste"
+
+# tmux
+alias tm="tmux"
+alias tma="tmux at"
+alias tml="tmux ls"
+
+# ls
+alias l="ls"
+alias ll="ls -l"
+alias la="ls -a"
+alias lla="ls -al"
+alias lt="ls -l --tree"
+alias lt2="ls -l --tree --level=2"
+alias lt3="ls -l --tree --level=3"
+alias lt4="ls -l --tree --level=4"
+alias lt5="ls -l --tree --level=5"
+
+# git
+alias ga="git add"
+alias gc="git commit -m"
+alias gd="git diff"
+alias gf="git fetch"
+alias gp="git pull"
+alias gP="git push"
+alias gs="git status"
+alias gco="git checkout"
+alias gsw="git switch"
+alias gbr="git switch -c"
+
+# dotfiles
+alias cm="chezmoi"
+alias cma="chezmoi add"
+alias cmr="chezmoi re-add"
+alias cme="chezmoi edit --apply"
+alias cms="chezmoi status"
+alias cmd="chezmoi diff"
+alias cmA="chezmoi -v apply"
+alias cmcd="cd /Users/ereilly/.dotfiles"
+
+# nb
+alias nbg="nb browse -n --gui"
+alias nbt="nb todos"
+alias nbta="nb todo add"
+
+# lazygit
+alias lz="lazygit"
+alias lzc="lz --path /Users/ereilly/.dotfiles"
+
+# github cli
+alias ghb="gh browse"
+alias ghd="gh dash"
+alias ghp="gh pr create"
+
+# other
+alias tools="glow /Users/ereilly/.config/docs/tools.md"
+
+# starship
+eval "$(starship init bash)"
