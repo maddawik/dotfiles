@@ -6,7 +6,18 @@ truncation_symbol = "…/"
 symbol = " "
 
 [time]
+format = "[$time]($style) "
 disabled = false
 
 [gcloud]
 disabled = true
+
+[shell]
+fish_indicator = "󰈺 "
+bash_indicator = " "
+style = "cyan bold"
+disabled = false
+
+[aws.region_aliases]
+us-east-1 = 'Virgina'
+us-west-2 = 'Oregon'
