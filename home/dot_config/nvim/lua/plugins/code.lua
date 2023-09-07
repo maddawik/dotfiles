@@ -20,7 +20,17 @@ return {
       servers = {
         ansiblels = {},
         bashls = {},
-        gdscript = {},
+        gdscript = {
+          on_attach = function(client)
+            local _notify = client.notify
+            client.notify = function(method, params)
+              if method == 'didChangeConfiguration' then
+                return
+              end
+              _notify(method, params)
+            end
+          end
+        },
         gopls = {},
         lua_ls = {},
         marksman = {
