@@ -460,7 +460,7 @@ bind-key G split-window -h "lazygit"
 #set -g status-position top
 
 # -- Pane border
-set -wg pane-border-status off # top
+# set -wg pane-border-status off # top
 # set -wg pane-border-format '#[align=right] #{?#{&&:#{pane_active},#{client_prefix}},#[underscore],}\
 # #{pane_current_command}  #{pane_tty} #{?pane_active,❐ #S:#I/#{session_windows} ,}\
 # #{?window_zoomed_flag,⬢,❄} #P '
@@ -505,10 +505,10 @@ tmux_conf_uninstall_plugins_on_reload=true
 set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @plugin 'sainnhe/tmux-fzf'
 set -g @plugin 'yardnsm/tmux-1password'
+set -g @plugin 'olimorris/tmux-pomodoro-plus'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
-set -g @plugin 'olimorris/tmux-pomodoro-plus'
-# set -g @plugin 'tmux-plugins/tmux-logging'
+set -g @plugin 'tmux-plugins/tmux-logging'
 # set -g @continuum-restore 'on'
 
 # for neovim
@@ -516,6 +516,14 @@ set -g @resurrect-strategy-nvim 'session'
 
 # update 1password keybinding
 set -g @1password-key 'U'
+
+# Pomodoro
+set -g @pomodoro_toggle 't'
+set -g @pomodoro_cancel 'T'
+
+# tmux-logging path
+set -g @logging-path "~/logs/tmux"
+
 # tokyonight setting for undercurls to work
 # set -g default-terminal "${TERM}"
 set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
