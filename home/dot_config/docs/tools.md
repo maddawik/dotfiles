@@ -8,5 +8,6 @@
 `jq` A command-line JSON processor that uses a domain-specific language.
 `ncdu` Disk usage analyzer with an ncurses interface.
 `rip` Send files to the graveyard.
+`smug` Session manager and task runner for tmux.
 `viddy` Execute a program periodically, showing output fullscreen.
 `xh` Friendly and fast tool for sending HTTP requests.
