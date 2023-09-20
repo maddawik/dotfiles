@@ -464,4 +464,11 @@ return {
       }
     }
   },
+
+  -- Twilight
+  {
+    "folke/twilight.nvim",
+    cmd = "Twilight",
+    keys = { { "<leader>ut", "<cmd>Twilight<cr>", desc = "Toggle Twilight" } },
+  }
 }
