@@ -9,5 +9,6 @@
 `ncdu` Disk usage analyzer with an ncurses interface.
 `rip` Send files to the graveyard.
 `smug` Session manager and task runner for tmux.
+`yazi` Blazing fast terminal file manager based on async I/O.
 `viddy` Execute a program periodically, showing output fullscreen.
 `xh` Friendly and fast tool for sending HTTP requests.
