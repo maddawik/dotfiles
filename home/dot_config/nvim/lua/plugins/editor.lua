@@ -26,8 +26,8 @@ return {
 ||.=='    _-'                                                     `' |  /==.||
 =='    _-'                                                            \/   `==
 \   _-'                                                                `-_   /
- `''                                                                      ``' 
-]]
+ `''                                                                      ``'
+      ]]
 
       dashboard.section.header.val = vim.split(logo, "\n")
       return dashboard
