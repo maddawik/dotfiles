@@ -117,12 +117,6 @@ return {
           require("telescope").load_extension("fzf")
         end,
       },
-      {
-        "nvim-telescope/telescope-symbols.nvim",
-        keys = {
-          { "<leader>se", "<cmd>Telescope symbols<cr>", desc = "Emojis" }
-        },
-      }
     },
     opts = {
       defaults = {
@@ -422,6 +416,40 @@ return {
       minimap_width = 15,
       show_cursor = false,
       screen_bounds = "background",
+    },
+  },
+
+  -- Worktrees dude
+  {
+    "ThePrimeagen/git-worktree.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+    },
+    config = function()
+      require("telescope").load_extension("git_worktree")
+    end,
+    keys = {
+      {
+        "<leader>gt",
+        function()
+          require("telescope").extensions.git_worktree.git_worktrees()
+        end,
+        desc = "Search Worktrees"
+      },
+      {
+        "<leader>gT",
+        function()
+          require("telescope").extensions.git_worktree.create_git_worktree()
+        end,
+        desc = "Search Worktrees"
+      },
+    },
+  },
+
+  {
+    "nvim-telescope/telescope-symbols.nvim",
+    keys = {
+      { "<leader>se", "<cmd>Telescope symbols<cr>", desc = "Emojis" }
     },
   },
 
