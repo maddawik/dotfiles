@@ -38,8 +38,10 @@ if status is-interactive
     # pyenv
     pyenv init - | source
 
+    {{- if ne .chezmoi.hostname "ereilly-mbp" }}
     # 1password
     op completion fish | source
+    {{- end }}
 
     # starship
     function starship_transient_prompt_func
