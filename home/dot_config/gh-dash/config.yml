@@ -4,6 +4,7 @@
 repoPaths:
   Mawdac/*: ~/projects/*
   Lookingglass/*: ~/work/lookingglass/*
+  Zerofox/*: ~/work/zerofox/*
 pager:
   diff: "delta"
 keybindings:
