@@ -401,6 +401,16 @@ return {
     },
   },
 
+  -- Split/Join blocks of code
+  {
+    "Wansmer/treesj",
+    keys = {
+      { "gS", "<esc><cmd>TSJSplit<cr>", desc = "Split node under cursor" },
+      { "gJ", "<esc><cmd>TSJJoin<cr>",  desc = "Join node under cursor", },
+    },
+    config = true,
+  },
+
   -- Super GitHub Integration
   {
     "pwntester/octo.nvim",
