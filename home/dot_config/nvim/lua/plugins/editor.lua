@@ -500,5 +500,17 @@ return {
     "folke/twilight.nvim",
     cmd = "Twilight",
     keys = { { "<leader>ut", "<cmd>Twilight<cr>", desc = "Toggle Twilight" } },
-  }
+  },
+
+  -- Zen-mode
+  {
+    "folke/zen-mode.nvim",
+    cmd = "ZenMode",
+    keys = { { "<leader>uz", "<cmd>ZenMode<cr>", desc = "Toggle Zen-Mode" } },
+    opts = {
+      plugins = {
+        tmux = { enabled = true },
+      }
+    }
+  },
 }
