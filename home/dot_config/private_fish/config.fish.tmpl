@@ -13,6 +13,13 @@ if status is-interactive
         else; set fish_bind_mode default; \
         commandline -f backward-char repaint-mode; end"
 
+    # tide prompt
+    set tide_git_icon ""
+    set tide_git_truncation_length 0
+    if not contains private_mode $tide_right_prompt_items
+        set -a tide_right_prompt_items private_mode
+    end
+
     # fzf
     set -gx FZF_DEFAULT_OPTS \
         "--color=fg:#c0caf5,hl:#ff9e64 \
@@ -37,19 +44,13 @@ if status is-interactive
 
     # pyenv
     pyenv init - | source
-
     {{- if ne .chezmoi.hostname "ereilly-mbp" }}
+
     # 1password
     op completion fish | source
     {{- end }}
 
-    # starship
-    function starship_transient_prompt_func
-        starship module time
-    end
-    starship init fish | source
-    enable_transience
+    # alias and abbr
+    source ~/.config/fish/alias.fish
 end
 
-# alias and abbr
-source ~/.config/fish/alias.fish
