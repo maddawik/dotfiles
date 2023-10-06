@@ -3,10 +3,12 @@ return {
   -- LazyVim plugins
   -- { import = "lazyvim.plugins.extras.coding.yanky" },
   -- { import = "lazyvim.plugins.extras.dap" },
+  { import = "lazyvim.plugins.extras.test.core" },
   { import = "lazyvim.plugins.extras.lang.go" },
   { import = "lazyvim.plugins.extras.lang.json" },
   { import = "lazyvim.plugins.extras.lang.rust" },
   { import = "lazyvim.plugins.extras.lang.typescript" },
+  -- { import = "lazyvim.plugins.extras.ui.dashboard" },
   -- { import = "lazyvim.plugins.extras.ui.edgy" },
   { import = "lazyvim.plugins.extras.util.project" },
   { import = "lazyvim.plugins.extras.vscode" },
