@@ -2,7 +2,7 @@
 return {
   -- LazyVim plugins
   -- { import = "lazyvim.plugins.extras.coding.yanky" },
-  -- { import = "lazyvim.plugins.extras.dap" },
+  { import = "lazyvim.plugins.extras.dap" },
   { import = "lazyvim.plugins.extras.test.core" },
   { import = "lazyvim.plugins.extras.lang.go" },
   { import = "lazyvim.plugins.extras.lang.json" },
