@@ -153,7 +153,7 @@ return {
       { "<leader>fW", Util.telescope("grep_string", { cwd = false }), desc = "Word (cwd)" },
       -- add a keymap to browse plugin files
       {
-        "<leader>fp",
+        "<leader>fP",
         function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
         desc = "Find Plugin File",
       },
@@ -419,12 +419,57 @@ return {
     },
   },
 
+  -- Markdown Integration
+  {
+    "jakewvincent/mkdnflow.nvim",
+    opts = {
+      mappings = {
+        MkdnEnter = false,
+        MkdnTab = false,
+        MkdnSTab = false,
+        MkdnNextLink = false,
+        MkdnPrevLink = false,
+        MkdnNextHeading = false,
+        MkdnPrevHeading = false,
+        MkdnGoBack = false,
+        MkdnGoForward = false,
+        MkdnCreateLink = false,
+        MkdnCreateLinkFromClipboard = false,
+        MkdnFollowLink = false,
+        MkdnDestroyLink = false,
+        MkdnTagSpan = false,
+        MkdnMoveSource = false,
+        MkdnYankAnchorLink = false,
+        MkdnYankFileAnchorLink = false,
+        MkdnIncreaseHeading = false,
+        MkdnDecreaseHeading = false,
+        MkdnToggleToDo = false,
+        MkdnNewListItem = false,
+        MkdnNewListItemBelowInsert = false,
+        MkdnNewListItemAboveInsert = false,
+        MkdnExtendList = false,
+        MkdnUpdateNumbering = false,
+        MkdnTableNextCell = false,
+        MkdnTablePrevCell = false,
+        MkdnTableNextRow = false,
+        MkdnTablePrevRow = false,
+        MkdnTableNewRowBelow = false,
+        MkdnTableNewRowAbove = false,
+        MkdnTableNewColAfter = false,
+        MkdnTableNewColBefore = false,
+        MkdnFoldSection = false,
+        MkdnUnfoldSection = false,
+      },
+    },
+    ft = "markdown",
+  },
+
   -- Code Map
   {
     "gorbit99/codewindow.nvim",
     config = true,
     keys = {
-      { "<leader>um", "<esc><cmd>lua require(\"codewindow\").toggle_minimap()<cr>", desc = "Toggle Minimap" },
+      { "<leader>um", '<esc><cmd>lua require("codewindow").toggle_minimap()<cr>', desc = "Toggle Minimap" },
     },
     opts = {
       window_border = "none",
