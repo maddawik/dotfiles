@@ -47,7 +47,7 @@ alias cme="chezmoi edit --apply"
 alias cms="chezmoi status"
 alias cmd="chezmoi diff"
 alias cmA="chezmoi -v apply"
-alias cmcd="cd /Users/ereilly/.dotfiles"
+alias cmcd="cd {{ .chezmoi.homeDir }}/.dotfiles"
 
 # nb
 alias nbg="nb browse -n --gui"
@@ -56,7 +56,7 @@ alias nbta="nb todo add"
 
 # lazygit
 alias lz="lazygit"
-alias lzc="lz --path /Users/ereilly/.dotfiles"
+alias lzc="lz --path {{ .chezmoi.homeDir }}/.dotfiles"
 
 # github cli
 alias ghb="gh browse"
@@ -64,7 +64,7 @@ alias ghd="gh dash"
 alias ghp="gh pr create"
 
 # other
-alias tools="glow /Users/ereilly/.config/docs/tools.md"
+alias tools="glow {{ .chezmoi.homeDir }}/.config/docs/tools.md"
 
 # starship
 eval "$(starship init bash)"
