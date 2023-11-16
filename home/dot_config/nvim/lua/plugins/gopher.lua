@@ -6,6 +6,6 @@ return {
     vim.cmd([[silent! goinstalldeps]])
   end,
   keys = {
-    { "<leader>ge", "<cmd> goiferr <cr>", desc = "goiferr" },
+    { "<leader>ce", "<cmd> GoIfErr <cr>", desc = "GoIfErr" },
   },
 }

@@ -2,8 +2,8 @@ return {
   -- Scoped buffers
   {
     "tiagovla/scope.nvim",
-    event = "VeryLazy",
     config = true,
+    event = "VeryLazy",
   },
 
   -- Better splits and tmux navigation
@@ -15,6 +15,16 @@ return {
   -- Super smart column status
   {
     "Bekaboo/deadcolumn.nvim",
+    event = {
+      "BufReadPre",
+      "BufNewFile",
+    },
+  },
+
+  -- Trim trailing whitespace
+  {
+    "lewis6991/spaceless.nvim",
+    config = true,
     event = {
       "BufReadPre",
       "BufNewFile",
@@ -34,10 +44,10 @@ return {
   -- Split/Join blocks of code
   {
     "Wansmer/treesj",
+    config = true,
     keys = {
       { "gS", "<esc><cmd>TSJSplit<cr>", desc = "Split node under cursor" },
       { "gJ", "<esc><cmd>TSJJoin<cr>", desc = "Join node under cursor" },
     },
-    config = true,
   },
 }
