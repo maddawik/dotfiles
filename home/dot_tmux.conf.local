@@ -447,11 +447,9 @@ bind-key N command-prompt 'rename-session %%'
 # Toggle synchronize panes
 bind-key p set -g synchronize-panes
 
-# nb cli shortcut
-bind-key k split-window -v "nb shell"
-bind-key K split-window -h "nb shell"
-bind-key g split-window -v "lazygit"
-bind-key G split-window -h "lazygit"
+# ollama shortcut
+bind-key k split-window -h "ollama run mistral"
+bind-key K split-window -v "ollama run mistral"
 
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind v new-window -c #{pane_current_path} #!important
