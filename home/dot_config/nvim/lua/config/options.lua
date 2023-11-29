@@ -1,1 +1,11 @@
 vim.opt.colorcolumn = "80"
+-- vim.opt.listchars = {
+--   space = ".",
+--   eol = "↲",
+--   nbsp = "␣",
+--   trail = "·",
+--   precedes = "←",
+--   extends = "→",
+--   tab = "¬ ",
+--   conceal = "※",
+-- }
