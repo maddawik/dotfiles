@@ -122,25 +122,25 @@ cat_thm_black4="#585b70"
 # Catppuccin-ified
 tmux_conf_theme_colour_1="$cat_thm_black"
 tmux_conf_theme_colour_2="$cat_thm_black4"
-tmux_conf_theme_colour_3="$tokyo_pink"
-tmux_conf_theme_colour_4="$tokyo_cyan" # window bg
+tmux_conf_theme_colour_3="$cat_thm_pink"
+tmux_conf_theme_colour_4="$cat_thm_cyan" # window bg
 tmux_conf_theme_colour_5="$cat_thm_green"
 tmux_conf_theme_colour_6="$cat_thm_black"
 tmux_conf_theme_colour_7="$cat_thm_black"
 tmux_conf_theme_colour_8="$cat_thm_black"
-tmux_conf_theme_colour_9="$tokyo_yellow" # session bg
-tmux_conf_theme_colour_10="$tokyo_cyan"
-tmux_conf_theme_colour_11="$tokyo_green"
-tmux_conf_theme_colour_12="$tokyo_foreground"
+tmux_conf_theme_colour_9="$cat_thm_yellow" # session bg
+tmux_conf_theme_colour_10="$cat_thm_cyan"
+tmux_conf_theme_colour_11="$cat_thm_green"
+tmux_conf_theme_colour_12="$cat_thm_fg"
 tmux_conf_theme_colour_13="$cat_thm_black"
 tmux_conf_theme_colour_14="$cat_thm_black"
 tmux_conf_theme_colour_15="$cat_thm_gray"
-tmux_conf_theme_colour_16="$tokyo_red" # user bg
-tmux_conf_theme_colour_17="$tokyo_green" # hostname bg
+tmux_conf_theme_colour_16="$cat_thm_red" # user bg
+tmux_conf_theme_colour_17="$cat_thm_green" # hostname bg
 
 # window style
-tmux_conf_theme_window_fg="$tokyo_foreground"
-# tmux_conf_theme_window_bg="$cat_thm_bg" # Remove for transparency
+tmux_conf_theme_window_fg="$cat_thm_fg"
+tmux_conf_theme_window_bg="$cat_thm_bg" # Remove for transparency
 
 # highlight focused pane (tmux >= 2.1), possible values are:
 #   - true
@@ -148,7 +148,7 @@ tmux_conf_theme_window_fg="$tokyo_foreground"
 tmux_conf_theme_highlight_focused_pane=false
 
 # focused pane colours:
-tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
+tmux_conf_theme_focused_pane_bg="$cat_thm_blue"
 
 # pane border style, possible values are:
 #   - thin (default)
@@ -156,31 +156,31 @@ tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_pane_border_style=thin
 
 # pane borders colours:
-tmux_conf_theme_pane_border="$tmux_conf_theme_colour_2"
-tmux_conf_theme_pane_active_border="$tmux_conf_theme_colour_4"
+tmux_conf_theme_pane_border="$cat_thm_gray"
+tmux_conf_theme_pane_active_border="$cat_thm_blue"
 
 # pane indicator colours (when you hit <prefix> + q)
-tmux_conf_theme_pane_indicator="$tmux_conf_theme_colour_4"
-tmux_conf_theme_pane_active_indicator="$tmux_conf_theme_colour_4"
+tmux_conf_theme_pane_indicator="$cat_thm_blue"
+tmux_conf_theme_pane_active_indicator="$cat_thm_green"
 
 # status line style
-tmux_conf_theme_message_fg="$tmux_conf_theme_colour_1"
-tmux_conf_theme_message_bg="$tmux_conf_theme_colour_5"
+tmux_conf_theme_message_fg="$cat_thm_fg"
+tmux_conf_theme_message_bg="$cat_thm_bg"
 tmux_conf_theme_message_attr="bold"
 
 # status line command style (<prefix> : Escape)
-tmux_conf_theme_message_command_fg="$tmux_conf_theme_colour_5"
-tmux_conf_theme_message_command_bg="$tmux_conf_theme_colour_1"
+tmux_conf_theme_message_command_fg="$cat_thm_fg"
+tmux_conf_theme_message_command_bg="$cat_thm_bg"
 tmux_conf_theme_message_command_attr="bold"
 
 # window modes style
-tmux_conf_theme_mode_fg="$tmux_conf_theme_colour_1"
-tmux_conf_theme_mode_bg="$tmux_conf_theme_colour_5"
+tmux_conf_theme_mode_fg="$cat_thm_fg"
+tmux_conf_theme_mode_bg="$cat_thm_bg"
 tmux_conf_theme_mode_attr="bold"
 
 # status line style
-tmux_conf_theme_status_fg="$tmux_conf_theme_colour_3"
-tmux_conf_theme_status_bg="$tmux_conf_theme_colour_1"
+tmux_conf_theme_status_fg="$cat_thm_fg"
+tmux_conf_theme_status_bg="$cat_thm_bg"
 tmux_conf_theme_status_attr="none"
 
 # terminal title
@@ -205,8 +205,8 @@ tmux_conf_theme_terminal_title="#h ❐ #S ● #I #W"
 #     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_window_status_fg="$tmux_conf_theme_colour_3"
-tmux_conf_theme_window_status_bg="$tmux_conf_theme_colour_1"
+tmux_conf_theme_window_status_fg="$cat_thm_fg"
+tmux_conf_theme_window_status_bg="$cat_thm_bg"
 tmux_conf_theme_window_status_attr="none"
 tmux_conf_theme_window_status_format="#I #W"
 #tmux_conf_theme_window_status_format="#{circled_window_index} #W"
@@ -222,26 +222,26 @@ tmux_conf_theme_window_status_format="#I #W"
 #     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_window_status_current_fg="$tmux_conf_theme_colour_1"
-tmux_conf_theme_window_status_current_bg="$tmux_conf_theme_colour_4"
+tmux_conf_theme_window_status_current_fg="$cat_thm_red"
+tmux_conf_theme_window_status_current_bg="$cat_thm_bg"
 tmux_conf_theme_window_status_current_attr="bold"
-tmux_conf_theme_window_status_current_format="#I #W"
-#tmux_conf_theme_window_status_current_format="#{circled_window_index} #W"
-tmux_conf_theme_window_status_current_format="#I #W#{?window_zoomed_flag,🔍,}"
+# tmux_conf_theme_window_status_current_format="#I #W"
+tmux_conf_theme_window_status_current_format="#{circled_window_index} #W"
+# tmux_conf_theme_window_status_current_format="#I #W#{?window_zoomed_flag,🔍,}"
 
 # window activity status style
-tmux_conf_theme_window_status_activity_fg="default"
-tmux_conf_theme_window_status_activity_bg="default"
+tmux_conf_theme_window_status_activity_fg="$cat_thm_fg"
+tmux_conf_theme_window_status_activity_bg="$cat_thm_bg"
 tmux_conf_theme_window_status_activity_attr="underscore"
 
 # window bell status style
-tmux_conf_theme_window_status_bell_fg="$tmux_conf_theme_colour_5"
+tmux_conf_theme_window_status_bell_fg="$cat_thm_fg"
 tmux_conf_theme_window_status_bell_bg="default"
 tmux_conf_theme_window_status_bell_attr="blink,bold"
 
 # window last status style
-tmux_conf_theme_window_status_last_fg="$tmux_conf_theme_colour_4"
-tmux_conf_theme_window_status_last_bg="$tmux_conf_theme_colour_2"
+tmux_conf_theme_window_status_last_fg="$cat_thm_green"
+tmux_conf_theme_window_status_last_bg="$cat_thm_bg"
 tmux_conf_theme_window_status_last_attr="none"
 
 # status left/right sections separators
@@ -286,17 +286,17 @@ tmux_conf_theme_right_separator_sub="|"
 # tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
 # tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
 
-tmux_conf_theme_status_left=" ❐ #S "
-tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{pomodoro_status} | #{username}#{root} | #{hostname} "
+tmux_conf_theme_status_left="  #S "
+tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{pomodoro_status} #{username}#{root}  %I:%M %p "
 
 # status left style
-tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
-tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_9,$tmux_conf_theme_colour_10,$tmux_conf_theme_colour_11"
+tmux_conf_theme_status_left_fg="$cat_thm_blue,$cat_thm_fg,$cat_thm_fg"
+tmux_conf_theme_status_left_bg="$cat_thm_bg,$cat_thm_bg,$cat_thm_bg"
 tmux_conf_theme_status_left_attr="bold,none,none"
 
 # status right style
-tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_13,$tmux_conf_theme_colour_14"
-tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_15,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_17"
+tmux_conf_theme_status_right_fg="$cat_thm_fg,$cat_thm_fg,$cat_thm_fg"
+tmux_conf_theme_status_right_bg="$cat_thm_bg,$cat_thm_bg,$cat_thm_bg"
 tmux_conf_theme_status_right_attr="none,none,bold"
 
 # pairing indicator
@@ -445,11 +445,7 @@ bind-key n command-prompt 'rename-window %%'
 bind-key N command-prompt 'rename-session %%'
 
 # Toggle synchronize panes
-bind-key p set -g synchronize-panes
-
-# ollama shortcut
-bind-key k split-window -h "ollama run mistral"
-bind-key K split-window -v "ollama run mistral"
+bind-key S set -g synchronize-panes
 
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind v new-window -c #{pane_current_path} #!important
@@ -458,12 +454,12 @@ bind-key K split-window -v "ollama run mistral"
 set -g status-position top
 
 # -- Pane border
-# set -wg pane-border-status off # top
-# set -wg pane-border-format '#[align=right] #{?#{&&:#{pane_active},#{client_prefix}},#[underscore],}\
-# #{pane_current_command}  #{pane_tty} #{?pane_active,❐ #S:#I/#{session_windows} ,}\
-# #{?window_zoomed_flag,⬢,❄} #P '
-# set -wg pane-active-border-style '#{?pane_in_mode,fg=#cc6633,\
-# #{?synchronize-panes,fg=#c586c0#,bold,#{?#{==:#{client_key_table},resize},fg=#c72e0f,fg=#16825d#,bold}}}'
+set -wg pane-border-status off # top
+set -wg pane-border-format '#[align=right] #{?#{&&:#{pane_active},#{client_prefix}},#[underscore],}\
+#{pane_current_command}  #{pane_tty} #{?pane_active,❐ #S:#I/#{session_windows} ,}\
+#{?window_zoomed_flag,⬢,❄} #P '
+set -wg pane-active-border-style '#{?pane_in_mode,fg=#cc6633,\
+#{?synchronize-panes,fg=#c586c0#,bold,#{?#{==:#{client_key_table},resize},fg=#c72e0f,fg=#16825d#,bold}}}'
 
 # -- tpm -----------------------------------------------------------------------
 
