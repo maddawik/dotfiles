@@ -165,7 +165,7 @@ tmux_conf_theme_pane_active_indicator="$cat_thm_green"
 
 # status line style
 tmux_conf_theme_message_fg="$cat_thm_fg"
-tmux_conf_theme_message_bg="$cat_thm_bg"
+tmux_conf_theme_message_bg="$cat_thm_gray"
 tmux_conf_theme_message_attr="bold"
 
 # status line command style (<prefix> : Escape)
@@ -175,7 +175,7 @@ tmux_conf_theme_message_command_attr="bold"
 
 # window modes style
 tmux_conf_theme_mode_fg="$cat_thm_fg"
-tmux_conf_theme_mode_bg="$cat_thm_bg"
+tmux_conf_theme_mode_bg="$cat_thm_gray"
 tmux_conf_theme_mode_attr="bold"
 
 # status line style
