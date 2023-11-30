@@ -7,12 +7,12 @@ return {
   {
     "catppuccin/nvim",
     event = "VeryLazy",
-    name = "catppuccin"
+    name = "catppuccin",
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight",
+      colorscheme = "catppuccin-mocha",
     },
   },
 }
