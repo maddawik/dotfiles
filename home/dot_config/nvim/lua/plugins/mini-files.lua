@@ -19,7 +19,7 @@ return {
   keys = function()
     return {
       {
-        "-",
+        "\\",
         function()
           minifiles_toggle(vim.api.nvim_buf_get_name(0), true)
         end,
