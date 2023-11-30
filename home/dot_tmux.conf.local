@@ -161,11 +161,11 @@ tmux_conf_theme_pane_active_border="$cat_thm_blue"
 
 # pane indicator colours (when you hit <prefix> + q)
 tmux_conf_theme_pane_indicator="$cat_thm_blue"
-tmux_conf_theme_pane_active_indicator="$cat_thm_green"
+tmux_conf_theme_pane_active_indicator="$cat_thm_red"
 
 # status line style
-tmux_conf_theme_message_fg="$cat_thm_fg"
-tmux_conf_theme_message_bg="$cat_thm_gray"
+tmux_conf_theme_message_fg="$cat_thm_black"
+tmux_conf_theme_message_bg="$cat_thm_blue"
 tmux_conf_theme_message_attr="bold"
 
 # status line command style (<prefix> : Escape)
@@ -226,7 +226,7 @@ tmux_conf_theme_window_status_current_fg="$cat_thm_red"
 tmux_conf_theme_window_status_current_bg="$cat_thm_bg"
 tmux_conf_theme_window_status_current_attr="bold"
 # tmux_conf_theme_window_status_current_format="#I #W"
-tmux_conf_theme_window_status_current_format="#{circled_window_index} #W"
+tmux_conf_theme_window_status_current_format="#{circled_window_index} #W#{?window_zoomed_flag,🔍,}"
 # tmux_conf_theme_window_status_current_format="#I #W#{?window_zoomed_flag,🔍,}"
 
 # window activity status style
@@ -287,7 +287,7 @@ tmux_conf_theme_right_separator_sub="|"
 # tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
 
 tmux_conf_theme_status_left="  #S "
-tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{pomodoro_status} #{username}#{root}  %I:%M %p "
+tmux_conf_theme_status_right=" #{prefix}#{pairing}#{synchronized}#{pomodoro_status}  #{username}#{root} |  %I:%M %p "
 
 # status left style
 tmux_conf_theme_status_left_fg="$cat_thm_blue,$cat_thm_fg,$cat_thm_fg"
