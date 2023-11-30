@@ -1,14 +1,44 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  opts = function(_, opts)
-    vim.list_extend(opts.ensure_installed, {
+  opts = {
+    ensure_installed = {
       "bash",
+      "c",
+      "diff",
       "fish",
+      "go",
+      "gomod",
+      "gosum",
+      "html",
+      "javascript",
+      "jsdoc",
       "json",
+      "jsonc",
       "lua",
+      "luadoc",
+      "luap",
+      "markdown",
+      "markdown_inline",
+      "python",
       "query",
       "regex",
+      "toml",
+      "tsx",
+      "typescript",
       "vim",
-    })
-  end,
+      "vimdoc",
+      "yaml",
+    },
+    textobjects = {
+      swap = {
+        enable = true,
+        swap_next = {
+          ["<leader>a"] = "@parameter.inner",
+        },
+        swap_previous = {
+          ["<leader>A"] = "@parameter.inner",
+        },
+      },
+    },
+  },
 }
