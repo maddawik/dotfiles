@@ -51,6 +51,14 @@ if status is-interactive
     op completion fish | source
     {{- end }}
 
+    # starship
+    function starship_transient_rprompt_func
+        starship module time
+    end
+    starship init fish | source
+    enable_transience
+
+
     # alias and abbr
     source ~/.config/fish/alias.fish
 end
