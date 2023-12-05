@@ -3,7 +3,7 @@ return {
   ft = "go",
   config = true,
   build = function()
-    vim.cmd([[silent! goinstalldeps]])
+    vim.cmd([[silent! GoInstallDeps]])
   end,
   keys = {
     { "<leader>ce", "<cmd> GoIfErr <cr>", desc = "GoIfErr" },
