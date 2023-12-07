@@ -232,7 +232,7 @@ tmux_conf_theme_window_status_current_format="#{circled_window_index} #W#{?windo
 # window activity status style
 tmux_conf_theme_window_status_activity_fg="$cat_thm_fg"
 tmux_conf_theme_window_status_activity_bg="$cat_thm_bg"
-tmux_conf_theme_window_status_activity_attr="underscore"
+tmux_conf_theme_window_status_activity_attr="none"
 
 # window bell status style
 tmux_conf_theme_window_status_bell_fg="$cat_thm_fg"

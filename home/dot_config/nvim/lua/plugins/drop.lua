@@ -23,9 +23,12 @@ end
 
 return {
   "folke/drop.nvim",
-  event = "VimEnter",
+  event = "VeryLazy",
   config = function()
     require("drop").setup({
+      filetypes = {},
+      winblend = 50,
+      screensaver = 1000 * 60 * 15,
       theme = GetCurrentSeason(os.date("*t", os.time()).month),
     })
   end,

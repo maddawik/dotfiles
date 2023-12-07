@@ -1,11 +1,10 @@
 return {
   "olexsmir/gopher.nvim",
   ft = "go",
-  config = true,
   build = function()
     vim.cmd([[silent! GoInstallDeps]])
   end,
-  keys = {
-    { "<leader>ce", "<cmd> GoIfErr <cr>", desc = "GoIfErr" },
-  },
+  config = function()
+    vim.keymap.set("n", "<leader>ce", "<cmd> GoIfErr <cr>", { desc = "GoIfErr" })
+  end,
 }
