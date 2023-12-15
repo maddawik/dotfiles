@@ -19,7 +19,7 @@ config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font("JetBrains Mono")
 -- config.font = wezterm.font("PlemolJP Console NF")
 
-config.font_size = 20
+config.font_size = 22
 config.enable_tab_bar = false
 config.window_padding = {
 	left = 0,
