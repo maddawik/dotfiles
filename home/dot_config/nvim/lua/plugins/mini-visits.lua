@@ -14,7 +14,11 @@ return {
     { "<leader>vl", '<cmd>lua MiniVisits.select_label("", "")<cr>', desc = "Select label (all)" },
     { "<leader>vL", "<cmd>lua MiniVisits.select_label()<cr>", desc = "Select label (cwd)" },
     { "<leader>vr", "<cmd>lua MiniVisits.select_path()<cr>", desc = "Select recent" },
-    { "<leader>vj", '<cmd>lua MiniVisits.iterate_paths("forward")<cr>', desc = "Next label" },
-    { "<leader>vk", '<cmd>lua MiniVisits.iterate_paths("backward")<cr>', desc = "Previous label" },
+    { "<leader>vj", '<cmd>lua MiniVisits.iterate_paths("forward", nil, {filter = "core" })<cr>', desc = "Next core" },
+    {
+      "<leader>vk",
+      '<cmd>lua MiniVisits.iterate_paths("backward", nil, {filter = "core" })<cr>',
+      desc = "Previous core",
+    },
   },
 }
