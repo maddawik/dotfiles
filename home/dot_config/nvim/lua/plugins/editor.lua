@@ -23,11 +23,15 @@ return {
 
   -- Trim trailing whitespace
   {
-    "lewis6991/spaceless.nvim",
+    "echasnovski/mini.trailspace",
     config = true,
     event = {
       "BufReadPre",
       "BufNewFile",
+    },
+    keys = {
+      { "<leader>ft", "<cmd>lua MiniTrailspace.trim()<cr>", desc = "Trim whitespace" },
+      { "<leader>fT", "<cmd>lua MiniTrailspace.trim_last_lines()<cr>", desc = "Trim extra lines" },
     },
   },
 
