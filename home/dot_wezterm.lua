@@ -21,6 +21,8 @@ config.font = wezterm.font("JetBrains Mono")
 
 config.enable_kitty_graphics = true
 
+config.window_background_opacity = 0.95
+
 config.font_size = 22
 config.enable_tab_bar = false
 config.window_padding = {
