@@ -1,3 +1,6 @@
+local discipline = require("mawdac.discipline")
+discipline.cowboy()
+
 local keymap = vim.keymap
 -- Exit insert and terminal mode with jk
 keymap.set("i", "jk", "<ESC>")
