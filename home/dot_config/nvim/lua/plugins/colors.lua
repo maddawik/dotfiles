@@ -2,6 +2,14 @@ return {
   { "rebelot/kanagawa.nvim", event = "VeryLazy" },
   { "folke/tokyonight.nvim", event = "VeryLazy" },
   {
+    "craftzdog/solarized-osaka.nvim",
+    priority = 1000,
+    opts = {
+      transparent = true,
+    },
+    event = "VeryLazy",
+  },
+  {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
