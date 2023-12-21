@@ -140,7 +140,7 @@ tmux_conf_theme_colour_17="$cat_thm_green" # hostname bg
 
 # window style
 tmux_conf_theme_window_fg="$cat_thm_fg"
-# tmux_conf_theme_window_bg="$cat_thm_bg" # Remove for transparency
+tmux_conf_theme_window_bg="$cat_thm_bg" # Remove for transparency
 
 # highlight focused pane (tmux >= 2.1), possible values are:
 #   - true
