@@ -1,4 +1,8 @@
 [".tmux"]
-    type = "git-repo"
-    url = "https://github.com/gpakosz/.tmux.git"
-    refreshPeriod = "168h"
+type = "git-repo"
+url = "https://github.com/gpakosz/.tmux.git"
+refreshPeriod = "168h"
+[".config/nvim"]
+type = "git-repo"
+url = "git@github.com:Mawdac/nvim.git"
+refreshPeriod = "168h"
