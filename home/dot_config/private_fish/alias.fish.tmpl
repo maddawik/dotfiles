@@ -49,6 +49,7 @@ abbr gbr git switch -c
 abbr cm chezmoi
 abbr cma chezmoi add
 abbr cmr chezmoi re-add
+abbr cmR chezmoi remove
 abbr cme chezmoi edit --apply
 abbr cms chezmoi status
 abbr cmd chezmoi diff
@@ -58,6 +59,8 @@ abbr cmcd cd {{ .chezmoi.homeDir }}/.dotfiles
 # lazygit
 alias lz lazygit
 alias lzc "lz --path {{ .chezmoi.homeDir }}/.dotfiles"
+# lazydocker
+alias lzd lazydocker
 
 # github cli
 abbr ghb gh browse
