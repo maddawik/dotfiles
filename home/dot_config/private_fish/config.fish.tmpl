@@ -15,11 +15,11 @@ if status is-interactive
     set fish_sequence_key_delay_ms 400
 
     # tide prompt
-    set tide_git_icon ""
-    set tide_git_truncation_length 0
-    if not contains private_mode $tide_right_prompt_items
-        set -a tide_right_prompt_items private_mode
-    end
+    # set tide_git_icon ""
+    # set tide_git_truncation_length 0
+    # if not contains private_mode $tide_right_prompt_items
+    #     set -a tide_right_prompt_items private_mode
+    # end
 
     # fzf
     set -gx FZF_DEFAULT_OPTS "\
@@ -28,8 +28,7 @@ if status is-interactive
         --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
         --height=70% --layout=reverse --inline-info \
         --bind 'ctrl-f:preview-half-page-down' \
-        --bind 'ctrl-b:preview-half-page-up' \
-        --bind 'tab:toggle'"
+        --bind 'ctrl-b:preview-half-page-up'"
 
     # fzf.fish
     set -gx fzf_diff_highlighter delta --paging=never --width=20
