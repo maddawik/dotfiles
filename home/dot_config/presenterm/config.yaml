@@ -1,0 +1,13 @@
+defaults:
+  theme: catppuccin-mocha
+
+options:
+  # whether slides are automatically terminated when a slide title is found.
+  implicit_slide_ends: false
+  # show all lists incrementally, by implicitly adding pauses in between elements.
+  incremental_lists: false
+  # whether to treat a thematic break as a slide end.
+  end_slide_shorthand: false
+
+bindings:
+  exit: ["<c-c>", "q"]
