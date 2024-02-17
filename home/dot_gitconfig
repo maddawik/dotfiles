@@ -1,10 +1,8 @@
 [user]
   name = Mawdac
-{{- if eq .chezmoi.hostname "ereilly-mbp" }}
-  email = ereilly@zerofox.com
-{{- else }}
   email = edwardreillycomputers@gmail.com
-{{- end }}
+[includeIf "gitdir:~/work/"]
+  path = ~/work/.gitconfig
 [core]
   editor = nvim
   pager = delta
