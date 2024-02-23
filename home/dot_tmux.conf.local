@@ -387,10 +387,8 @@ tmux_conf_copy_to_os_clipboard=true
 # -- user customizations -------------------------------------------------------
 # this is the place to override or undo settings
 
-set -g default-terminal "screen-256color"
-# set -ag terminal-overrides ",xterm-256colo:RGB"
-set -sg terminal-overrides ",*:RGB"
-# set -ag terminal-overrides ",$TERM:RGB"
+set -g default-terminal "xterm-256color"
+set -ga terminal-overrides ",xterm*:Tc"
 
 # set tmux-fzf vars
 TMUX_FZF_OPTIONS="-p -w 65% -h 50% -m"
@@ -499,8 +497,6 @@ tmux_conf_uninstall_plugins_on_reload=true
 set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @plugin 'sainnhe/tmux-fzf'
 set -g @plugin 'yardnsm/tmux-1password'
-set -g @plugin 'olimorris/tmux-pomodoro-plus'
-set -g @plugin 'schasse/tmux-jump'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'tmux-plugins/tmux-logging'
@@ -511,10 +507,6 @@ set -g @resurrect-strategy-nvim 'session'
 
 # update 1password keybinding
 set -g @1password-key 'U'
-
-# Pomodoro
-set -g @pomodoro_toggle 't'
-set -g @pomodoro_cancel 'T'
 
 # tmux-logging path
 set -g @logging-path "~/logs/tmux"
