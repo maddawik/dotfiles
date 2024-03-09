@@ -1,5 +1,9 @@
 ---
 title: Presenterm Template
+theme:
+  override:
+    code:
+      theme_name: Catppuccin-macchiato
 sub_title: A template for presenterm slideshows
 ---
 
