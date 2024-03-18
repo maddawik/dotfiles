@@ -20,6 +20,8 @@ config.font = wezterm.font("JetBrains Mono")
 
 config.enable_kitty_graphics = true
 
+config.audible_bell = "Disabled"
+
 -- config.window_background_opacity = 0.95
 
 config.font_size = 20
