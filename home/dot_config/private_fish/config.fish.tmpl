@@ -1,4 +1,7 @@
 if status is-interactive
+    # alias and abbr
+    source ~/.config/fish/alias.fish
+
     # env
     set -gx EDITOR nvim
     set -gx MANPAGER bat
@@ -57,6 +60,6 @@ if status is-interactive
     starship init fish | source
     enable_transience
 
-    # alias and abbr
-    source ~/.config/fish/alias.fish
+    # direnv
+    direnv hook fish | source
 end
