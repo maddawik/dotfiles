@@ -3,6 +3,8 @@ git:
     colorArg: always
     pager: delta --paging=never
 gui:
+  showIcons: false
+  nerdFontsVersion: "3"
   theme:
     activeBorderColor:
       - "#89b4fa"
@@ -25,7 +27,6 @@ gui:
       - "#cdd6f4"
     searchingActiveBorderColor:
       - "#f9e2af"
-  showIcons: false
   branchColors:
     "main": "blue"
     "master": "blue"
