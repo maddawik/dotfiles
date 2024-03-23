@@ -16,7 +16,7 @@ end
 -- config.color_scheme = 'tokyonight_moon'
 -- config.color_scheme = 'Solarized Dark (Gogh)'
 config.color_scheme = "Catppuccin Mocha"
-config.font = wezterm.font("JetBrains Mono")
+config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font Mono" })
 
 config.enable_kitty_graphics = true
 
