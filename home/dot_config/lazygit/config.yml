@@ -3,30 +3,29 @@ git:
     colorArg: always
     pager: delta --paging=never
 gui:
-  showIcons: false
+  showIcons: true
   nerdFontsVersion: "3"
   theme:
-    activeBorderColor:
-      - "#89b4fa"
-      - bold
-    inactiveBorderColor:
-      - "#a6adc8"
+    searchingActiveBorderColor:
+      - "#fab387"
+      - "bold"
     optionsTextColor:
       - "#89b4fa"
-    selectedLineBgColor:
-      - "#313244"
-    selectedRangeBgColor:
-      - "#313244"
-    cherryPickedCommitBgColor:
-      - "#45475a"
-    cherryPickedCommitFgColor:
+    inactiveBorderColor:
       - "#89b4fa"
-    unstagedChangesColor:
-      - "#f38ba8"
     defaultFgColor:
       - "#cdd6f4"
-    searchingActiveBorderColor:
-      - "#f9e2af"
+    cherryPickedCommitFgColor:
+      - "#89b4fa"
+    cherryPickedCommitBgColor:
+      - "#f2cdcd"
+    activeBorderColor:
+      - "#fab387"
+      - "bold"
+    unstagedChangesColor:
+      - "#f38ba8"
+    selectedLineBgColor:
+      - "#45475a"
   branchColors:
     "main": "blue"
     "master": "blue"
