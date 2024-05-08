@@ -19,11 +19,12 @@ if status is-interactive
     set fish_sequence_key_delay_ms 400
 
     # tide prompt
-    # set tide_git_icon ""
-    # set tide_git_truncation_length 0
-    # if not contains private_mode $tide_right_prompt_items
-    #     set -a tide_right_prompt_items private_mode
-    # end
+    set tide_git_icon ""
+    set tide_git_truncation_length 0
+    if not contains private_mode $tide_right_prompt_items
+        set -a tide_right_prompt_items private_mode
+    end
+    set tide_pwd_color_dirs blue
 
     # fzf
     set -gx FZF_DEFAULT_OPTS "\
@@ -55,11 +56,11 @@ if status is-interactive
     {{- end }}
 
     # starship
-    function starship_transient_rprompt_func
-        starship module time
-    end
-    starship init fish | source
-    enable_transience
+    # function starship_transient_rprompt_func
+    #     starship module time
+    # end
+    # starship init fish | source
+    # enable_transience
 
     # direnv
     direnv hook fish | source
