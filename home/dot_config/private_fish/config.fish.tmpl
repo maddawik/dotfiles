@@ -42,15 +42,16 @@ if status is-interactive
         --git_log=\cg --git_status=\cs --processes=\cp
 
     {{- if eq .chezmoi.hostname "ereilly-mbp" }}
-    # rbenv
-    rbenv init - fish | source
 
     # pyenv
     pyenv init - | source
+
     {{- end }}
     {{- if eq .chezmoi.hostname "nibelheim" }}
+
     # 1password
     op completion fish | source
+
     {{- end }}
 
     # direnv
