@@ -47,12 +47,6 @@ if status is-interactive
     pyenv init - | source
 
     {{- end }}
-    {{- if eq .chezmoi.hostname "nibelheim" }}
-
-    # 1password
-    op completion fish | source
-
-    {{- end }}
 
     # direnv
     direnv hook fish | source
