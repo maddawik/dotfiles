@@ -5,6 +5,9 @@ git:
 gui:
   showIcons: true
   nerdFontsVersion: "3"
+  spinner:
+    frames: ["🌑 ", "🌒 ", "🌓 ", "🌔 ", "🌕 ", "🌖 ", "🌗 ", "🌘 "]
+    rate: 80
   theme:
     searchingActiveBorderColor:
       - "#fab387"
