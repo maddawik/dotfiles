@@ -1,20 +1,29 @@
 # fancy pants
 alias git="hub"
 alias vim="nvim"
-alias ls="exa --icons"
+alias ls="eza --icons --git"
 alias watch="viddy"
+alias icat 'kitty +kitten icat --align left'
 alias nv="nvim"
 alias pn="pnpm"
 alias yless="jless --yaml"
 
 # copy/pasta
+{{- if eq .chezmoi.os "darwin" }}
 alias c="pbcopy"
 alias v="pbpaste"
+{{- else }}
+alias c="xclip -selection clipboard"
+alias v="xclip -selection clipboard -o"
+{{- end }}
 
 # tmux
 alias tm="tmux"
 alias tma="tmux at"
 alias tml="tmux ls"
+
+# tmuxinator
+alias mux="tmuxinator"
 
 # ls
 alias l="ls"
@@ -49,22 +58,25 @@ alias cmd="chezmoi diff"
 alias cmA="chezmoi -v apply"
 alias cmcd="cd {{ .chezmoi.homeDir }}/.dotfiles"
 
-# nb
-alias nbg="nb browse -n --gui"
-alias nbt="nb todos"
-alias nbta="nb todo add"
-
 # lazygit
 alias lz="lazygit"
 alias lzc="lz --path {{ .chezmoi.homeDir }}/.dotfiles"
+
+# lazydocker
+alias lzd="lazydocker"
 
 # github cli
 alias ghb="gh browse"
 alias ghd="gh dash"
 alias ghp="gh pr create"
 
+# godot
+alias nvg="nvim --listen /tmp/godot.pipe ."
+
 # other
 alias tools="glow {{ .chezmoi.homeDir }}/.config/docs/tools.md"
+alias ccs="glow {{ .chezmoi.homeDir }}/.config/docs/ccs.md"
+alias reload="exec bash"
 
 # starship
 eval "$(starship init bash)"
