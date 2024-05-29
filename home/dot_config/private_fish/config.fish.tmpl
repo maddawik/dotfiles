@@ -40,7 +40,4 @@ if status is-interactive
     set -gx fzf_history_time_format "%m-%d-%y %H:%M"
     fzf_configure_bindings --directory=\cf \
         --git_log=\cg --git_status=\cs --processes=\cp
-
-    # direnv
-    direnv hook fish | source
 end
