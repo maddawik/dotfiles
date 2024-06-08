@@ -1,7 +1,0 @@
-# Amethyst window manager config
-window-margins: true
-smart-window-margins: false
-window-margin-size: 10
-window-max-count: 10
-mouse-swaps-windows: true
-mouse-resizes-windows: true
