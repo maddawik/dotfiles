@@ -1,6 +1,8 @@
 if status is-interactive
     # alias and abbr
     source ~/.config/fish/alias.fish
+    # tide prompt config
+    source ~/.config/fish/tide_config.fish
 
     # env
     set -gx EDITOR nvim
@@ -17,14 +19,6 @@ if status is-interactive
         else; set fish_bind_mode default; \
         commandline -f backward-char repaint-mode; end"
     set fish_sequence_key_delay_ms 400
-
-    # tide prompt
-    set tide_git_icon ""
-    set tide_git_truncation_length 0
-    if not contains private_mode $tide_right_prompt_items
-        set -a tide_right_prompt_items private_mode
-    end
-    set tide_pwd_color_dirs blue
 
     # fzf
     set -gx FZF_DEFAULT_OPTS "\
