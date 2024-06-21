@@ -6,7 +6,7 @@ if status is-interactive
 
     # env
     set -gx EDITOR nvim
-    set -gx MANPAGER bat
+    set -gx MANPAGER "bat --style plain"
     set -gx TERM xterm-256color
 
     # vi-mode
