@@ -6,10 +6,22 @@ repoPaths:
   riskive/*: ~/work/*
 pager:
   diff: "delta"
-keybindings:
-  prs:
-    - key: e
-      command: >
-        tmux new-window -c {{.RepoPath}} '
-          nvim -c ":Octo pr edit {{.PrNumber}}"
-        '
+
+theme:
+  ui:
+    table:
+      showSeparator: true
+  colors:
+    text:
+      primary: "#cdd6f4"
+      secondary: "#89b4fa"
+      inverted: "#181825"
+      faint: "#89b4fa"
+      warning: "#f38ba8"
+      success: "#a6e3a1"
+    background:
+      selected: "#313244"
+    border:
+      primary: "#89b4fa"
+      secondary: "#313244"
+      faint: "#313244"
