@@ -27,7 +27,9 @@ if status is-interactive
         --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
         --height=70% --layout=reverse --inline-info \
         --bind 'ctrl-f:preview-half-page-down' \
-        --bind 'ctrl-b:preview-half-page-up'"
+        --bind 'ctrl-b:preview-half-page-up' \
+        --bind 'ctrl-d:half-page-down' \
+        --bind 'ctrl-u:half-page-up'"
 
     # fzf.fish
     set -gx fzf_diff_highlighter delta --paging=never --width=20
