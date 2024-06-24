@@ -1,4 +1,4 @@
-# CLI Tools
+# The best of the best™
 
 `bat` Print and concatenate files.
 `curlie` Friendly and fast tool for sending HTTP requests.
@@ -9,8 +9,5 @@
 `fd` Find files or directories under the given directory tree, recursively.
 `jless` An interactive JSON processor.
 `jq` A command-line JSON processor that uses a domain-specific language.
-`ncdu` Disk usage analyzer with an ncurses interface.
 `rip` Send files to the graveyard.
-`smug` Session manager and task runner for tmux.
-`viddy` Execute a program periodically, showing output fullscreen.
 `yazi` Blazing fast terminal file manager based on async I/O.
