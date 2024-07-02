@@ -1,25 +1,27 @@
 # dotfiles
 
-These are my configuration files (often called `dotfiles`), managed using
+![wezterm, tmux, fish and neovim](screenshot.png)
+
+These are my configuration files (le `dotfiles`), managed using
 [chezmoi](https://www.chezmoi.io/)
 
-Feel free to use anything you find here for inspiration in your own config. I
-do not suggest forking or copy-pasta'ing this repo, as it's catered to my own
-tools.
+Feel free to use anything you find here for inspiration in your own config.
 
 It is primarily intended for use on MacOS as that is my daily driver for
 work/home, I occasionally use linux so everything should work there as well,
-albeit untested.
+albeit less tested.
 
 ## Core tools
 
-- Amethyst (MacOS)
 - WezTerm
-- Fish shell
+- Fish
 - Tmux
 - Neovim
 
 ## Install
+
+> Note: These steps serve as reminder for me, not encouragement for you to
+> blindly use my dotfiles as your own. But ya know, you do you boo.
 
 With chezmoi already installed:
 
@@ -33,15 +35,9 @@ Batteries included:
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply Mawdac
 ```
 
-Transitory environments (containers):
+Transitory install (containers):
 
 ```sh
 # Install dotfiles - then remove chezmoi, its source-dir and its config-dir
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --one-shot Mawdac
-```
-
-1Password integration:
-
-```sh
-eval $(op signin)
 ```

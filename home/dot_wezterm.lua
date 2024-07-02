@@ -14,7 +14,6 @@ end
 
 -- For example, changing the color scheme:
 -- config.color_scheme = 'tokyonight_moon'
--- config.color_scheme = 'Solarized Dark (Gogh)'
 config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font Mono" })
 
