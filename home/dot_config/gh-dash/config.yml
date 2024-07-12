@@ -2,7 +2,7 @@
 #   preview:
 #     width: 80
 repoPaths:
-  Mawdac/*: ~/projects/*
+  maddawik/*: ~/projects/*
   riskive/*: ~/work/*
 pager:
   diff: "delta"

@@ -26,18 +26,18 @@ albeit less tested.
 With chezmoi already installed:
 
 ```sh
-chezmoi init Mawdac
+chezmoi init maddawik
 ```
 
 Batteries included:
 
 ```sh
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply Mawdac
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply maddawik
 ```
 
 Transitory install (containers):
 
 ```sh
 # Install dotfiles - then remove chezmoi, its source-dir and its config-dir
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --one-shot Mawdac
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --one-shot maddawik
 ```
