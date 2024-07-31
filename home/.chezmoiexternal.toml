@@ -1,4 +1,4 @@
 [".config/nvim"]
 type = "git-repo"
-url = "git@github.com:Mawdac/nvim.git"
+url = "git@github.com:maddawik/nvim.git"
 refreshPeriod = "168h"
