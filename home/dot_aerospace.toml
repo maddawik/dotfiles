@@ -212,8 +212,18 @@ backspace = ['close-all-windows-but-current', 'mode main']
 #   'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar',
 # ]
 
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefox'
+run = "move-node-to-workspace 1"
 
 [[on-window-detected]]
-if.app-id = 'org.godotengine.godot'
-check-further-callbacks = false
-run = ['layout floating', 'move-node-to-workspace G']
+if.app-id = 'com.github.wez.wezterm'
+run = "move-node-to-workspace 2"
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = "move-node-to-workspace 3"
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = "move-node-to-workspace 4"
