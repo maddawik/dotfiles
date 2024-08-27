@@ -12,7 +12,14 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar position=top height=40 blur_radius=30 color=0x40000000
+sketchybar --bar \
+  position=top \
+  height=35 \
+  blur_radius=30 \
+  color=0x40000000 \
+  corner_radius=10 \
+  margin=8 \
+  y_offset=8
 
 ##### Changing Defaults #####
 # We now change some default values, which are applied to all further items.
@@ -26,20 +33,16 @@ default=(
   label.font="Hack Nerd Font:Bold:16.0"
   icon.color=0xffffffff
   label.color=0xffffffff
-  icon.padding_left=4
+  icon.padding_left=2
   icon.padding_right=4
-  label.padding_left=4
-  label.padding_right=4
+  label.padding_left=2
+  label.padding_right=2
 )
 sketchybar --default "${default[@]}"
 
 ##### Adding Left Items #####
 # We add some regular items to the left side of the bar, where
 # only the properties deviating from the current defaults need to be set
-
-sketchybar --add item front_app left \
-           --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
-           --subscribe front_app front_app_switched
 
 # Aerospace
 sketchybar --add event aerospace_workspace_change
@@ -58,6 +61,9 @@ for sid in $(aerospace list-workspaces --all | sort -n); do
         script="$PLUGIN_DIR/aerospace.sh $sid"
 done
 
+sketchybar --add item front_app left \
+           --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
+           --subscribe front_app front_app_switched
 
 ##### Adding Right Items #####
 # In the same way as the left items we can add items to the right side.
