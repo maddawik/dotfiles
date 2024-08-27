@@ -62,7 +62,7 @@ customCommands:
           - name: "Refactor"
             description: "Reorganization of code"
             value: "refactor"
-          - name: "Performance Improvements"
+          - name: "Performance"
             description: "Make it go vroom fast"
             value: "perf"
           - name: "Tests"
