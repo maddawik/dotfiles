@@ -52,6 +52,7 @@ set -gx tide_chezmoi_color yellow
 
 # pyenv
 pyenv init - | source
+pyenv virtualenv-init - | source
 
 # direnv
 direnv hook fish | source
