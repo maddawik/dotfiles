@@ -19,6 +19,8 @@
 [pull]
   rebase = false
   ff = only
+[remote "origin"]
+	prune = true
 [interactive]
   diffFilter = delta --color-only
 [add.interactive]
