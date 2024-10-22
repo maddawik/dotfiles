@@ -49,10 +49,3 @@ if not contains chezmoi $tide_right_prompt_items
 end
 set -gx tide_chezmoi_bg_color normal
 set -gx tide_chezmoi_color yellow
-
-# pyenv
-pyenv init - | source
-pyenv virtualenv-init - | source
-
-# direnv
-direnv hook fish | source
