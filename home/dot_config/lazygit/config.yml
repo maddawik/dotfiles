@@ -30,7 +30,7 @@ gui:
     unstagedChangesColor:
       - "#f38ba8"
     selectedLineBgColor:
-      - "#45475a"
+      - "#313244"
   branchColors:
     "main": "blue"
     "master": "blue"
