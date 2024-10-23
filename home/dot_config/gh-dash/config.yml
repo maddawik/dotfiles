@@ -1,12 +1,18 @@
 defaults:
   preview:
-    width: 80
+    width: 70
 repoPaths:
   maddawik/*: ~/projects/*
-  riskive/*: ~/work/*
+  vulncheck/*: ~/work/vulncheck/*
+  vulncheck-oss/*: ~/work/vulncheck-oss/*
 pager:
   diff: "delta"
-
+keybindings:
+  universal:
+    - key: ctrl+f
+      builtin: pageDown
+    - key: ctrl+b
+      builtin: pageUp
 theme:
   ui:
     sectionsShowCount: true
