@@ -32,11 +32,12 @@
   useBuiltin = false
 
 [include]
-	path = .config/delta/mocha.gitconfig
+	path = .config/delta/rose-pine-moon.gitconfig
 [delta]
-  features = catppuccin-mocha
+  features = rose-pine-moon
   light = false
   navigate = true
+  hyperlinks = true
 [merge]
   conflictstyle = diff3
 [diff]

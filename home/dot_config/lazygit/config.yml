@@ -11,26 +11,26 @@ gui:
     frames: ["🌑 ", "🌒 ", "🌓 ", "🌔 ", "🌕 ", "🌖 ", "🌗 ", "🌘 "]
     rate: 80
   theme:
+    unstagedChangesColor:
+      - "#eb6f92"
+    selectedLineBgColor:
+      - "#44415a"
     searchingActiveBorderColor:
-      - "#fab387"
+      - "#3e8fb0"
       - "bold"
     optionsTextColor:
-      - "#89b4fa"
+      - "#ea9a97"
     inactiveBorderColor:
-      - "#89b4fa"
+      - "#6e6a86"
     defaultFgColor:
-      - "#cdd6f4"
+      - "#e0def4"
     cherryPickedCommitFgColor:
-      - "#89b4fa"
+      - "#ea9a97"
     cherryPickedCommitBgColor:
-      - "#f2cdcd"
+      - "#e0def4"
     activeBorderColor:
-      - "#fab387"
+      - "#f6c177"
       - "bold"
-    unstagedChangesColor:
-      - "#f38ba8"
-    selectedLineBgColor:
-      - "#313244"
   branchColors:
     "main": "blue"
     "master": "blue"

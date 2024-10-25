@@ -5,24 +5,31 @@ end
 # env
 set -gx EDITOR nvim
 set -gx MANPAGER "bat --style plain"
+set -gx BAT_THEME rose-pine-moon
 set -gx TERM xterm-256color
+
+# soho time
+fish_config theme choose "Rosé Pine Moon"
 
 # vi-mode
 set fish_vi_force_cursor 1
 set fish_cursor_default block
 set fish_cursor_insert line
 set fish_cursor_replace_one underscore
+# exit insert mode with jk
 bind --user -M insert jk \
     "if commandline -P; commandline -f cancel; \
         else; set fish_bind_mode default; \
         commandline -f backward-char repaint-mode; end"
-set fish_sequence_key_delay_ms 400
+set fish_sequence_key_delay_ms 400 # don't wait after `j` forever!
 
 # fzf
 set -gx FZF_DEFAULT_OPTS "\
-    --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
-    --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-    --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+    --color=fg:#908caa,bg:#232136,hl:#ea9a97 \
+    --color=fg+:#e0def4,bg+:#393552,hl+:#ea9a97 \
+    --color=border:#44415a,header:#3e8fb0,gutter:#232136 \
+    --color=spinner:#f6c177,info:#9ccfd8 \
+    --color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa \
     --height=70% --layout=reverse --inline-info \
     --bind 'ctrl-f:preview-half-page-down' \
     --bind 'ctrl-b:preview-half-page-up' \
