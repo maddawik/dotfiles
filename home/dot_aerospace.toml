@@ -12,7 +12,10 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = ['exec-and-forget /opt/homebrew/bin/sketchybar']
+after-startup-command = [
+  'exec-and-forget /opt/homebrew/bin/sketchybar',
+  'exec-and-forget borders active_color=0xffe0def4 inactive_color=0xff6e6a86 width=5.0',
+]
 
 # Notify Sketchybar about workspace change
 exec-on-workspace-change = [
@@ -53,13 +56,13 @@ key-mapping.preset = 'qwerty'
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 5
-inner.vertical = 5
+inner.horizontal = 10
+inner.vertical = 10
 outer.left = 10
 outer.bottom = 10
 outer.top = [
-  { monitor.'^built-in retina display$' = 20 },
-  { monitor."^rog" = 50 },
+  { monitor.'^built-in retina display$' = 10 },
+  { monitor."^rog" = 45 },
   20,
 ]
 outer.right = 10
