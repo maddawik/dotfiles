@@ -15,11 +15,9 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 sketchybar --bar \
   position=top \
   height=35 \
-  blur_radius=30 \
+  blur_radius=15 \
   color=0x40000000 \
-  corner_radius=10 \
-  margin=8 \
-  y_offset=8
+  margin=8
 
 ##### Changing Defaults #####
 # We now change some default values, which are applied to all further items.

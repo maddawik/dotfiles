@@ -23,17 +23,17 @@ config.enable_kitty_graphics = true
 
 config.audible_bell = "Disabled"
 
--- config.window_background_opacity = 0.96
+config.window_background_opacity = 0.86
 
-config.macos_window_background_blur = 20
+config.macos_window_background_blur = 15
 
 config.font_size = 20
 config.enable_tab_bar = false
 config.window_padding = {
-	left = 0,
-	right = 0,
-	top = 0,
-	bottom = 0,
+	left = 5,
+	right = 5,
+	top = 5,
+	bottom = 5,
 }
 config.window_decorations = "RESIZE"
 
