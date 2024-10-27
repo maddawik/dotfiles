@@ -17,7 +17,11 @@ end
 -- config.color_scheme = "Catppuccin Mocha"
 config.color_scheme = "rose-pine-moon"
 
-config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font Mono" })
+config.font = wezterm.font_with_fallback({
+	"JetBrains Mono",
+	"Flog Symbols",
+	"Symbols Nerd Font Mono",
+})
 
 config.enable_kitty_graphics = true
 
