@@ -19,8 +19,8 @@ config.color_scheme = "rose-pine-moon"
 
 config.font = wezterm.font_with_fallback({
 	"JetBrains Mono",
-	"Flog Symbols",
 	"Symbols Nerd Font Mono",
+	"Flog Symbols",
 })
 
 config.enable_kitty_graphics = true
@@ -34,8 +34,8 @@ config.macos_window_background_blur = 15
 config.font_size = 20
 config.enable_tab_bar = false
 config.window_padding = {
-	left = 5,
-	right = 5,
+	left = 3,
+	right = 0,
 	top = 5,
 	bottom = 5,
 }
