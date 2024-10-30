@@ -207,6 +207,7 @@ backspace = ['close-all-windows-but-current', 'mode main']
 # alt-shift-j = ['join-with down', 'mode main']
 # alt-shift-k = ['join-with up', 'mode main']
 # alt-shift-l = ['join-with right', 'mode main']
+alt-shift-r = ['exec-and-forget /opt/homebrew/bin/sketchybar --reload']
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
