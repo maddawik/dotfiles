@@ -14,7 +14,7 @@ after-login-command = []
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
   'exec-and-forget /opt/homebrew/bin/sketchybar',
-  'exec-and-forget borders active_color=0xffe0def4 inactive_color=0xff6e6a86 width=5.0',
+  'exec-and-forget borders active_color=0xffe0def4 inactive_color=0xff6e6a86 width=5.0 blacklist="iPhone Mirroring"',
 ]
 
 # Notify Sketchybar about workspace change
@@ -232,6 +232,10 @@ run = "move-node-to-workspace 3"
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
 run = "move-node-to-workspace 4"
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ScreenContinuity'
+run = "move-node-to-workspace 5"
 
 [workspace-to-monitor-force-assignment]
 1 = 'main'
