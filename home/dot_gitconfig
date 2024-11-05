@@ -40,6 +40,14 @@
   light = false
   navigate = true
   hyperlinks = true
+  file-added-label = [●]
+  file-copied-label = [C]
+  file-modified-label = [+]
+  file-removed-label = [⛌]
+  file-renamed-label = [→]
+  side-by-side = true
+  line-numbers-left-format = "{nm:^4}┊"
+  line-numbers-right-format = "│{np:^4}┊"
 [merge]
   conflictstyle = diff3
 [diff]
