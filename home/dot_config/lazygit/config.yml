@@ -4,6 +4,7 @@ git:
     colorArg: always
     pager: delta --paging=never --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 gui:
+  sidePanelWidth: 0.25
   showIcons: true
   showFileIcons: true
   nerdFontsVersion: "3"
