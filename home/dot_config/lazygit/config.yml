@@ -1,9 +1,15 @@
 promptToReturnFromSubprocess: false
 git:
+  commit:
+    autoWrapWidth: 80
   paging:
     colorArg: always
     pager: delta --paging=never --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 gui:
+  authorColors:
+    "EJ": "#3e8fb0"
+    "maddawik": "#3e8fb0"
+    # "*": "#ea9a97"
   sidePanelWidth: 0.25
   showIcons: true
   showFileIcons: true
@@ -12,9 +18,15 @@ gui:
     frames: ["🌑 ", "🌒 ", "🌓 ", "🌔 ", "🌕 ", "🌖 ", "🌗 ", "🌘 "]
     rate: 80
   theme:
+    # markedBaseCommitBgColor:
+    #   - "#6e6a86"
+    # markedBaseCommitFgColor:
+    #   - "#ea9a97"
     unstagedChangesColor:
       - "#eb6f92"
     selectedLineBgColor:
+      - "#44415a"
+    inactiveViewSelectedLineBgColor:
       - "#44415a"
     searchingActiveBorderColor:
       - "#3e8fb0"
