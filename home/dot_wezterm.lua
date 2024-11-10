@@ -1,5 +1,5 @@
 -- Pull in the wezterm API
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") --[[@as Wezterm]]
 
 -- This table will hold the configuration.
 local config = {}
@@ -20,7 +20,6 @@ config.color_scheme = "rose-pine-moon"
 config.font = wezterm.font_with_fallback({
 	"JetBrains Mono",
 	"Symbols Nerd Font Mono",
-	"Flog Symbols",
 })
 
 config.enable_kitty_graphics = true
