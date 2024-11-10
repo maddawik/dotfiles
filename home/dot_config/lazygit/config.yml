@@ -55,7 +55,7 @@ gui:
 customCommands:
   - key: "C"
     command: 'git commit -m "{{ .Form.Type }}{{if .Form.Scopes}}({{ .Form.Scopes }}){{end}}: {{ .Form.Description }}"'
-    description: "conventional commit"
+    description: "Conventional commit"
     context: "files"
     prompts:
       - type: "menu"
