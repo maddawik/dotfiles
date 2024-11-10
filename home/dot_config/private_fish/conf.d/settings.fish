@@ -46,8 +46,9 @@ fzf_configure_bindings --directory=\cf --git_log=\cg \
     --processes=\cp \
     --variables=\cv
 
+
 # tide prompt
-set -gx tide_git_icon ""
+set -gx tide_git_icon ""
 set -gx tide_git_truncation_length 0
 if not contains private_mode $tide_right_prompt_items
     set -a tide_right_prompt_items private_mode
