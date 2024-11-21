@@ -10,6 +10,8 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+config.default_prog = { "/opt/homebrew/bin/fish", "-l" }
+
 config.max_fps = 120
 config.animation_fps = 120
 
