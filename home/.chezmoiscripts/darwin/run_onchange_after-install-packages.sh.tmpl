@@ -1,0 +1,56 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+{{ $brews := list
+     "bat"
+     "btop"
+     "chezmoi"
+     "entr"
+     "eza"
+     "fd"
+     "fish"
+     "fzf"
+     "gh"
+     "git"
+     "git-delta"
+     "glow"
+     "go"
+     "hub"
+     "jless"
+     "jq"
+     "presenterm"
+     "ripgrep"
+     "tealdeer"
+     "tmux"
+     "vivid"
+     "wget"
+     "yazi"
+     "yamllint"
+     "felixkratz/formulae/sketchybar"
+     "jesseduffield/lazydocker/lazydocker"
+     "jesseduffield/lazygit/lazygit" -}}
+{{ $casks := list
+     "1password"
+     "1password-cli"
+     "aerospace"
+     "barrier"
+     "betterdisplay"
+     "cursor"
+     "docker"
+     "firefox"
+     "font-hack-nerd-font"
+     "font-jetbrains-mono-nerd-font"
+     "font-symbols-only-nerd-font"
+     "obsidian"
+     "raycast"
+     "wezterm" -}}
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ range ($brews | sortAlpha | uniq) -}}
+brew "{{ . }}"
+{{ end -}}
+{{ range ($casks | sortAlpha | uniq) -}}
+cask "{{ . }}"
+{{ end -}}
+EOF
