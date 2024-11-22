@@ -2,6 +2,11 @@
 
 set -eufo pipefail
 
+{{ $taps := list
+     "FelixKratz/formulae"
+     "nikitabobko/tap"
+     "jesseduffield/lazydocker"
+     "jesseduffield/lazygit" -}}
 {{ $brews := list
      "bat"
      "btop"
@@ -36,7 +41,6 @@ set -eufo pipefail
      "aerospace"
      "barrier"
      "betterdisplay"
-     "cursor"
      "docker"
      "firefox"
      "font-hack-nerd-font"
@@ -44,9 +48,13 @@ set -eufo pipefail
      "font-symbols-only-nerd-font"
      "obsidian"
      "raycast"
-     "wezterm" -}}
+     "wezterm"
+     "nikitabobko/tap/aerospace" -}}
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ range ($taps | sortAlpha | uniq) -}}
+tap "{{ . }}"
+{{ end -}}
 {{ range ($brews | sortAlpha | uniq) -}}
 brew "{{ . }}"
 {{ end -}}
