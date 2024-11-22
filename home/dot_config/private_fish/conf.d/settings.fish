@@ -63,6 +63,9 @@ set -gx tide_chezmoi_bg_color normal
 set -gx tide_chezmoi_color yellow
 
 # terraform & terragrunt
+if not test -e "$HOME/.cache/"
+    mkdir "$HOME/.cache/"
+end
 if not test -e "$HOME/.cache/tf-cache/"
     mkdir "$HOME/.cache/tf-cache/"
 end
