@@ -1,9 +1,8 @@
-# dotfiles
+# ~
 
 ![wezterm, tmux, fish and neovim](screenshot.png)
 
-These are my configuration files (le `dotfiles`), managed using
-[chezmoi](https://www.chezmoi.io/)
+Managed with [chezmoi](https://www.chezmoi.io/)
 
 Feel free to use anything you find here for inspiration in your own config.
 
@@ -23,7 +22,7 @@ albeit less tested.
 > Note: These steps serve as reminder for me, not encouragement for you to
 > blindly use my dotfiles as your own. But ya know, you do you boo.
 
-With chezmoi already installed:
+With `chezmoi` already installed:
 
 ```sh
 chezmoi init maddawik
@@ -35,7 +34,7 @@ Batteries included:
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply maddawik
 ```
 
-Transitory install (containers):
+Transitory install (VMs/containers):
 
 ```sh
 # Install dotfiles - then remove chezmoi, its source-dir and its config-dir
