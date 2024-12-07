@@ -31,9 +31,7 @@ us-east-1 = 'Virgina'
 us-west-2 = 'Oregon'
 
 [custom.chezmoi]
-detect_files = [".chezmoiroot"]
-# This makes the prompt too slow, nice in concept though
-# when = "ps aux | grep chezmoi | grep -v grep"
-symbol = "🥖"
+when = ''' test -n "$CHEZMOI_SUBSHELL" '''
+symbol = " "
 style = "green"
 format = "[$symbol]($style)"
