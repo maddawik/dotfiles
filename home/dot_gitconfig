@@ -34,9 +34,9 @@
   useBuiltin = false
 
 [include]
-	path = .config/delta/rose-pine-moon.gitconfig
+	path = .config/delta/tokyonight-moon.gitconfig
 [delta]
-  features = rose-pine-moon
+  features = tokyonight-moon
   light = false
   navigate = true
   hyperlinks = true

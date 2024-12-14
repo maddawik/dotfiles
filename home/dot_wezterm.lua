@@ -18,9 +18,9 @@ config.animation_fps = 120
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
--- config.color_scheme = 'tokyonight_moon'
+config.color_scheme = "tokyonight_moon"
 -- config.color_scheme = "Catppuccin Mocha"
-config.color_scheme = "rose-pine-moon"
+-- config.color_scheme = "rose-pine-moon"
 
 config.font = wezterm.font_with_fallback({
 	"JetBrains Mono",
