@@ -7,9 +7,9 @@ git:
     pager: delta --paging=never --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 gui:
   authorColors:
-    "EJ": "#3e8fb0"
-    "maddawik": "#3e8fb0"
-    # "*": "#ea9a97"
+    "EJ": "#589ed7"
+    "maddawik": "#589ed7"
+    # "*": "#ff966c"
   sidePanelWidth: 0.25
   showIcons: true
   showFileIcons: true
