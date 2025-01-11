@@ -32,11 +32,11 @@ k9s:
   # Dialog styles.
   dialog:
     fgColor: *foreground
-    bgColor: default
+    bgColor: *background
     buttonFgColor: *foreground
-    buttonBgColor: *magenta
-    buttonFocusFgColor: *background
-    buttonFocusBgColor: *foreground
+    buttonBgColor: *red
+    buttonFocusFgColor: *black
+    buttonFocusBgColor: *red
     labelFgColor: *comment
     fieldFgColor: *foreground
   frame:
