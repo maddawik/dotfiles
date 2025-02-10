@@ -3,7 +3,6 @@ if not status is-interactive
 end
 
 # general env
-set -gx TERM xterm-256color # HACK: Come back to this (this works, but feels wrong)
 set -gx EDITOR nvim
 set -gx MANPAGER "bat --style plain"
 set -gx BAT_THEME tokyonight
