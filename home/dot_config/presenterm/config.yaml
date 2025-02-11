@@ -2,6 +2,7 @@ defaults:
   theme: catppuccin-mocha
 
 options:
+  auto_render_languages:
   # whether slides are automatically terminated when a slide title is found.
   implicit_slide_ends: false
   # show all lists incrementally, by implicitly adding pauses in between elements.
