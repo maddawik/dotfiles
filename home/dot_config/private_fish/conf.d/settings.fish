@@ -78,17 +78,3 @@ if not contains chezmoi $tide_right_prompt_items
 end
 set -gx tide_chezmoi_bg_color normal
 set -gx tide_chezmoi_color yellow
-
-# terraform & terragrunt
-if not test -e "$HOME/.cache/"
-    mkdir "$HOME/.cache/"
-end
-if not test -e "$HOME/.cache/tf-cache/"
-    mkdir "$HOME/.cache/tf-cache/"
-end
-if not test -e "$HOME/.cache/tg-cache/"
-    mkdir "$HOME/.cache/tg-cache/"
-end
-
-set -gx TF_PLUGIN_CACHE_DIR "$HOME/.cache/tf-cache"
-set -gx TERRAGRUNT_DOWNLOAD "$HOME/.cache/tg-cache"
