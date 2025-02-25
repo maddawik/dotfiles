@@ -74,6 +74,9 @@ alias lzd lazydocker
 abbr ghb gh browse
 abbr ghd gh dash
 abbr ghp gh pr create --fill-first
+abbr --set-cursor='%' -- ghcs 'gh copilot suggest "%"'
+abbr --set-cursor='%' -- ghce 'gh copilot explain \'%\''
+abbr ghcel "gh copilot explain "\'(history | head -n1 | string trim)\'
 
 # godot
 alias nvg 'nvim --listen /tmp/godot.pipe .'
