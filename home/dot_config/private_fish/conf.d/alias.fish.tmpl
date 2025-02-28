@@ -41,7 +41,6 @@ abbr lt5 ls --tree --level=5
 
 # git
 abbr ga git add
-abbr --set-cursor='%' -- gc 'git commit -m "%"'
 abbr gd git diff
 abbr gf git fetch
 abbr gp git pull
@@ -50,6 +49,14 @@ abbr gs git status
 abbr gco git checkout
 abbr gsw git switch
 abbr gbr git switch -c
+abbr --set-cursor='%' -- gc 'git commit -m "%"'
+
+abbr --command git la 'config -l | grep alias | cut -c 7-'
+abbr --command git l 'log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short'
+abbr --command git ll 'log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat'
+abbr --command git lll 'log -u'
+abbr --command git t 'log --graph --abbrev-commit --decorate --oneline'
+abbr --command git bc 'clone --bare'
 
 # dotfiles
 abbr cm chezmoi
