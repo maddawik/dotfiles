@@ -1,6 +1,6 @@
 # ~
 
-![wezterm, tmux, fish and neovim](screenshot.png)
+![ghostty, tmux, fish and neovim](screenshot.png)
 
 Managed with [chezmoi](https://www.chezmoi.io/)
 
@@ -12,7 +12,7 @@ albeit less tested.
 
 ## Core tools
 
-- WezTerm
+- Ghostty
 - Fish
 - Tmux
 - Neovim
