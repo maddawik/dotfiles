@@ -1,4 +1,5 @@
 k9s:
   ui:
     skin: tokyonight-moon
+    noIcons: true
     logoless: true
