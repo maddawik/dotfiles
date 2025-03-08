@@ -4,7 +4,7 @@ end
 
 # general env
 set -gx EDITOR nvim
-set -gx MANPAGER "bat --style plain"
+set -gx MANPAGER "nvim +Man!"
 set -gx BAT_THEME tokyonight
 set -gx TEALDEER_CONFIG_DIR "$HOME/.config/tealdeer"
 
@@ -62,7 +62,6 @@ fzf_configure_bindings --directory=\cf --git_log=\cg \
     --git_status=\cs \
     --processes=\cp \
     --variables=\cv
-
 
 # tide prompt
 set -gx tide_git_icon ""
