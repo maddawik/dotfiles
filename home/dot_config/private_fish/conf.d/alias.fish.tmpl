@@ -4,14 +4,13 @@ end
 
 # quick 🔒
 abbr shh fish --private
+alias reload 'exec fish'
 
 # fancy pants
 alias git hub
 alias vim nvim
 alias ls 'eza --icons --group-directories-first'
-alias icat 'kitty +kitten icat --align left'
 abbr nv nvim
-abbr pn pnpm
 abbr yless 'jless --yaml'
 
 # copy/pasta
@@ -23,13 +22,7 @@ alias c 'xclip -selection clipboard'
 alias v 'xclip -selection clipboard -o'
 {{- end }}
 
-# tmux
-abbr tm tmux
-abbr tma tmux at
-abbr tml tmux ls
-
 # ls
-abbr l ls
 abbr ll ls -l
 abbr la ls -a
 abbr lla ls -al
@@ -38,6 +31,11 @@ abbr lt2 ls --tree --level=2
 abbr lt3 ls --tree --level=3
 abbr lt4 ls --tree --level=4
 abbr lt5 ls --tree --level=5
+
+# tmux
+abbr tm tmux
+abbr tma tmux at
+abbr tml tmux ls
 
 # git
 abbr ga git add
@@ -58,6 +56,14 @@ abbr --command git lll 'log -u'
 abbr --command git t 'log --graph --abbrev-commit --decorate --oneline'
 abbr --command git bc 'clone --bare'
 
+# github cli
+abbr ghb gh browse
+abbr ghd gh dash
+abbr ghp gh pr create --fill-first
+abbr --set-cursor='%' -- ghcs 'gh copilot suggest "%"'
+abbr --set-cursor='%' -- ghce 'gh copilot explain \'%\''
+abbr ghcel "gh copilot explain "\'(history | head -n1 | string trim)\'
+
 # dotfiles
 abbr cm chezmoi
 abbr cma chezmoi add
@@ -77,21 +83,5 @@ alias lzc "lz --path {{ .chezmoi.config.sourceDir }}"
 # lazydocker
 alias lzd lazydocker
 
-# github cli
-abbr ghb gh browse
-abbr ghd gh dash
-abbr ghp gh pr create --fill-first
-abbr --set-cursor='%' -- ghcs 'gh copilot suggest "%"'
-abbr --set-cursor='%' -- ghce 'gh copilot explain \'%\''
-abbr ghcel "gh copilot explain "\'(history | head -n1 | string trim)\'
-
-# godot
-alias nvg 'nvim --listen /tmp/godot.pipe .'
-
-# k8s
-alias k kubectl
-
 # other
 alias tools 'glow {{ .chezmoi.homeDir }}/.config/docs/tools.md'
-alias ccs 'glow {{ .chezmoi.homeDir }}/.config/docs/ccs.md'
-alias reload 'exec fish'

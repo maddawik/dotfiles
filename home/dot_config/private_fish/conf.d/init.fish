@@ -7,6 +7,7 @@ set -gx EDITOR nvim
 set -gx MANPAGER "nvim +Man!"
 set -gx BAT_THEME tokyonight
 set -gx TEALDEER_CONFIG_DIR "$HOME/.config/tealdeer"
+set -gx EZA_CONFIG_DIR "$HOME/.config/eza"
 
 fish_config theme choose tokyonight_moon
 
@@ -22,9 +23,6 @@ bind --user -M insert jk \
         else; set fish_bind_mode default; \
         commandline -f backward-char repaint-mode; end"
 set fish_sequence_key_delay_ms 400 # don't wait after `j` forever!
-
-# eza
-set -gx EZA_CONFIG_DIR "$HOME/.config/eza"
 
 # fzf
 set -gx FZF_DEFAULT_OPTS "\
@@ -62,18 +60,3 @@ fzf_configure_bindings --directory=\cf --git_log=\cg \
     --git_status=\cs \
     --processes=\cp \
     --variables=\cv
-
-# tide prompt
-set -gx tide_git_icon ""
-set -gx tide_git_truncation_length 0
-if not contains private_mode $tide_right_prompt_items
-    set -a tide_right_prompt_items private_mode
-end
-set tide_pwd_color_dirs blue
-
-# chezmoi item
-if not contains chezmoi $tide_right_prompt_items
-    set -a tide_right_prompt_items chezmoi
-end
-set -gx tide_chezmoi_bg_color normal
-set -gx tide_chezmoi_color yellow
