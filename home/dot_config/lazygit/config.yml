@@ -45,9 +45,10 @@ gui:
       - "#c53b53"
     defaultFgColor:
       - "#c8d3f5"
-  branchColors:
+  branchColorPatterns:
     "main": "blue"
     "master": "blue"
+    '^\d+-*': "#c099ff"
     "feature": "green"
     "release": "yellow"
     "hotfix": "red"
