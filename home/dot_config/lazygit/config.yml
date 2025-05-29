@@ -46,12 +46,12 @@ gui:
     defaultFgColor:
       - "#c8d3f5"
   branchColorPatterns:
-    "main": "blue"
-    "master": "blue"
+    "^main": "blue"
+    "^master": "blue"
     '^\d+-*': "#c099ff"
-    "feature": "green"
-    "release": "yellow"
-    "hotfix": "red"
+    "^feature": "green"
+    "^release": "yellow"
+    "^hotfix": "red"
   expandFocusedSidePanel: true
   expandedSidePanelWeight: 3
 customCommands:
