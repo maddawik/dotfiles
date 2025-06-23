@@ -5,8 +5,7 @@ set -eufo pipefail
 {{ $taps := list
      "FelixKratz/formulae"
      "nikitabobko/tap"
-     "jesseduffield/lazydocker"
-     "jesseduffield/lazygit" -}}
+     "deskflow/homebrew-tap" -}}
 {{ $brews := list
      "bat"
      "btop"
@@ -35,26 +34,22 @@ set -eufo pipefail
      "wget"
      "yamllint"
      "yazi"
-     "felixkratz/formulae/sketchybar"
-     "jesseduffield/lazydocker/lazydocker"
-     "jesseduffield/lazygit/lazygit" -}}
+     "felixkratz/formulae/sketchybar" -}}
 {{ $casks := list
      "1password"
      "1password-cli"
-     "aerospace"
-     "barrier"
      "betterdisplay"
+     "deskflow"
      "docker"
      "firefox"
      "font-hack-nerd-font"
      "font-jetbrains-mono"
-     "font-symbols-only-nerd-font"
      "ghostty"
      "obsidian"
      "raycast"
      "nikitabobko/tap/aerospace" -}}
 
-brew bundle --no-lock --file=/dev/stdin <<EOF
+brew bundle --file=/dev/stdin <<EOF
 {{ range ($taps | sortAlpha | uniq) -}}
 tap "{{ . }}"
 {{ end -}}
