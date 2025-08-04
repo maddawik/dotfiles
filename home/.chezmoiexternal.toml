@@ -1,7 +1,3 @@
 [".config/nvim"]
 type = "git-repo"
 url = "git@github.com:maddawik/nvim.git"
-[".tmux/plugins/tpm"]
-type = "git-repo"
-url = "https://github.com/tmux-plugins/tpm"
-refreshPeriod = "168h"
