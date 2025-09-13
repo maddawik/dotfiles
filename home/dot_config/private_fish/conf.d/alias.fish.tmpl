@@ -22,9 +22,7 @@ alias c 'xclip -selection clipboard'
 alias v 'xclip -selection clipboard -o'
 {{- end }}
 
-# ls
-abbr ll ls -l
-abbr la ls -a
+# ls shortcuts
 abbr lla ls -al
 abbr lt ls --tree
 abbr lt2 ls --tree --level=2
@@ -48,8 +46,8 @@ abbr gco git checkout
 abbr gsw git switch
 abbr gbr git switch -c
 abbr --set-cursor='%' -- gc 'git commit -m "%"'
+abbr gca git commit --amend --allow-empty --allow-empty-message --no-edit
 
-abbr --command git la 'config -l | grep alias | cut -c 7-'
 abbr --command git l 'log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short'
 abbr --command git ll 'log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat'
 abbr --command git lll 'log -u'
