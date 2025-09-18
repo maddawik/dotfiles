@@ -4,8 +4,7 @@ set -eufo pipefail
 
 {{ $taps := list
      "FelixKratz/formulae"
-     "nikitabobko/tap"
-     "deskflow/homebrew-tap" -}}
+     "nikitabobko/tap" -}}
 {{ $brews := list
      "bat"
      "btop"
@@ -30,16 +29,17 @@ set -eufo pipefail
      "ripgrep"
      "tealdeer"
      "tmux"
+     "uv"
      "vivid"
      "wget"
      "yamllint"
      "yazi"
+     "zig"
      "felixkratz/formulae/sketchybar" -}}
 {{ $casks := list
      "1password"
      "1password-cli"
      "betterdisplay"
-     "deskflow"
      "docker"
      "firefox"
      "font-hack-nerd-font"
