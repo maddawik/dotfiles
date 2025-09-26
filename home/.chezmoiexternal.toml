@@ -1,3 +1,7 @@
 [".config/nvim"]
 type = "git-repo"
 url = "git@github.com:maddawik/nvim.git"
+[".tmux/resurrect"]
+type = "git-repo"
+url = "git@github.com:tmux-plugins/tmux-resurrect"
+refreshPeriod = "744h"
