@@ -1,5 +1,5 @@
 defaults:
-  theme: catppuccin-mocha
+  theme: tokyonight-storm
 
 options:
   auto_render_languages:
@@ -9,6 +9,15 @@ options:
   incremental_lists: false
   # whether to treat a thematic break as a slide end.
   end_slide_shorthand: false
+
+transition:
+  # how long the transition should last.
+  duration_millis: 800
+  # how many frames should be rendered during the transition
+  frames: 40
+  # the animation to use
+  animation:
+    style: slide_horizontal
 
 bindings:
   exit: ["<c-c>", "q"]
