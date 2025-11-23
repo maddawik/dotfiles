@@ -3,9 +3,9 @@ git:
   overrideGpg: true
   commit:
     autoWrapWidth: 80
-  paging:
-    colorArg: always
-    pager: delta --paging=never --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 gui:
   authorColors:
     "EJ": "#589ed7"
@@ -16,7 +16,7 @@ gui:
   showFileIcons: true
   nerdFontsVersion: "3"
   spinner:
-    frames: ["🌑 ", "🌒 ", "🌓 ", "🌔 ", "🌕 ", "🌖 ", "🌗 ", "🌘 "]
+    frames: ["\U0001F311 ", "\U0001F312 ", "\U0001F313 ", "\U0001F314 ", "\U0001F315 ", "\U0001F316 ", "\U0001F317 ", "\U0001F318 "]
     rate: 80
   theme:
     activeBorderColor:
