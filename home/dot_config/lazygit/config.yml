@@ -16,7 +16,17 @@ gui:
   showFileIcons: true
   nerdFontsVersion: "3"
   spinner:
-    frames: ["\U0001F311 ", "\U0001F312 ", "\U0001F313 ", "\U0001F314 ", "\U0001F315 ", "\U0001F316 ", "\U0001F317 ", "\U0001F318 "]
+    frames:
+      [
+        "\U0001F311 ",
+        "\U0001F312 ",
+        "\U0001F313 ",
+        "\U0001F314 ",
+        "\U0001F315 ",
+        "\U0001F316 ",
+        "\U0001F317 ",
+        "\U0001F318 ",
+      ]
     rate: 80
   theme:
     activeBorderColor:
