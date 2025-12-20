@@ -1,42 +1,42 @@
 [user]
   name = maddawik
   email = edwardreillycomputers@gmail.com
-	signingKey = 1208B7724BB2E9CA
+  signingKey = 1208B7724BB2E9CA
 [gpg]
-	program = /opt/homebrew/bin/gpg # NOTE: may need to template this in the future
+  program = gpg
 [commit]
-	gpgsign = true
+  gpgsign = true
 [tag]
-	gpgSign = true
-
-[includeIf "gitdir:~/work/"]
-  path = ~/work/.gitconfig
+  gpgSign = true
 [core]
   editor = nvim
   pager = delta
 [diff]
   tool = nvimdiff
+  colorMoved = default
 [init]
   defaultBranch = main
 [url "git@gitlab.com:"]
   insteadOf = https://gitlab.com/
 [url "git@github.com:"]
   insteadOf = https://github.com/
+
 [push]
   useForceIfIncludes = true
-
+  autoSetupRemote = true
 [pull]
   rebase = false
   ff = only
-[remote "origin"]
-	prune = true
+[fetch]
+  prune = true
+  pruneTags = true
 [interactive]
   diffFilter = delta --color-only
 [add.interactive]
   useBuiltin = false
 
 [include]
-	path = .config/delta/tokyonight-moon.gitconfig
+  path = .config/delta/tokyonight-moon.gitconfig
 [delta]
   features = tokyonight-moon
   light = false
@@ -52,6 +52,10 @@
   line-numbers-left-format = "{nm:^4}"
   line-numbers-right-format = "┊{np:^4}│"
 [merge]
-  conflictstyle = diff3
-[diff]
-  colorMoved = default
+  conflictstyle = zdiff3
+
+
+[includeIf "hasconfig:remote.*.url:git@github.com:vulncheck/**"]
+  path = ~/.work.gitconfig
+[includeIf "hasconfig:remote.*.url:https://github.com/vulncheck/**"]
+  path = ~/.work.gitconfig
