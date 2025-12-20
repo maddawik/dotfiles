@@ -4,7 +4,7 @@ end
 
 # tide prompt
 set -gx tide_git_icon ""
-set -gx tide_private_mode_icon "󰗹 "
+set -gx tide_private_mode_icon "󰗹"
 set -gx tide_git_truncation_length 0
 
 if not contains private_mode $tide_left_prompt_items
