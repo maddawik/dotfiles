@@ -13,6 +13,7 @@ set -gx EZA_CONFIG_DIR "$HOME/.config/eza"
 fish_config theme choose tokyonight_moon
 
 # vi-mode
+set --global fish_key_bindings fish_vi_key_bindings
 set fish_vi_force_cursor 1
 set fish_cursor_default block
 set fish_cursor_insert line
