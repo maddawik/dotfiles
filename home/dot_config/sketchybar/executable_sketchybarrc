@@ -6,12 +6,6 @@
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 ##### Bar Appearance #####
-# Configuring the general appearance of the bar.
-# These are only some of the options available. For all options see:
-# https://felixkratz.github.io/SketchyBar/config/bar
-# If you are looking for other colors, see the color picker:
-# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
-
 sketchybar --bar \
   position=top \
   height=33 \
@@ -19,10 +13,6 @@ sketchybar --bar \
   color=0x40232136
 
 ##### Changing Defaults #####
-# We now change some default values, which are applied to all further items.
-# For a full list of all available item properties see:
-# https://felixkratz.github.io/SketchyBar/config/items
-
 default=(
   padding_left=5
   padding_right=5
@@ -38,49 +28,81 @@ default=(
 sketchybar --default "${default[@]}"
 
 ##### Adding Left Items #####
-# We add some regular items to the left side of the bar, where
-# only the properties deviating from the current defaults need to be set
 
 # Aerospace
 sketchybar --add event aerospace_workspace_change
 for sid in $(aerospace list-workspaces --all | sort -n); do
-    sketchybar --add item space.$sid left \
-        --subscribe space.$sid aerospace_workspace_change \
-        --set space.$sid \
-        background.color=0x40908caa \
-        background.corner_radius=5 \
-        background.height=25 \
-        background.drawing=off \
-        icon="$sid" \
-        icon.padding_left=7 \
-        icon.padding_right=7 \
-        click_script="aerospace workspace $sid" \
-        script="$PLUGIN_DIR/aerospace.sh $sid"
+  sketchybar --add item space.$sid left \
+    --subscribe space.$sid aerospace_workspace_change \
+    --set space.$sid \
+    background.color=0x40908caa \
+    background.corner_radius=5 \
+    background.height=25 \
+    background.drawing=off \
+    icon="$sid" \
+    icon.padding_left=7 \
+    icon.padding_right=7 \
+    click_script="aerospace workspace $sid" \
+    script="$PLUGIN_DIR/aerospace.sh $sid"
 done
 
 sketchybar --add item front_app left \
-           --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
-           --subscribe front_app front_app_switched
+  --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
+  --subscribe front_app front_app_switched
 
 ##### Adding Right Items #####
-# In the same way as the left items we can add items to the right side.
-# Additional position (e.g. center) are available, see:
-# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
+# Option A: group related items into "pills" using brackets + add small gaps with spacers.
 
-# Some items refresh on a fixed cycle, e.g. the clock runs its script once
-# every 10s. Other items respond to events they subscribe to, e.g. the
-# volume.sh script is only executed once an actual change in system audio
-# volume is registered. More info about the event system can be found here:
-# https://felixkratz.github.io/SketchyBar/config/events
+# Tune these to taste
+PILL_COLOR=0x40908caa
+PILL_RADIUS=8
+PILL_HEIGHT=25
+GAP_WIDTH=10
 
-sketchybar --add item clock right \
-           --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \
-           --add item volume right \
-           --set volume script="$PLUGIN_DIR/volume.sh" \
-           --subscribe volume volume_change \
-           --add item battery right \
-           --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-           --subscribe battery system_woke power_source_change
+# Add items in the order you want them to appear
+sketchybar \
+  --add item clock right \
+  --set clock update_freq=10 icon= script="$PLUGIN_DIR/clock.sh" \
+  --add item spacer_1 right \
+  --set spacer_1 width=$GAP_WIDTH background.drawing=off icon.drawing=off label.drawing=off \
+  --add item volume right \
+  --set volume script="$PLUGIN_DIR/volume.sh" \
+  --subscribe volume volume_change \
+  --add item battery right \
+  --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+  --subscribe battery system_woke power_source_change \
+  --add item spacer_2 right \
+  --set spacer_2 width=$GAP_WIDTH background.drawing=off icon.drawing=off label.drawing=off \
+  --add item cpu right \
+  --set cpu update_freq=2 icon= script="$PLUGIN_DIR/cpu.sh" click_script="open -a 'Activity Monitor'" \
+  --add item memory right \
+  --set memory update_freq=2 icon=󰍛 script="$PLUGIN_DIR/memory.sh" click_script="open -a 'Activity Monitor'"
 
-##### Force all scripts to run the first time (never do this in a script) #####
+# Force a consistent order
+sketchybar --reorder \
+  clock spacer_1 volume battery spacer_2 cpu memory
+
+# Volume + Battery
+sketchybar --add bracket status_group volume battery \
+  --set status_group \
+  background.drawing=on \
+  background.color=$PILL_COLOR \
+  background.corner_radius=$PILL_RADIUS \
+  background.height=$PILL_HEIGHT
+
+# CPU + Memory
+sketchybar --add bracket sys_group cpu memory \
+  --set sys_group \
+  background.drawing=on \
+  background.color=$PILL_COLOR \
+  background.corner_radius=$PILL_RADIUS \
+  background.height=$PILL_HEIGHT
+
+# Make sure member items don't draw their own backgrounds
+sketchybar --set volume background.drawing=off \
+  battery background.drawing=off \
+  cpu background.drawing=off \
+  memory background.drawing=off
+
+##### Force all scripts to run the first time
 sketchybar --update
