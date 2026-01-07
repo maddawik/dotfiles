@@ -51,15 +51,17 @@ sketchybar --add item front_app left \
   --subscribe front_app front_app_switched
 
 ##### Adding Right Items #####
-# Option A: group related items into "pills" using brackets + add small gaps with spacers.
 
-# Tune these to taste
 PILL_COLOR=0x40908caa
 PILL_RADIUS=8
 PILL_HEIGHT=25
 GAP_WIDTH=10
 
-# Add items in the order you want them to appear
+# Battery present? (desktop-safe)
+HAS_BATTERY=1
+pmset -g batt 2>/dev/null | grep -q "No battery" && HAS_BATTERY=0
+
+# Clock + Volume (no pill)
 sketchybar \
   --add item clock right \
   --set clock update_freq=10 icon= script="$PLUGIN_DIR/clock.sh" \
@@ -68,9 +70,6 @@ sketchybar \
   --add item volume right \
   --set volume script="$PLUGIN_DIR/volume.sh" \
   --subscribe volume volume_change \
-  --add item battery right \
-  --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-  --subscribe battery system_woke power_source_change \
   --add item spacer_2 right \
   --set spacer_2 width=$GAP_WIDTH background.drawing=off icon.drawing=off label.drawing=off \
   --add item cpu right \
@@ -78,31 +77,37 @@ sketchybar \
   --add item memory right \
   --set memory update_freq=2 icon=󰍛 script="$PLUGIN_DIR/memory.sh" click_script="open -a 'Activity Monitor'"
 
-# Force a consistent order
-sketchybar --reorder \
-  clock spacer_1 volume battery spacer_2 cpu memory
+# If battery exists, add it (no blank space on desktops)
+if [ "$HAS_BATTERY" -eq 1 ]; then
+  sketchybar --add item battery right \
+    --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+    --subscribe battery system_woke power_source_change
+fi
 
-# Volume + Battery
-sketchybar --add bracket status_group volume battery \
-  --set status_group \
+# Force order: CPU/MEM/BATTERY
+if [ "$HAS_BATTERY" -eq 1 ]; then
+  sketchybar --reorder clock spacer_1 volume spacer_2 cpu memory battery
+else
+  sketchybar --reorder clock spacer_1 volume spacer_2 cpu memory
+fi
+
+# One pill for CPU/MEM/BATTERY
+if [ "$HAS_BATTERY" -eq 1 ]; then
+  sketchybar --add bracket sys_group cpu memory battery
+else
+  sketchybar --add bracket sys_group cpu memory
+fi
+
+sketchybar --set sys_group \
   background.drawing=on \
   background.color=$PILL_COLOR \
   background.corner_radius=$PILL_RADIUS \
   background.height=$PILL_HEIGHT
 
-# CPU + Memory
-sketchybar --add bracket sys_group cpu memory \
-  --set sys_group \
-  background.drawing=on \
-  background.color=$PILL_COLOR \
-  background.corner_radius=$PILL_RADIUS \
-  background.height=$PILL_HEIGHT
-
-# Make sure member items don't draw their own backgrounds
-sketchybar --set volume background.drawing=off \
-  battery background.drawing=off \
-  cpu background.drawing=off \
+# Pill draws background, not the items
+sketchybar --set cpu background.drawing=off \
   memory background.drawing=off
+[ "$HAS_BATTERY" -eq 1 ] && sketchybar --set battery background.drawing=off
 
-##### Force all scripts to run the first time
+##### Force all scripts to run the first time #####
 sketchybar --update
