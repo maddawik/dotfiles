@@ -118,6 +118,7 @@ sketchybar \
   --set cpu "${pill[@]}" \
   update_freq=2 icon= icon.color=$TN_GREEN script="$PLUGIN_DIR/cpu.sh" \
   --add item memory right \
+  --subscribe memory mouse.entered mouse.exited mouse.exited.global \
   --set memory "${pill[@]}" \
   update_freq=2 icon= icon.color=$TN_MAGENTA script="$PLUGIN_DIR/memory.sh"
 
