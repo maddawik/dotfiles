@@ -82,8 +82,10 @@ PILL_BORDER_WIDTH=1
 PILL_BORDER_COLOR=0x80636da6 # comment @ ~50%
 
 # Check for battery
-HAS_BATTERY=1
-pmset -g batt 2>/dev/null | grep -qi "no battery" && HAS_BATTERY=0
+HAS_BATTERY=0
+if pmset -g batt 2>/dev/null | grep -qE 'InternalBattery'; then
+  HAS_BATTERY=1
+fi
 
 # Common pill style for items
 pill=(
