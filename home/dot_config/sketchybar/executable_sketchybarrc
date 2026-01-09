@@ -1,16 +1,31 @@
-# This is a demo config to showcase some of the most important commands.
-# It is meant to be changed and configured, as it is intentionally kept sparse.
-# For a (much) more advanced configuration example see my dotfiles:
-# https://github.com/FelixKratz/dotfiles
+# SketchyBar config (TokyoNight Moon accents)
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
+##### TokyoNight Moon palette (0xAARRGGBB) #####
+TN_BG=0xff222436      # bg
+TN_BG_DARK=0xff1e2030 # bg_dark
+TN_HL=0xff2f334d      # bg_highlight
+TN_FG=0xffc8d3f5      # fg
+TN_MUTED=0xff828bb8   # fg_dark
+TN_COMMENT=0xff636da6 # comment
+
+TN_BLUE=0xff82aaff
+TN_CYAN=0xff86e1fc
+TN_GREEN=0xffc3e88d
+TN_MAGENTA=0xffc099ff
+TN_YELLOW=0xffffc777
+TN_RED=0xffff757f
+TN_ORANGE=0xffff966c
+TN_PURPLE=0xfffca7ea
+
 ##### Bar Appearance #####
+# Moon bg with ~25% alpha
 sketchybar --bar \
   position=top \
   height=33 \
   blur_radius=15 \
-  color=0x40232136
+  color=0x40222436
 
 ##### Changing Defaults #####
 default=(
@@ -18,8 +33,8 @@ default=(
   padding_right=5
   icon.font="Hack Nerd Font:Bold:18.0"
   label.font="Hack Nerd Font:Bold:16.0"
-  icon.color=0xffe0def4
-  label.color=0xffe0def4
+  icon.color=$TN_MUTED
+  label.color=$TN_FG
   icon.padding_left=2
   icon.padding_right=4
   label.padding_left=2
@@ -35,11 +50,12 @@ for sid in $(aerospace list-workspaces --all | sort -n); do
   sketchybar --add item space.$sid left \
     --subscribe space.$sid aerospace_workspace_change \
     --set space.$sid \
-    background.color=0x40908caa \
+    background.color=0x40394b70 \
     background.corner_radius=5 \
     background.height=25 \
     background.drawing=off \
     icon="$sid" \
+    icon.color=$TN_FG \
     icon.padding_left=7 \
     icon.padding_right=7 \
     click_script="aerospace workspace $sid" \
@@ -47,67 +63,71 @@ for sid in $(aerospace list-workspaces --all | sort -n); do
 done
 
 sketchybar --add item front_app left \
-  --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
+  --set front_app icon.drawing=off label.color=$TN_FG script="$PLUGIN_DIR/front_app.sh" \
   --subscribe front_app front_app_switched
 
 ##### Adding Right Items #####
 
-PILL_COLOR=0x40908caa
+# Pill styling
+PILL_COLOR=0x662f334d # bg_highlight @ ~40%
 PILL_RADIUS=8
 PILL_HEIGHT=25
-GAP_WIDTH=10
 
-# Battery present? (desktop-safe)
+# Insets inside pills (this one actually shows up)
+PILL_INSET_L=10
+PILL_INSET_R=10
+
+# Subtle outline
+PILL_BORDER_WIDTH=1
+PILL_BORDER_COLOR=0x80636da6 # comment @ ~50%
+
+# Check for battery
 HAS_BATTERY=1
-pmset -g batt 2>/dev/null | grep -q "No battery" && HAS_BATTERY=0
+pmset -g batt 2>/dev/null | grep -qi "no battery" && HAS_BATTERY=0
 
-# Clock + Volume (no pill)
+# Common pill style for items
+pill=(
+  background.drawing=on
+  background.color=$PILL_COLOR
+  background.corner_radius=$PILL_RADIUS
+  background.height=$PILL_HEIGHT
+  background.border_width=$PILL_BORDER_WIDTH
+  background.border_color=$PILL_BORDER_COLOR
+
+  # Safe if ignored:
+  background.padding_left=$PILL_INSET_L
+  background.padding_right=$PILL_INSET_R
+
+  # Inset that always affects the content spacing:
+  icon.padding_left=$PILL_INSET_L
+  label.padding_right=$PILL_INSET_R
+
+  # Keep labels readable
+  label.color=$TN_FG
+)
+
 sketchybar \
   --add item clock right \
-  --set clock update_freq=10 icon= script="$PLUGIN_DIR/clock.sh" \
-  --add item spacer_1 right \
-  --set spacer_1 width=$GAP_WIDTH background.drawing=off icon.drawing=off label.drawing=off \
+  --set clock "${pill[@]}" \
+  update_freq=10 icon= icon.color=$TN_BLUE script="$PLUGIN_DIR/clock.sh" \
   --add item volume right \
-  --set volume script="$PLUGIN_DIR/volume.sh" \
+  --set volume "${pill[@]}" \
+  icon.color=$TN_CYAN script="$PLUGIN_DIR/volume.sh" \
   --subscribe volume volume_change \
-  --add item spacer_2 right \
-  --set spacer_2 width=$GAP_WIDTH background.drawing=off icon.drawing=off label.drawing=off \
   --add item cpu right \
-  --set cpu update_freq=2 icon= script="$PLUGIN_DIR/cpu.sh" click_script="open -a 'Activity Monitor'" \
+  --set cpu "${pill[@]}" \
+  update_freq=2 icon= icon.color=$TN_GREEN script="$PLUGIN_DIR/cpu.sh" \
   --add item memory right \
-  --set memory update_freq=2 icon=󰍛 script="$PLUGIN_DIR/memory.sh" click_script="open -a 'Activity Monitor'"
+  --set memory "${pill[@]}" \
+  update_freq=2 icon= icon.color=$TN_MAGENTA script="$PLUGIN_DIR/memory.sh"
 
-# If battery exists, add it (no blank space on desktops)
 if [ "$HAS_BATTERY" -eq 1 ]; then
   sketchybar --add item battery right \
-    --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+    --set battery "${pill[@]}" \
+    icon.color=$TN_YELLOW \
+    update_freq=120 script="$PLUGIN_DIR/battery.sh" \
     --subscribe battery system_woke power_source_change
 fi
-
-# Force order: CPU/MEM/BATTERY
-if [ "$HAS_BATTERY" -eq 1 ]; then
-  sketchybar --reorder clock spacer_1 volume spacer_2 cpu memory battery
-else
-  sketchybar --reorder clock spacer_1 volume spacer_2 cpu memory
-fi
-
-# One pill for CPU/MEM/BATTERY
-if [ "$HAS_BATTERY" -eq 1 ]; then
-  sketchybar --add bracket sys_group cpu memory battery
-else
-  sketchybar --add bracket sys_group cpu memory
-fi
-
-sketchybar --set sys_group \
-  background.drawing=on \
-  background.color=$PILL_COLOR \
-  background.corner_radius=$PILL_RADIUS \
-  background.height=$PILL_HEIGHT
-
-# Pill draws background, not the items
-sketchybar --set cpu background.drawing=off \
-  memory background.drawing=off
-[ "$HAS_BATTERY" -eq 1 ] && sketchybar --set battery background.drawing=off
 
 ##### Force all scripts to run the first time #####
 sketchybar --update
