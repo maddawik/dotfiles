@@ -1,14 +1,12 @@
-# SketchyBar config (TokyoNight Moon accents)
-
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
-##### TokyoNight Moon palette (0xAARRGGBB) #####
-TN_BG=0xff222436      # bg
-TN_BG_DARK=0xff1e2030 # bg_dark
-TN_HL=0xff2f334d      # bg_highlight
-TN_FG=0xffc8d3f5      # fg
-TN_MUTED=0xff828bb8   # fg_dark
-TN_COMMENT=0xff636da6 # comment
+##### TokyoNight Moon #####
+TN_BG=0xff222436
+TN_BG_DARK=0xff1e2030
+TN_HL=0xff2f334d
+TN_FG=0xffc8d3f5
+TN_MUTED=0xff828bb8
+TN_COMMENT=0xff636da6
 
 TN_BLUE=0xff82aaff
 TN_CYAN=0xff86e1fc
@@ -68,26 +66,19 @@ sketchybar --add item front_app left \
 
 ##### Adding Right Items #####
 
-# Pill styling
-PILL_COLOR=0x662f334d # bg_highlight @ ~40%
+# Shared styling
+PILL_COLOR=0x662f334d
 PILL_RADIUS=8
 PILL_HEIGHT=25
-
-# Insets inside pills (this one actually shows up)
 PILL_INSET_L=10
 PILL_INSET_R=10
-
-# Subtle outline
 PILL_BORDER_WIDTH=1
-PILL_BORDER_COLOR=0x80636da6 # comment @ ~50%
+PILL_BORDER_COLOR=0x80636da6
 
-# Check for battery
+# Battery present?
 HAS_BATTERY=0
-if pmset -g batt 2>/dev/null | grep -qE 'InternalBattery'; then
-  HAS_BATTERY=1
-fi
+pmset -g batt 2>/dev/null | grep -q "InternalBattery" && HAS_BATTERY=1
 
-# Common pill style for items
 pill=(
   background.drawing=on
   background.color=$PILL_COLOR
@@ -96,18 +87,26 @@ pill=(
   background.border_width=$PILL_BORDER_WIDTH
   background.border_color=$PILL_BORDER_COLOR
 
-  # Safe if ignored:
   background.padding_left=$PILL_INSET_L
   background.padding_right=$PILL_INSET_R
 
-  # Inset that always affects the content spacing:
   icon.padding_left=$PILL_INSET_L
   label.padding_right=$PILL_INSET_R
 
-  # Keep labels readable
   label.color=$TN_FG
 )
 
+# Bracket pill style (for cpu+memory group)
+group_pill=(
+  background.drawing=on
+  background.color=$PILL_COLOR
+  background.corner_radius=$PILL_RADIUS
+  background.height=$PILL_HEIGHT
+  background.border_width=$PILL_BORDER_WIDTH
+  background.border_color=$PILL_BORDER_COLOR
+)
+
+# Right items
 sketchybar \
   --add item clock right \
   --set clock "${pill[@]}" \
@@ -117,13 +116,28 @@ sketchybar \
   icon.color=$TN_CYAN script="$PLUGIN_DIR/volume.sh" \
   --subscribe volume volume_change \
   --add item cpu right \
-  --set cpu "${pill[@]}" \
+  --set cpu \
+  background.drawing=off \
+  padding_left=0 \
+  icon.padding_left=$PILL_INSET_L \
+  label.padding_left=0 \
+  label.color=$TN_FG \
   update_freq=2 icon= icon.color=$TN_GREEN script="$PLUGIN_DIR/cpu.sh" \
   --add item memory right \
   --subscribe memory mouse.entered mouse.exited mouse.exited.global \
-  --set memory "${pill[@]}" \
+  --set memory \
+  background.drawing=off \
+  padding_right=0 \
+  icon.padding_right=0 \
+  label.padding_right=$PILL_INSET_R \
+  label.color=$TN_FG \
   update_freq=2 icon= icon.color=$TN_MAGENTA script="$PLUGIN_DIR/memory.sh"
 
+# One shared pill for CPU + Memory
+sketchybar --add bracket sys_group cpu memory \
+  --set sys_group "${group_pill[@]}"
+
+# Battery
 if [ "$HAS_BATTERY" -eq 1 ]; then
   sketchybar --add item battery right \
     --set battery "${pill[@]}" \
