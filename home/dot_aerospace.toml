@@ -184,6 +184,11 @@ run = "move-node-to-workspace 3"
 if.app-id = 'md.obsidian'
 run = "move-node-to-workspace 4"
 
+[[on-window-detected]]
+if.app-id = 'org.godotengine.godot'
+run = "move-node-to-workspace 5"
+
+
 [workspace-to-monitor-force-assignment]
 1 = 'main'
 2 = 'main'
