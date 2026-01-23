@@ -13,6 +13,10 @@ keybindings:
       builtin: pageDown
     - key: ctrl+b
       builtin: pageUp
+    - key: g
+      name: lazygit
+      command: >
+        cd {{.RepoPath}} && lazygit
 theme:
   ui:
     sectionsShowCount: true
