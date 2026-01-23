@@ -10,6 +10,8 @@ set -gx BAT_THEME tokyonight
 set -gx TEALDEER_CONFIG_DIR "$HOME/.config/tealdeer"
 set -gx EZA_CONFIG_DIR "$HOME/.config/eza"
 
+set -gx fish_color_valid_path green
+
 fish_config theme choose tokyonight_moon
 
 # vi-mode
