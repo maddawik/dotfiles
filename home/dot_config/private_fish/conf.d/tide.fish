@@ -1,11 +1,9 @@
-if not status is-interactive
-    exit
-end
+status is-interactive || exit
 
 # tide prompt
 set -gx tide_git_icon ""
 set -gx tide_private_mode_icon "󰗹"
-set -gx tide_git_truncation_length 0
+set -gx tide_git_truncation_length 12
 set tide_pwd_color_dirs blue
 
 if not contains private_mode $tide_left_prompt_items

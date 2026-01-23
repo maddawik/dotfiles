@@ -1,6 +1,4 @@
-if not status is-interactive
-    exit
-end
+status is-interactive || exit
 
 # godot
 alias nvg 'nvim --listen /tmp/godot.pipe .'

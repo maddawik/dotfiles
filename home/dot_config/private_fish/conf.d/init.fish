@@ -1,6 +1,4 @@
-if not status is-interactive
-    exit
-end
+status is-interactive || exit
 
 # general env
 set -gx SHELL $(which fish)

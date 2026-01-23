@@ -1,6 +1,4 @@
-if not status is-interactive
-    exit
-end
+status is-interactive || exit
 
 set -gx TG_DOWNLOAD_DIR "$HOME/.cache/tg-cache"
 set -gx TG_PROVIDER_CACHE 1

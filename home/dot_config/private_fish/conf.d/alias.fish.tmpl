@@ -1,6 +1,4 @@
-if not status is-interactive
-    exit
-end
+status is-interactive || exit
 
 alias reload 'exec fish'
 
@@ -56,7 +54,7 @@ abbr --command git bc 'clone --bare'
 # github cli
 abbr ghb gh browse
 abbr ghd gh dash
-abbr ghp gh pr create --fill-first --assignee @me
+abbr ghp gh pr create --assignee @me
 abbr --set-cursor='%' -- ghid 'gh issue develop % --checkout'
 
 # dotfiles
@@ -77,6 +75,3 @@ alias lzc "lz --path {{ .chezmoi.config.sourceDir }}"
 
 # lazydocker
 alias lzd lazydocker
-
-# other
-alias tools 'glow {{ .chezmoi.homeDir }}/.config/docs/tools.md'
