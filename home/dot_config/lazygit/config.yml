@@ -66,7 +66,7 @@ gui:
   expandedSidePanelWeight: 3
 customCommands:
   - key: "C"
-    command: 'git commit -m "{{ .Form.Type }}{{if .Form.Scopes}}({{ .Form.Scopes }}){{end}}{{if eq .Form.Breaking `yes`}}!{{end}}: {{ .Form.Description }}"'
+    command: 'git commit -m "{{ .Form.Type }}{{if .Form.Scopes}}({{ .Form.Scopes }}){{end}}{{if eq .Form.Breaking `yes`}}!{{end}}: {{ .Form.Description }}"{{if .Form.Body}} -m "{{ .Form.Body }}"{{end}}{{if .Form.Issues}} -m "closes #{{ .Form.Issues }}"{{end}}'
     description: "Conventional commit"
     context: "files"
     prompts:
@@ -108,8 +108,11 @@ customCommands:
         title: "Enter the scope(s) of the change (Optional)"
         key: "Scopes"
       - type: "input"
-        title: "Enter a short description of the change"
+        title: "Enter a short, imperative tense description"
         key: "Description"
+      - type: "input"
+        title: "Enter a longer description of the change (Optional, leave blank to skip)"
+        key: "Body"
       - type: "menu"
         title: "Is this a breaking change?"
         key: "Breaking"
@@ -120,6 +123,9 @@ customCommands:
           - name: "Yes"
             description: "This introduces a breaking change."
             value: "yes"
+      - type: "input"
+        title: "Enter an issue number this change closes (Optional, leave blank to skip)"
+        key: "Issues"
       - type: "confirm"
         title: "Looks good?"
-        body: "{{ .Form.Type }}{{if .Form.Scopes}}({{ .Form.Scopes }}){{end}}{{if eq .Form.Breaking `yes`}}!{{end}}: {{ .Form.Description }}"
+        body: "{{ .Form.Type }}{{if .Form.Scopes}}({{ .Form.Scopes }}){{end}}{{if eq .Form.Breaking `yes`}}!{{end}}: {{ .Form.Description }}{{if .Form.Body}}\n\n{{ .Form.Body }}{{end}}{{if .Form.Issues}}\n\ncloses #{{ .Form.Issues }}{{end}}"
