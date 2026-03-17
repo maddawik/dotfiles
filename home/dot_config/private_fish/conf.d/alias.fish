@@ -10,13 +10,8 @@ abbr nv nvim
 abbr yless 'jless --yaml'
 
 # copy/pasta
-{{- if eq .chezmoi.os "darwin" }}
 alias c pbcopy
 alias v pbpaste
-{{- else }}
-alias c 'xclip -selection clipboard'
-alias v 'xclip -selection clipboard -o'
-{{- end }}
 
 # ls shortcuts
 alias l ls
@@ -71,7 +66,7 @@ abbr cms chezmoi status
 
 # lazygit
 alias lz lazygit
-alias lzc "lz --path {{ .chezmoi.config.sourceDir }}"
+alias lzc "lz --path ~/.local/share/chezmoi/"
 
 # lazydocker
 alias lzd lazydocker

@@ -8,6 +8,9 @@ repoPaths:
 pager:
   diff: "delta"
 keybindings:
+  prs:
+    - key: T
+      command: ENHANCE_THEME=tokyo_night_storm gh enhance -R {{.RepoName}} {{.PrNumber}}
   universal:
     - key: ctrl+f
       builtin: pageDown

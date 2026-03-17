@@ -19,3 +19,8 @@ vim.keymap.set("n", "<leader>cw", function()
   end
   vim.lsp.buf.rename()
 end, { desc = "Rename (LSP) + save all" })
+
+-- Open gh dash in a floating terminal
+vim.keymap.set("n", "<leader>gH", function()
+  Snacks.terminal.open("gh dash")
+end, { desc = "GitHub Dashboard" })

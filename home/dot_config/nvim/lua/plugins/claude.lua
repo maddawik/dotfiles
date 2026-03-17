@@ -8,6 +8,7 @@ return {
     },
     diff_opts = {
       open_in_current_tab = false,
+      hide_terminal_in_new_tab = true,
     },
   },
   keys = {
