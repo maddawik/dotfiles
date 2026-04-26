@@ -1,3 +1,16 @@
 [".tmux/plugins/tmux-resurrect"]
 type = "git-repo"
 url = "https://github.com/tmux-plugins/tmux-resurrect"
+
+# go-skills by spf13 (Steve Francia)
+[".claude/skills/go/SKILL.md"]
+type = "file"
+url = "https://raw.githubusercontent.com/spf13/go-skills/main/go/SKILL.md"
+
+[".claude/skills/cobra-viper/SKILL.md"]
+type = "file"
+url = "https://raw.githubusercontent.com/spf13/go-skills/main/cobra-viper/SKILL.md"
+
+[".claude/skills/go-spec-reviewer/SKILL.md"]
+type = "file"
+url = "https://raw.githubusercontent.com/spf13/go-skills/main/go-spec-reviewer/SKILL.md"
