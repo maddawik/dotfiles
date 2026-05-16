@@ -84,6 +84,11 @@ that you could jump to.”
 
 • Grady Booch
 ]],
+  [[
+“Simplicity is prerequisite for reliability.”
+
+• Edsger W. Dijkstra
+]],
 }
 
 return M
