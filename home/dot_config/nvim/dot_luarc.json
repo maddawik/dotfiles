@@ -1,6 +1,7 @@
 {
     "diagnostics.globals": [
         "Snacks",
-        "LazyVim"
+        "MiniIcons",
+        "MiniFiles"
     ]
 }

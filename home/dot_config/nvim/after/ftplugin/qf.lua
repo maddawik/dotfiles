@@ -15,7 +15,6 @@ local del_qf_item = function()
     vim.api.nvim_win_set_cursor(0, { new_line, 0 })
   end
 
-  -- Exit visual mode after deletion
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "nx", false)
 end
 
