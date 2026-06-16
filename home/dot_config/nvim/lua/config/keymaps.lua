@@ -39,9 +39,8 @@ map("i", ";", ";<c-g>u")
 map("x", "<", "<gv")
 map("x", ">", ">gv")
 
--- Center cursor on scroll/search
-map("n", "<C-d>", "<C-d>zz")
-map("n", "<C-u>", "<C-u>zz")
+-- Center cursor on search (skipped <C-d>/<C-u> centering — those remaps
+-- register the keys in the which-key tree, breaking popup scroll at root)
 map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
 map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
 map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })

@@ -45,6 +45,9 @@ vim.opt.timeoutlen = 300
 vim.opt.completeopt = "menu,menuone,noselect"
 
 vim.opt.laststatus = 3
+vim.opt.ruler = false
+vim.opt.showcmd = false
+vim.opt.shortmess:append("I")
 
 local icons = require("maddawik.icons")
 vim.diagnostic.config({

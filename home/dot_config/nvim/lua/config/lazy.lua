@@ -36,7 +36,7 @@ require("lazy").setup({
   },
   install = { colorscheme = { "tokyonight-moon", "default" } },
   checker = { enabled = true, notify = false, frequency = 3600 },
-  ui = { pills = false, border = "rounded", title = " Lazy 💤 " },
+  ui = { pills = true, border = "rounded", title = " Lazy 💤 " },
   change_detection = { notify = false },
   performance = {
     rtp = {
