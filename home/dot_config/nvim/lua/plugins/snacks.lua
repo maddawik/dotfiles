@@ -111,15 +111,39 @@ return {
         .option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" })
         :map("<leader>uA")
       Snacks.toggle.treesitter():map("<leader>uT")
+      Snacks.toggle({
+        name = "Treesitter Context",
+        get = function()
+          return require("treesitter-context").enabled()
+        end,
+        set = function(state)
+          if state then
+            require("treesitter-context").enable()
+          else
+            require("treesitter-context").disable()
+          end
+        end,
+      }):map("<leader>ut")
       Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
       Snacks.toggle.dim():map("<leader>uD")
       Snacks.toggle.indent():map("<leader>ug")
-      Snacks.toggle.scroll():map("<leader>uS")
       Snacks.toggle.zoom():map("<leader>wm"):map("<leader>uZ")
       Snacks.toggle.zen():map("<leader>uz")
       if vim.lsp.inlay_hint then
         Snacks.toggle.inlay_hints():map("<leader>uh")
       end
+      Snacks.toggle({
+        name = "Auto Format",
+        get = function()
+          return not vim.g.disable_autoformat
+        end,
+        set = function(state)
+          vim.g.disable_autoformat = not state
+        end,
+      }):map("<leader>uf")
+      vim.keymap.set("n", "<leader>uC", function()
+        Snacks.picker.colorschemes()
+      end, { desc = "Colorscheme" })
     end,
   },
 }

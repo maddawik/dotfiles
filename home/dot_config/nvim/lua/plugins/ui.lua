@@ -194,6 +194,12 @@ return {
       views = {
         mini = { size = { max_height = 8 } },
       },
+      routes = {
+        {
+          filter = { event = "msg_show", find = "written" },
+          view = "mini",
+        },
+      },
     },
   },
 

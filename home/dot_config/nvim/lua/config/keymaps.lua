@@ -353,16 +353,6 @@ end, { desc = "Inspect Tree" })
 
 -- Snacks toggles are registered in plugins/snacks.lua after Snacks.setup() runs.
 
--- Custom format-on-save toggles (conform-aware)
-map("n", "<leader>uf", function()
-  vim.g.disable_autoformat = not vim.g.disable_autoformat
-  vim.notify("format on save = " .. tostring(not vim.g.disable_autoformat))
-end, { desc = "Toggle format-on-save (global)" })
-map("n", "<leader>uF", function()
-  vim.b.disable_autoformat = not vim.b.disable_autoformat
-  vim.notify("buffer format on save = " .. tostring(not vim.b.disable_autoformat))
-end, { desc = "Toggle format-on-save (buffer)" })
-
 -- ── Lua development ─────────────────────────────────────────────────────────
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "lua",
