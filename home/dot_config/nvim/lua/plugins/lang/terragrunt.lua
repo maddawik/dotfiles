@@ -1,3 +1,7 @@
+if vim.fn.executable("terragrunt") ~= 1 then
+  return {}
+end
+
 return {
   {
     "gruntwork-io/terragrunt-ls",

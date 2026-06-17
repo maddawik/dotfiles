@@ -13,6 +13,24 @@ return {
         return ""
       end
 
+      local term_apps = {
+        { pat = "gh dash", icon = " ", name = "GitHub" },
+        { pat = "claude", icon = " ", name = "Claude" },
+        { pat = "lazygit", icon = "󰒲 ", name = "Lazygit" },
+      }
+      local function term_app()
+        if vim.bo.buftype ~= "terminal" then
+          return nil
+        end
+        local bufname = vim.api.nvim_buf_get_name(0)
+        for _, app in ipairs(term_apps) do
+          if bufname:match(app.pat) then
+            return app
+          end
+        end
+        return nil
+      end
+
       return {
         options = {
           theme = "auto",
@@ -53,8 +71,36 @@ return {
               },
             },
             "%=",
-            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            { "filename", path = 1 },
+            {
+              -- custom icon for known terminal apps (blank = fill in later)
+              function()
+                local app = term_app()
+                return app and app.icon or ""
+              end,
+              cond = function()
+                return term_app() ~= nil
+              end,
+              separator = "",
+              padding = { left = 1, right = 0 },
+            },
+            {
+              -- default filetype icon for everything else (keeps its coloring)
+              "filetype",
+              icon_only = true,
+              separator = "",
+              padding = { left = 1, right = 0 },
+              cond = function()
+                return term_app() == nil
+              end,
+            },
+            {
+              "filename",
+              path = 1,
+              fmt = function(name)
+                local app = term_app()
+                return app and app.name or name
+              end,
+            },
           },
           lualine_x = {
             {

@@ -1,3 +1,7 @@
+if vim.fn.executable("terraform") ~= 1 then
+  return {}
+end
+
 return {
   -- Mason: tflint for linting (installed via mason-tool-installer)
   {
@@ -32,3 +36,4 @@ return {
     end,
   },
 }
+

@@ -1,3 +1,11 @@
+if
+  vim.fn.executable("python3") ~= 1
+  and vim.fn.executable("python") ~= 1
+  and vim.fn.executable("uv") ~= 1
+then
+  return {}
+end
+
 return {
   -- venv-selector (auto-detects uv venvs alongside pip/poetry/conda)
   {
