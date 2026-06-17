@@ -86,6 +86,15 @@ return {
                 modified = icons.git.modified,
                 removed = icons.git.removed,
               },
+              source = function()
+                local summary = vim.b.minidiff_summary
+                return summary
+                  and {
+                    added = summary.add,
+                    modified = summary.change,
+                    removed = summary.delete,
+                  }
+              end,
             },
             { "filesize", padding = { left = 0, right = 1 } },
           },
@@ -215,7 +224,6 @@ return {
         { "<leader>d", group = "debug" },
         { "<leader>f", group = "file/find" },
         { "<leader>g", group = "git" },
-        { "<leader>gh", group = "hunks" },
         { "<leader>q", group = "quit" },
         { "<leader>s", group = "search" },
         { "<leader>t", group = "test" },

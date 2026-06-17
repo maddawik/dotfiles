@@ -60,6 +60,14 @@ return {
       run_on_start = true,
       start_delay = 3000,
     },
+    config = function(_, opts)
+      local mti = require("mason-tool-installer")
+      mti.setup(opts)
+      -- The plugin's startup install is wired to a VimEnter autocmd in its plugin/
+      -- file, which never fires under lazy-loading (VeryLazy runs after VimEnter).
+      -- Trigger it explicitly so tools auto-install on a fresh start.
+      mti.run_on_start()
+    end,
   },
 
   {

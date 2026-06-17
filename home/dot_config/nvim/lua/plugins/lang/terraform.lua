@@ -1,7 +1,8 @@
 return {
-  -- Mason: tflint for linting
+  -- Mason: tflint for linting (installed via mason-tool-installer)
   {
-    "mason-org/mason.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    optional = true,
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, { "tflint" })

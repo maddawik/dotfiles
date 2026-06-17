@@ -71,7 +71,7 @@ return {
       workspaces = get_local_workspaces(),
       frontmatter = {
         enabled = function(file)
-          return string.find(file, "-presenterm.md")
+          return not string.find(file, "-presenterm.md")
         end,
       },
       legacy_commands = false,
