@@ -1,8 +1,4 @@
-if
-  vim.fn.executable("python3") ~= 1
-  and vim.fn.executable("python") ~= 1
-  and vim.fn.executable("uv") ~= 1
-then
+if vim.fn.executable("python3") ~= 1 and vim.fn.executable("python") ~= 1 and vim.fn.executable("uv") ~= 1 then
   return {}
 end
 
@@ -10,7 +6,6 @@ return {
   -- venv-selector (auto-detects uv venvs alongside pip/poetry/conda)
   {
     "linux-cultist/venv-selector.nvim",
-    branch = "regexp",
     cmd = "VenvSelect",
     ft = "python",
     keys = { { "<leader>cv", "<cmd>VenvSelect<cr>", desc = "Select VirtualEnv", ft = "python" } },

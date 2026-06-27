@@ -60,10 +60,30 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local set = function(mode, lhs, rhs, desc)
       vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", opts, { desc = desc }))
     end
-    set("n", "gd", vim.lsp.buf.definition, "Go to definition")
-    set("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
-    set("n", "gr", vim.lsp.buf.references, "References")
-    set("n", "gI", vim.lsp.buf.implementation, "Go to implementation")
+    -- Neovim 0.11+ ships global gr* default maps (grn/gra/grr/gri/grt/grx),
+    -- which turn `gr` into a prefix and add a timeoutlen delay. Remove them so
+    -- `gr` can map directly to references below.
+    for _, lhs in ipairs({ "grn", "gra", "grr", "gri", "grt", "grx" }) do
+      pcall(vim.keymap.del, "n", lhs)
+    end
+    set("n", "gd", function()
+      Snacks.picker.lsp_definitions()
+    end, "Go to definition")
+    set("n", "gD", function()
+      Snacks.picker.lsp_declarations()
+    end, "Go to declaration")
+    set("n", "gr", function()
+      Snacks.picker.lsp_references()
+    end, "References")
+    set("n", "gI", function()
+      Snacks.picker.lsp_implementations()
+    end, "Go to implementation")
+    set("n", "gy", function()
+      Snacks.picker.lsp_type_definitions()
+    end, "Go to type definition")
+    set("n", "<leader>ss", function()
+      Snacks.picker.lsp_symbols()
+    end, "Document symbols")
     set("n", "K", vim.lsp.buf.hover, "Hover docs")
     set("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
     set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
