@@ -8,6 +8,7 @@ return {
         sign = false,
         width = "block",
         right_pad = 1,
+        disable = { "mermaid" },
       },
       heading = {
         sign = false,

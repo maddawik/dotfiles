@@ -16,7 +16,7 @@ return {
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
-        go = { "goimports", "gofumpt" },
+        go = { "goimports", "gofmt" },
         python = { "ruff_fix", "ruff_organize_imports", "ruff_format" },
         javascript = { "prettierd", "prettier", stop_after_first = true },
         typescript = { "prettierd", "prettier", stop_after_first = true },
@@ -33,7 +33,9 @@ return {
         bash = { "shfmt" },
       },
       format_on_save = function(_bufnr)
-        if vim.g.disable_autoformat then return end
+        if vim.g.disable_autoformat then
+          return
+        end
         return { timeout_ms = 1000, lsp_format = "fallback" }
       end,
     },

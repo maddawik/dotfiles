@@ -48,18 +48,6 @@ map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search R
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
--- Commenting: add comment above/below
-map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
-map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
-
--- ── Move lines (Alt-j / Alt-k) ──────────────────────────────────────────────
-map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
-map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
-map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
-map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
-
 -- ── Buffer navigation ───────────────────────────────────────────────────────
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
@@ -119,6 +107,7 @@ end, { desc = "Select Scratch Buffer" })
 -- ── Quit / Lazy / New file ──────────────────────────────────────────────────
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 map("n", "<leader>qQ", "<cmd>qa!<cr>", { desc = "Quit All (force)" })
+map("n", "<leader>uR", "<cmd>restart<cr>", { desc = "Restart Nvim" })
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
@@ -126,16 +115,7 @@ map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 map({ "n", "x" }, "<leader>cf", function()
   require("conform").format({ async = true, lsp_format = "fallback" })
 end, { desc = "Format" })
-
-map("n", "<leader>cw", function()
-  local orig = vim.lsp.handlers["textDocument/rename"]
-  vim.lsp.handlers["textDocument/rename"] = function(...)
-    orig(...)
-    vim.cmd("silent! wall")
-    vim.lsp.handlers["textDocument/rename"] = orig
-  end
-  vim.lsp.buf.rename()
-end, { desc = "Rename (LSP) + save all" })
+map("n", "<leader>cl", "<cmd>checkhealth vim.lsp<cr>", { desc = "LSP info" })
 
 -- ── Find / files (Snacks picker) ────────────────────────────────────────────
 map("n", "<leader><space>", function()
@@ -180,17 +160,11 @@ end, { desc = "Config files" })
 map("n", "<leader>fg", function()
   Snacks.picker.git_files()
 end, { desc = "Git files" })
-map("n", "<leader>fb", function()
-  Snacks.picker.buffers()
-end, { desc = "Buffers" })
 
 -- ── Search (Snacks picker) ──────────────────────────────────────────────────
 map("n", "<leader>/", function()
   Snacks.picker.grep_buffers()
 end, { desc = "Grep open buffers" })
-map("n", "<leader>sf", function()
-  Snacks.picker.files()
-end, { desc = "Find files" })
 map("n", "<leader>sg", function()
   Snacks.picker.grep()
 end, { desc = "Grep" })
@@ -239,9 +213,6 @@ end, { desc = "Todo comments" })
 map("n", "<leader>sa", function()
   Snacks.picker.autocmds()
 end, { desc = "Autocmds" })
-map("n", "<leader>sc", function()
-  Snacks.picker.command_history()
-end, { desc = "Command history" })
 map("n", "<leader>sC", function()
   Snacks.picker.commands()
 end, { desc = "Commands" })

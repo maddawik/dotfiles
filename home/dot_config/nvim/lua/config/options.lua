@@ -44,6 +44,12 @@ vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 vim.opt.completeopt = "menu,menuone,noselect"
 
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "0"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = false
+
 vim.opt.laststatus = 3
 vim.opt.ruler = false
 vim.opt.showcmd = false

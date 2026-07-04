@@ -39,20 +39,6 @@ return {
           diff = { native = true },
           git = { native = true },
         },
-        win = {
-          input = {
-            keys = {
-              ["<c-e>"] = { "preview_scroll_left", mode = { "i", "n" } },
-              ["<c-y>"] = { "preview_scroll_right", mode = { "i", "n" } },
-            },
-          },
-          list = {
-            keys = {
-              ["<c-e>"] = "preview_scroll_left",
-              ["<c-y>"] = "preview_scroll_right",
-            },
-          },
-        },
       },
       zen = {
         win = { backdrop = { transparent = false } },
@@ -86,7 +72,9 @@ return {
         width = 30,
         sections = {
           { section = "keys", gap = 0, padding = 1 },
-          { text = { require("maddawik.dashboard").get_quote(), hl = "Comment", align = "center" } },
+          function()
+            return { text = { require("maddawik.dashboard").get_quote(), hl = "Comment", align = "center" } }
+          end,
           { section = "startup" },
         },
       },

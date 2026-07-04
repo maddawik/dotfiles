@@ -5,18 +5,25 @@ return {
     dependencies = { "nvim-mini/mini.icons" },
     opts = function()
       local icons = require("maddawik.icons")
-      local function root_dir()
-        local root = vim.fs.root(0, { ".git", "go.mod", "Makefile", ".luarc.json" })
-        if root then
-          return vim.fn.fnamemodify(root, ":t")
-        end
-        return ""
-      end
+      local root_dir = {
+        function()
+          local root = vim.fs.root(0, { ".git", "go.mod", "Makefile", ".luarc.json" })
+          return root and (" " .. vim.fn.fnamemodify(root, ":t")) or ""
+        end,
+        cond = function()
+          local root = vim.fs.root(0, { ".git", "go.mod", "Makefile", ".luarc.json" })
+          return root ~= nil and vim.fs.normalize(root) ~= vim.fs.normalize(vim.fn.getcwd())
+        end,
+        color = function()
+          return { fg = Snacks.util.color("Special") }
+        end,
+      }
 
       local term_apps = {
         { pat = "gh dash", icon = " ", name = "GitHub" },
         { pat = "claude", icon = " ", name = "Claude" },
         { pat = "lazygit", icon = "󰒲 ", name = "Lazygit" },
+        { pat = "term", icon = " ", name = "Terminal" },
       }
       local function term_app()
         if vim.bo.buftype ~= "terminal" then
@@ -29,6 +36,74 @@ return {
           end
         end
         return nil
+      end
+
+      -- Ported from LazyVim: lualine.utils.format_hl + pretty_path
+      local function format_hl(component, text, hl_group)
+        text = text:gsub("%%", "%%%%")
+        if not hl_group or hl_group == "" then
+          return text
+        end
+        component.hl_cache = component.hl_cache or {}
+        local lualine_hl_group = component.hl_cache[hl_group]
+        if not lualine_hl_group then
+          local utils = require("lualine.utils.utils")
+          local gui = vim.tbl_filter(function(x)
+            return x
+          end, {
+            utils.extract_highlight_colors(hl_group, "bold") and "bold",
+            utils.extract_highlight_colors(hl_group, "italic") and "italic",
+          })
+          lualine_hl_group = component:create_hl({
+            fg = utils.extract_highlight_colors(hl_group, "fg"),
+            gui = #gui > 0 and table.concat(gui, ",") or nil,
+          }, "LV_" .. hl_group)
+          component.hl_cache[hl_group] = lualine_hl_group
+        end
+        return component:format_hl(lualine_hl_group) .. text .. component:get_default_hl()
+      end
+
+      local function pretty_path(self)
+        local app = term_app()
+        if app then
+          return app.name
+        end
+
+        local path = vim.fn.expand("%:p") --[[@as string]]
+        if path == "" then
+          return ""
+        end
+
+        path = vim.fs.normalize(path)
+        local root =
+          vim.fs.normalize(vim.fs.root(0, { ".git", "go.mod", "Makefile", ".luarc.json" }) or vim.fn.getcwd())
+        local cwd = vim.fs.normalize(vim.fn.getcwd())
+
+        if path:find(cwd, 1, true) == 1 then
+          path = path:sub(#cwd + 2)
+        elseif path:find(root, 1, true) == 1 then
+          path = path:sub(#root + 2)
+        end
+
+        local sep = package.config:sub(1, 1)
+        local parts = vim.split(path, "[\\/]")
+
+        if #parts > 3 then
+          parts = { parts[1], "…", unpack(parts, #parts - 1, #parts) }
+        end
+
+        if vim.bo.modified then
+          parts[#parts] = format_hl(self, parts[#parts] .. "", "MatchParen")
+        else
+          parts[#parts] = format_hl(self, parts[#parts], "Bold")
+        end
+
+        local dir = ""
+        if #parts > 1 then
+          dir = format_hl(self, table.concat({ unpack(parts, 1, #parts - 1) }, sep) .. sep, "")
+        end
+
+        return dir .. parts[#parts]
       end
 
       return {
@@ -52,15 +127,15 @@ return {
             {
               "branch",
               fmt = function(str)
-                if str:len() > 6 then
-                  return str:sub(1, 6) .. "…"
+                if str:len() > 20 then
+                  return str:sub(1, 20) .. "…"
                 end
                 return str
               end,
             },
           },
           lualine_c = {
-            { root_dir },
+            root_dir,
             {
               "diagnostics",
               symbols = {
@@ -70,12 +145,9 @@ return {
                 hint = icons.diagnostics.Hint,
               },
             },
-            "%=",
             {
-              -- custom icon for known terminal apps (blank = fill in later)
               function()
-                local app = term_app()
-                return app and app.icon or ""
+                return term_app().icon
               end,
               cond = function()
                 return term_app() ~= nil
@@ -83,26 +155,30 @@ return {
               separator = "",
               padding = { left = 1, right = 0 },
             },
-            {
-              -- default filetype icon for everything else (keeps its coloring)
-              "filetype",
-              icon_only = true,
-              separator = "",
-              padding = { left = 1, right = 0 },
-              cond = function()
-                return term_app() == nil
-              end,
-            },
-            {
-              "filename",
-              path = 1,
-              fmt = function(name)
-                local app = term_app()
-                return app and app.name or name
-              end,
-            },
+            { pretty_path },
           },
           lualine_x = {
+            {
+              function()
+                local clients = vim.lsp.get_clients({ bufnr = 0 })
+                if #clients == 0 then
+                  return ""
+                end
+                return " "
+                  .. table.concat(
+                    vim.tbl_map(function(c)
+                      return c.name
+                    end, clients),
+                    " "
+                  )
+              end,
+              cond = function()
+                return #vim.lsp.get_clients({ bufnr = 0 }) > 0
+              end,
+              color = function()
+                return { fg = Snacks.util.color("Special") }
+              end,
+            },
             {
               function()
                 return require("noice").api.status.mode.get():gsub("recording", " ")
@@ -142,11 +218,22 @@ return {
                   }
               end,
             },
-            { "filesize", padding = { left = 0, right = 1 } },
           },
           lualine_y = {
-            { "fileformat", padding = { left = 1, right = 2 } },
-            { "encoding", padding = { left = 0, right = 1 } },
+            {
+              "fileformat",
+              padding = { left = 1, right = 2 },
+              cond = function()
+                return vim.bo.fileformat ~= "unix"
+              end,
+            },
+            {
+              "encoding",
+              padding = { left = 0, right = 1 },
+              cond = function()
+                return (vim.bo.fileencoding or vim.o.encoding) ~= "utf-8"
+              end,
+            },
           },
           lualine_z = { "location" },
         },
@@ -234,7 +321,6 @@ return {
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
         },
         signature = { enabled = false },
       },

@@ -42,7 +42,6 @@ return {
         "regols",
         -- Formatters
         "stylua",
-        "gofumpt",
         "goimports",
         "prettierd",
         "shfmt",
