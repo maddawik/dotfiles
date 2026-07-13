@@ -23,37 +23,47 @@ return {
     event = "VeryLazy",
     opts = {
       ensure_installed = {
-        -- LSP servers (only those Mason packages exist for; native LSP configs below)
+        -- Lua
         "lua-language-server",
-        "fish-lsp",
+        "stylua",
+        -- Go
+        "goimports",
+        "golangci-lint",
+        "gomodifytags",
         "gopls",
+        "gotests",
+        "iferr",
+        "impl",
+        -- Terraform & Terragrunt
         "terraform-ls",
-        "helm-ls",
+        "terragrunt-ls",
+        -- Shell & Bash
+        "bash-language-server",
+        "fish-lsp",
+        "shellcheck",
+        "shfmt",
+        -- YAML
         "yaml-language-server",
+        -- JSON
         "json-lsp",
-        "ty",
-        "ruff",
-        "vtsls",
+        -- Markdown
+        "marksman",
+        -- Docker
         "dockerfile-language-server",
         "docker-compose-language-service",
-        "bash-language-server",
-        "marksman",
-        "taplo",
-        "regols",
-        -- Formatters
-        "stylua",
-        "goimports",
-        "prettierd",
-        "shfmt",
-        -- Linters
-        "golangci-lint",
-        "shellcheck",
         "hadolint",
-        -- Go tooling
-        "iferr",
-        "gomodifytags",
-        "gotests",
-        "impl",
+        -- TypeScript/JavaScript
+        "vtsls",
+        "prettierd",
+        -- Python
+        "ty",
+        "ruff",
+        -- Helm
+        "helm-ls",
+        -- TOML
+        "taplo",
+        -- OPA
+        "regols",
       },
       auto_update = false,
       run_on_start = true,
@@ -114,6 +124,7 @@ return {
           },
         },
         terraformls = {},
+        terragrunt_ls = {},
         helm_ls = {},
         yamlls = {
           capabilities = {
