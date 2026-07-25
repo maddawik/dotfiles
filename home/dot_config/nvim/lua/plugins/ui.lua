@@ -8,11 +8,14 @@ return {
       local root_dir = {
         function()
           local root = vim.fs.root(0, { ".git", "go.mod", "Makefile", ".luarc.json" })
-          return root and (" " .. vim.fn.fnamemodify(root, ":t")) or ""
-        end,
-        cond = function()
-          local root = vim.fs.root(0, { ".git", "go.mod", "Makefile", ".luarc.json" })
-          return root ~= nil and vim.fs.normalize(root) ~= vim.fs.normalize(vim.fn.getcwd())
+          if not root then
+            return ""
+          end
+          local cwd = vim.fs.normalize(vim.fn.getcwd())
+          local root_norm = vim.fs.normalize(root)
+          local cwd_in_root = cwd == root_norm or cwd:sub(1, #root_norm + 1) == root_norm .. "/"
+          local icon = cwd_in_root and "" or ""
+          return icon .. " " .. vim.fn.fnamemodify(root, ":t")
         end,
         color = function()
           return { fg = Snacks.util.color("Special") }
@@ -21,7 +24,7 @@ return {
 
       local term_apps = {
         { pat = "gh dash", icon = " ", name = "GitHub" },
-        { pat = "claude", icon = " ", name = "Claude" },
+        { pat = "claude", icon = "✻", name = "Claude" },
         { pat = "lazygit", icon = "󰒲 ", name = "Lazygit" },
         { pat = "term", icon = " ", name = "Terminal" },
       }
