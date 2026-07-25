@@ -297,19 +297,10 @@ map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
--- ── Floating terminal ───────────────────────────────────────────────────────
-map("n", "<leader>fT", function()
-  Snacks.terminal()
-end, { desc = "Terminal (cwd)" })
-map("n", "<leader>ft", function()
-  Snacks.terminal(nil, { cwd = vim.fs.root(0, { ".git" }) or vim.fn.getcwd() })
-end, { desc = "Terminal (Root Dir)" })
+-- ── Terminal ───────────────────────────────────────────────────────
 map({ "n", "t" }, "<C-/>", function()
   Snacks.terminal.focus(nil, { cwd = vim.fs.root(0, { ".git" }) or vim.fn.getcwd() })
 end, { desc = "Terminal (Root Dir)" })
-map({ "n", "t" }, "<C-_>", function()
-  Snacks.terminal.focus(nil, { cwd = vim.fs.root(0, { ".git" }) or vim.fn.getcwd() })
-end, { desc = "which_key_ignore" })
 
 -- ── UI toggles ──────────────────────────────────────────────────────────────
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
