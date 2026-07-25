@@ -34,6 +34,7 @@ return {
         "gotests",
         "iferr",
         "impl",
+        "templ",
         -- Terraform & Terragrunt
         "terraform-ls",
         "terragrunt-ls",
@@ -123,6 +124,7 @@ return {
             },
           },
         },
+        templ = {},
         terraformls = {},
         terragrunt_ls = {},
         helm_ls = {},

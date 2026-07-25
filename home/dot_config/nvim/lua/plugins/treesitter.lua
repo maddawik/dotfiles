@@ -33,6 +33,7 @@ return {
         "query",
         "regex",
         "rego",
+        "templ",
         "terraform",
         "toml",
         "tsx",
