@@ -67,11 +67,6 @@ return {
       end
 
       local function pretty_path(self)
-        local app = term_app()
-        if app then
-          return app.name
-        end
-
         local path = vim.fn.expand("%:p") --[[@as string]]
         if path == "" then
           return ""
@@ -138,7 +133,19 @@ return {
             },
           },
           lualine_c = {
-            root_dir,
+            vim.tbl_extend("force", root_dir, {
+              cond = function()
+                return term_app() == nil
+              end,
+            }),
+            {
+              pretty_path,
+              cond = function()
+                return term_app() == nil
+              end,
+            },
+          },
+          lualine_x = {
             {
               "diagnostics",
               symbols = {
@@ -148,19 +155,6 @@ return {
                 hint = icons.diagnostics.Hint,
               },
             },
-            {
-              function()
-                return term_app().icon
-              end,
-              cond = function()
-                return term_app() ~= nil
-              end,
-              separator = "",
-              padding = { left = 1, right = 0 },
-            },
-            { pretty_path },
-          },
-          lualine_x = {
             {
               function()
                 local clients = vim.lsp.get_clients({ bufnr = 0 })
@@ -238,7 +232,23 @@ return {
               end,
             },
           },
-          lualine_z = { "location" },
+          lualine_z = {
+            {
+              "location",
+              cond = function()
+                return term_app() == nil
+              end,
+            },
+            {
+              function()
+                local app = term_app()
+                return app and (app.icon .. app.name) or ""
+              end,
+              cond = function()
+                return term_app() ~= nil
+              end,
+            },
+          },
         },
         extensions = { "lazy" },
       }
