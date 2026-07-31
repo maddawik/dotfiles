@@ -24,7 +24,7 @@ return {
 
       local term_apps = {
         { pat = "gh dash", icon = " ", name = "GitHub" },
-        { pat = "claude", icon = "✻", name = "Claude" },
+        { pat = "claude", icon = "✻ ", name = "Claude" },
         { pat = "lazygit", icon = "󰒲 ", name = "Lazygit" },
         { pat = "term", icon = " ", name = "Terminal" },
       }
@@ -139,6 +139,24 @@ return {
               end,
             }),
             {
+              "diff",
+              symbols = {
+                added = icons.git.added,
+                modified = icons.git.modified,
+                removed = icons.git.removed,
+              },
+              source = function()
+                local summary = vim.b.minidiff_summary
+                return summary
+                  and {
+                    added = summary.add,
+                    modified = summary.change,
+                    removed = summary.delete,
+                  }
+              end,
+            },
+            "%=",
+            {
               pretty_path,
               cond = function()
                 return term_app() == nil
@@ -196,23 +214,6 @@ return {
               end,
               color = function()
                 return { fg = Snacks.util.color("Debug") }
-              end,
-            },
-            {
-              "diff",
-              symbols = {
-                added = icons.git.added,
-                modified = icons.git.modified,
-                removed = icons.git.removed,
-              },
-              source = function()
-                local summary = vim.b.minidiff_summary
-                return summary
-                  and {
-                    added = summary.add,
-                    modified = summary.change,
-                    removed = summary.delete,
-                  }
               end,
             },
           },
