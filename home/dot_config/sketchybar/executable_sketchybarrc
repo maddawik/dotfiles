@@ -18,18 +18,23 @@ TN_ORANGE=0xffff966c
 TN_PURPLE=0xfffca7ea
 
 ##### Bar Appearance #####
-# Moon bg with ~25% alpha
+# Floating rounded bar, Moon bg with soft border.
+# height stays 33 so it keeps lining up with the notch/camera.
 sketchybar --bar \
   position=top \
   height=33 \
+  margin=8 \
+  corner_radius=14 \
+  border_width=1 \
+  border_color=0x40636da6 \
   blur_radius=15 \
-  color=0x40222436
+  color=0x54222436
 
 ##### Changing Defaults #####
 default=(
-  padding_left=5
-  padding_right=5
-  icon.font="Hack Nerd Font:Bold:18.0"
+  padding_left=4
+  padding_right=4
+  icon.font="Hack Nerd Font:Bold:16.0"
   label.font="Hack Nerd Font:Bold:16.0"
   icon.color=$TN_MUTED
   label.color=$TN_FG
@@ -48,32 +53,38 @@ for sid in $(aerospace list-workspaces --all | sort -n); do
   sketchybar --add item space.$sid left \
     --subscribe space.$sid aerospace_workspace_change \
     --set space.$sid \
-    background.color=0x40394b70 \
-    background.corner_radius=5 \
-    background.height=25 \
+    background.color=0x2682aaff \
+    background.corner_radius=7 \
+    background.height=24 \
+    background.border_width=1 \
+    background.border_color=0x0082aaff \
     background.drawing=off \
     icon="$sid" \
-    icon.color=$TN_FG \
-    icon.padding_left=7 \
-    icon.padding_right=7 \
+    icon.color=$TN_MUTED \
+    icon.padding_left=8 \
+    icon.padding_right=8 \
     click_script="aerospace workspace $sid" \
     script="$PLUGIN_DIR/aerospace.sh $sid"
 done
 
 sketchybar --add item front_app left \
-  --set front_app icon.drawing=off label.color=$TN_FG script="$PLUGIN_DIR/front_app.sh" \
+  --set front_app \
+  icon.drawing=off \
+  label.color=$TN_MUTED \
+  padding_left=8 \
+  script="$PLUGIN_DIR/front_app.sh" \
   --subscribe front_app front_app_switched
 
 ##### Adding Right Items #####
 
 # Shared styling
-PILL_COLOR=0x662f334d
-PILL_RADIUS=8
-PILL_HEIGHT=25
+PILL_COLOR=0x732f334d
+PILL_RADIUS=9
+PILL_HEIGHT=26
 PILL_INSET_L=10
 PILL_INSET_R=10
 PILL_BORDER_WIDTH=1
-PILL_BORDER_COLOR=0x80636da6
+PILL_BORDER_COLOR=0x99636da6
 
 # Battery present?
 HAS_BATTERY=0
@@ -110,7 +121,7 @@ group_pill=(
 sketchybar \
   --add item clock right \
   --set clock "${pill[@]}" \
-  update_freq=10 icon= icon.color=$TN_BLUE script="$PLUGIN_DIR/clock.sh" \
+  update_freq=10 icon= icon.color=$TN_BLUE script="$PLUGIN_DIR/clock.sh" \
   --add item volume right \
   --set volume "${pill[@]}" \
   icon.color=$TN_CYAN script="$PLUGIN_DIR/volume.sh" \
