@@ -12,5 +12,8 @@ if not test -e "$HOME/.cache/tg-cache/"
     mkdir "$HOME/.cache/tg-cache/"
 end
 
+abbr tf terraform
+abbr tg terragrunt
+
 # k8s
 alias k kubectl
