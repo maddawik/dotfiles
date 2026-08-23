@@ -339,6 +339,34 @@ return {
         signature = { enabled = false },
       },
       cmdline = { view = "cmdline" },
+      notify = { enabled = false },
+      commands = {
+        history = {
+          view = "split",
+          opts = { enter = true, format = "details" },
+          filter = {
+            any = {
+              { error = true },
+              { warning = true },
+              { event = "msg_show", kind = { "" } },
+              { event = "lsp", kind = "message" },
+            },
+          },
+        },
+        last = {
+          view = "popup",
+          opts = { enter = true, format = "details" },
+          filter = {
+            any = {
+              { error = true },
+              { warning = true },
+              { event = "msg_show", kind = { "" } },
+              { event = "lsp", kind = "message" },
+            },
+          },
+          filter_opts = { count = 1 },
+        },
+      },
       format = {
         spinner = { name = "moon" },
       },

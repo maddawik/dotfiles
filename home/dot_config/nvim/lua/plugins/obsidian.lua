@@ -51,7 +51,7 @@ return {
         order = { " ", "x" },
       },
       picker = {
-        name = "snacks.pick",
+        name = "mini.pick",
       },
       ui = {
         enable = false,

@@ -18,6 +18,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "git",
     "grug-far",
     "help",
+    "mininotify-history",
     "lspinfo",
     "neotest-output",
     "neotest-output-panel",
@@ -67,22 +68,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
       pcall(vim.keymap.del, "n", lhs)
     end
     set("n", "gd", function()
-      Snacks.picker.lsp_definitions()
+      require("mini.extra").pickers.lsp({ scope = "definition" })
     end, "Go to definition")
     set("n", "gD", function()
-      Snacks.picker.lsp_declarations()
+      require("mini.extra").pickers.lsp({ scope = "declaration" })
     end, "Go to declaration")
     set("n", "gr", function()
-      Snacks.picker.lsp_references()
+      require("mini.extra").pickers.lsp({ scope = "references" })
     end, "References")
     set("n", "gI", function()
-      Snacks.picker.lsp_implementations()
+      require("mini.extra").pickers.lsp({ scope = "implementation" })
     end, "Go to implementation")
     set("n", "gy", function()
-      Snacks.picker.lsp_type_definitions()
+      require("mini.extra").pickers.lsp({ scope = "type_definition" })
     end, "Go to type definition")
     set("n", "<leader>ss", function()
-      Snacks.picker.lsp_symbols()
+      require("mini.extra").pickers.lsp({ scope = "document_symbol" })
     end, "Document symbols")
     set("n", "K", vim.lsp.buf.hover, "Hover docs")
     set("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")

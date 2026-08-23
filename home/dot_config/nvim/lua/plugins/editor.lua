@@ -187,7 +187,7 @@ return {
       {
         "<leader>p",
         function()
-          Snacks.picker.yanky()
+          require("maddawik.pickers").yanky()
         end,
         mode = { "n", "x" },
         desc = "Open Yank History",

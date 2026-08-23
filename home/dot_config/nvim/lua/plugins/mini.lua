@@ -247,26 +247,26 @@ return {
       local yank_path = function()
         local entry = MiniFiles.get_fs_entry()
         if not entry then
-          return Snacks.notify.warn("Cursor is not on valid entry")
+          return vim.notify("Cursor is not on valid entry", vim.log.levels.WARN)
         end
         vim.fn.setreg(vim.v.register, entry.path)
-        Snacks.notify.info("Copied path to clipboard")
+        vim.notify("Copied path to clipboard", vim.log.levels.INFO)
       end
 
       local set_cwd = function()
         local entry = MiniFiles.get_fs_entry()
         if not entry then
-          return Snacks.notify.warn("Cursor is not on valid entry")
+          return vim.notify("Cursor is not on valid entry", vim.log.levels.WARN)
         end
         local dir = vim.fs.dirname(entry.path)
         vim.fn.chdir(dir)
-        Snacks.notify.info("cwd: " .. vim.fn.fnamemodify(dir, ":~"))
+        vim.notify("cwd: " .. vim.fn.fnamemodify(dir, ":~"), vim.log.levels.INFO)
       end
 
       local grug_far_in_dir = function()
         local entry = MiniFiles.get_fs_entry()
         if not entry then
-          return Snacks.notify.warn("Cursor is not on valid entry")
+          return vim.notify("Cursor is not on valid entry", vim.log.levels.WARN)
         end
         local grug_far = require("grug-far")
         local prefills = { paths = vim.fs.dirname(entry.path) }

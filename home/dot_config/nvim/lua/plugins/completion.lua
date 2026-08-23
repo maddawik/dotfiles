@@ -4,10 +4,11 @@ return {
     "saghen/blink.cmp",
     event = { "InsertEnter", "CmdlineEnter" },
     version = "*",
-    dependencies = { "saghen/blink.compat" },
+    dependencies = { "saghen/blink.compat", "rafamadriz/friendly-snippets" },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+      snippets = { preset = "default" },
       appearance = {
         kind_icons = require("maddawik.icons").kinds,
       },

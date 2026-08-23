@@ -27,10 +27,7 @@ return {
       scope = { enabled = true },
       statuscolumn = { enabled = true },
       words = { enabled = true },
-      notifier = {
-        margin = { top = 1 },
-        style = "compact",
-      },
+      notifier = { enabled = false },
       terminal = {
         win = { wo = { winbar = "" } },
       },
@@ -55,7 +52,9 @@ return {
               icon = " ",
               key = "c",
               desc = "Config",
-              action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+              action = function()
+                require("mini.pick").builtin.files({}, { source = { cwd = vim.fn.stdpath("config") } })
+              end,
             },
             {
               icon = " ",
@@ -63,7 +62,7 @@ return {
               desc = "Chezmoi",
               action = function()
                 local src = vim.fn.system({ "chezmoi", "source-path" }):gsub("%s+$", "")
-                Snacks.dashboard.pick("files", { cwd = src })
+                require("mini.pick").builtin.files({}, { source = { cwd = src } })
               end,
             },
             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
@@ -130,7 +129,7 @@ return {
         end,
       }):map("<leader>uf")
       vim.keymap.set("n", "<leader>uC", function()
-        Snacks.picker.colorschemes()
+        require("mini.extra").pickers.colorschemes()
       end, { desc = "Colorscheme" })
     end,
   },

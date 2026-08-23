@@ -9,7 +9,10 @@ return {
       vim.g["chezmoi#use_tmp_buffer"] = 1
       vim.g["chezmoi#source_dir_path"] = vim.fn.expand("~") .. "/.local/share/chezmoi"
       vim.keymap.set("n", "<leader>sz", function()
-        Snacks.picker.files({ cwd = vim.fn.expand("~") .. "/.local/share/chezmoi/home/" })
+        require("mini.pick").builtin.files(
+          {},
+          { source = { cwd = vim.fn.expand("~") .. "/.local/share/chezmoi/home/" } }
+        )
       end, { silent = true, desc = "Chezmoi config" })
     end,
   },
