@@ -49,6 +49,7 @@ return {
         "json-lsp",
         -- Markdown
         "marksman",
+        "markdownlint-cli2",
         -- Docker
         "dockerfile-language-server",
         "docker-compose-language-service",

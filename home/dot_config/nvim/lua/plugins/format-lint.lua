@@ -26,7 +26,7 @@ return {
         json = { "prettierd", "prettier", stop_after_first = true },
         jsonc = { "prettierd", "prettier", stop_after_first = true },
         yaml = { "prettierd", "prettier", stop_after_first = true },
-        markdown = { "prettierd", "prettier", stop_after_first = true },
+        markdown = { "prettierd", "prettier", stop_after_first = true, "markdown-toc" },
         terraform = { "terraform_fmt" },
         hcl = { "terragrunt_hclfmt" },
         fish = { "fish_indent" },
@@ -62,6 +62,7 @@ return {
         sh = { "shellcheck" },
         bash = { "shellcheck" },
         dockerfile = { "hadolint" },
+        markdown = { "markdownlint-cli2" },
       },
     },
     config = function(_, opts)
