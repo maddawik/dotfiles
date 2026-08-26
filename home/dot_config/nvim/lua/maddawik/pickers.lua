@@ -230,6 +230,25 @@ function M.todo_comments()
   require("mini.pick").builtin.grep({ pattern = [[\b(TODO|FIXME|HACK|NOTE|WARNING|PERF|TEST)\b]] })
 end
 
+-- `<C-Space>` (built-in `refine`) permanently swaps `source.match` away from
+-- whatever custom matcher a picker was using to plain fuzzy matching over the
+-- frozen result set — mini.pick's own documented way to "revert to regular
+-- matching". Once that's happened, no further `rg` invocation can affect the
+-- result set, so toggles that only make sense while still live should warn
+-- instead of silently doing nothing. Left untouched otherwise — no attempt
+-- to rewrite mini.pick's own "(Refine N)" title text.
+local function make_refine_guard(match)
+  return function(func)
+    return function()
+      local opts = require("mini.pick").get_picker_opts()
+      if opts == nil or opts.source.match ~= match then
+        return vim.notify("Picker was refined (<C-Space>) — no longer live, toggle has no effect", vim.log.levels.WARN)
+      end
+      func()
+    end
+  end
+end
+
 local function hidden_ignore_mappings(state, refresh)
   return {
     toggle_hidden = {
@@ -257,6 +276,28 @@ local function append_hidden_glob(cmd, state)
   end
 end
 
+-- Mirrors upstream `H.user_input`: prefers `MiniInput.get()` (shown in the
+-- picker's winbar) and falls back to plain `vim.fn.input()` otherwise.
+-- `scope` must be one of mini.input's allowed scopes ("window", "editor", ...)
+-- — NOT a completion method; `completion` (e.g. "file") is the separate field.
+local function user_input(prompt, completion, scope)
+  prompt = "(pickers) " .. prompt
+  if _G.MiniInput ~= nil then
+    return MiniInput.get({
+      prompt = prompt,
+      completion = completion,
+      scope = scope,
+      -- "winbar" (not the default "statusline") so it renders as a line
+      -- inside the picker's own floating window, not the underlying split.
+      handlers = { view = MiniInput.gen_view.uiline({ style = "winbar" }) },
+    })
+  end
+  vim.cmd("echohl Question")
+  local ok, res = pcall(vim.fn.input, { prompt = prompt .. ": ", completion = completion })
+  vim.cmd('echohl None | echo "" | redraw')
+  return ok and res or nil
+end
+
 local function hidden_ignore_name(prefix, tool, state)
   local flags = {}
   if state.hidden then
@@ -278,6 +319,9 @@ function M.files(local_opts, opts)
 
   local cwd = ((opts or {}).source or {}).cwd or vim.fn.getcwd()
   local state = { hidden = false, no_ignore = false }
+  local get_name = function()
+    return hidden_ignore_name("Files", "rg", state)
+  end
 
   local build_command = function()
     local cmd = { "rg", "--files", "--color=never" }
@@ -294,13 +338,13 @@ function M.files(local_opts, opts)
     MiniPick.set_picker_items_from_cli(build_command(), { spawn_opts = { cwd = cwd } })
   end
   local refresh = function()
-    MiniPick.set_picker_opts({ source = { name = hidden_ignore_name("Files", "rg", state) } })
+    MiniPick.set_picker_opts({ source = { name = get_name() } })
     spawn()
   end
 
   local default_opts = {
     source = {
-      name = hidden_ignore_name("Files", "rg", state),
+      name = get_name(),
       cwd = cwd,
       show = show_with_icons,
       items = vim.schedule_wrap(spawn),
@@ -319,7 +363,21 @@ function M.grep_live(local_opts, opts)
   end
 
   local cwd = ((opts or {}).source or {}).cwd or vim.fn.getcwd()
-  local state = { hidden = false, no_ignore = false }
+  local state = { hidden = false, no_ignore = false, method = "󰑑 ", globs = {} }
+
+  local get_name = function()
+    local parts = { "rg", state.method }
+    if #state.globs > 0 then
+      table.insert(parts, table.concat(state.globs, ", "))
+    end
+    if state.hidden then
+      table.insert(parts, "hidden")
+    end
+    if state.no_ignore then
+      table.insert(parts, "no-ignore")
+    end
+    return string.format("Grep live (%s)", table.concat(parts, " | "))
+  end
 
   local build_command = function(pattern)
     local cmd = {
@@ -330,8 +388,8 @@ function M.grep_live(local_opts, opts)
       "--field-match-separator",
       "\\x00",
       "--color=never",
-      "--no-fixed-strings",
     }
+    table.insert(cmd, state.method == "󰑑 " and "--no-fixed-strings" or "--fixed-strings")
     if state.hidden then
       table.insert(cmd, "--hidden")
     end
@@ -339,6 +397,10 @@ function M.grep_live(local_opts, opts)
       table.insert(cmd, "--no-ignore")
     end
     append_hidden_glob(cmd, state)
+    for _, g in ipairs(state.globs) do
+      table.insert(cmd, "--glob")
+      table.insert(cmd, g)
+    end
     local case = vim.o.ignorecase and (vim.o.smartcase and "smart-case" or "ignore-case") or "case-sensitive"
     vim.list_extend(cmd, { "--" .. case, "--", pattern })
     return cmd
@@ -365,19 +427,45 @@ function M.grep_live(local_opts, opts)
   end
 
   local refresh = function()
-    MiniPick.set_picker_opts({ source = { name = hidden_ignore_name("Grep live", "rg", state) } })
+    MiniPick.set_picker_opts({ source = { name = get_name() } })
     MiniPick.set_picker_query(MiniPick.get_picker_query())
   end
 
+  local guard_refined = make_refine_guard(match)
+  local mappings = hidden_ignore_mappings(state, refresh)
+  mappings.toggle_hidden.func = guard_refined(mappings.toggle_hidden.func)
+  mappings.toggle_ignored.func = guard_refined(mappings.toggle_ignored.func)
+  mappings.add_glob = {
+    char = "<C-o>",
+    func = guard_refined(function()
+      local glob = user_input("Glob pattern", "file", "window")
+      if glob == nil or glob == "" then
+        return
+      end
+      table.insert(state.globs, glob)
+      refresh()
+    end),
+  }
+  -- Not guarded: regex/plain stays switchable even once refined. It won't
+  -- respawn `rg` at that point (same as the other toggles), but flips the
+  -- state/label for if you start a fresh grep_live later.
+  mappings.switch_method = {
+    char = "<C-e>",
+    func = function()
+      state.method = state.method == "󰑑 " and " " or "󰑑 "
+      refresh()
+    end,
+  }
+
   local default_opts = {
     source = {
-      name = hidden_ignore_name("Grep live", "rg", state),
+      name = get_name(),
       cwd = cwd,
       items = {},
       match = match,
       show = show_with_icons,
     },
-    mappings = hidden_ignore_mappings(state, refresh),
+    mappings = mappings,
   }
   return MiniPick.start(vim.tbl_deep_extend("force", default_opts, opts or {}))
 end
@@ -447,6 +535,60 @@ function M.yanky()
       end,
     },
   })
+end
+
+-- Mirrors mini.extra's private `H.pick_prepend_position`, so the multi-result
+-- picker still shows "path│line│col│ text" like `pickers.lsp` does.
+local function lsp_prepend_position(item)
+  local path = item.path
+  if path == nil and item.bufnr and vim.api.nvim_buf_is_valid(item.bufnr) then
+    local name = vim.api.nvim_buf_get_name(item.bufnr)
+    path = name == "" and ("Buffer_" .. item.bufnr) or name
+  end
+  if path == nil then
+    return item
+  end
+  path = vim.fn.fnamemodify(path, ":p:.")
+  local text = item.text or ""
+  local suffix = text == "" and "" or ("│ " .. text)
+  item.text = string.format("%s│%s│%s%s", path, item.lnum or 1, item.col or 1, suffix)
+  return item
+end
+
+--- LSP goto-* picker (definition/declaration/references/implementation/
+--- type_definition) that jumps straight to the target when there's exactly
+--- one location, and only opens a picker when there's more than one.
+--- `mini.extra.pickers.lsp` always opens the picker, even for a single hit,
+--- because it always supplies its own `on_list` (which preempts the
+--- built-in single-result auto-jump `vim.lsp.buf.*` normally does).
+function M.lsp_goto(scope)
+  return function()
+    local MiniPick = require("mini.pick")
+    local on_list = function(data)
+      local items = {}
+      for _, item in ipairs(data.items) do
+        item.text, item.path = item.text or "", item.filename or nil
+        table.insert(items, lsp_prepend_position(item))
+      end
+
+      if #items == 0 then
+        return vim.notify("No " .. scope:gsub("_", " ") .. " found", vim.log.levels.WARN)
+      end
+      if #items == 1 then
+        return MiniPick.default_choose(items[1])
+      end
+
+      MiniPick.start({
+        source = { items = items, name = string.format("LSP (%s)", scope), show = show_with_icons },
+      })
+    end
+
+    if scope == "references" then
+      vim.lsp.buf.references(nil, { on_list = on_list })
+    else
+      vim.lsp.buf[scope]({ on_list = on_list })
+    end
+  end
 end
 
 return M

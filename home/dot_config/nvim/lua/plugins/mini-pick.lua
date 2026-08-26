@@ -36,21 +36,7 @@ return {
         prompt_caret = "▏",
         prompt_prefix = " ",
       },
-      options = {
-        use_cache = true,
-      },
     },
-    config = function(_, opts)
-      require("mini.pick").setup(opts)
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "MiniPickStart",
-        callback = function()
-          vim.schedule(function()
-            vim.cmd("redraw")
-          end)
-        end,
-      })
-    end,
   },
   {
     "nvim-mini/mini.input",

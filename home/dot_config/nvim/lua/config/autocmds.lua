@@ -60,6 +60,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local opts = { buffer = ev.buf }
     local set = function(mode, lhs, rhs, desc)
       vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", opts, { desc = desc }))
+      -- which-key doesn't reliably pick up <leader>-prefixed buffer-local maps
+      -- created this late (inside LspAttach, well after its own VeryLazy setup
+      -- and initial group-spec registration) — register them explicitly too.
+      if lhs:match("^<[Ll]eader>") and package.loaded["which-key"] then
+        require("which-key").add({ lhs, mode = mode, buffer = ev.buf, desc = desc })
+      end
     end
     -- Neovim 0.11+ ships global gr* default maps (grn/gra/grr/gri/grt/grx),
     -- which turn `gr` into a prefix and add a timeoutlen delay. Remove them so
@@ -67,24 +73,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
     for _, lhs in ipairs({ "grn", "gra", "grr", "gri", "grt", "grx" }) do
       pcall(vim.keymap.del, "n", lhs)
     end
-    set("n", "gd", function()
-      require("mini.extra").pickers.lsp({ scope = "definition" })
-    end, "Go to definition")
-    set("n", "gD", function()
-      require("mini.extra").pickers.lsp({ scope = "declaration" })
-    end, "Go to declaration")
-    set("n", "gr", function()
-      require("mini.extra").pickers.lsp({ scope = "references" })
-    end, "References")
-    set("n", "gI", function()
-      require("mini.extra").pickers.lsp({ scope = "implementation" })
-    end, "Go to implementation")
-    set("n", "gy", function()
-      require("mini.extra").pickers.lsp({ scope = "type_definition" })
-    end, "Go to type definition")
+    set("n", "gd", require("maddawik.pickers").lsp_goto("definition"), "Go to definition")
+    set("n", "gD", require("maddawik.pickers").lsp_goto("declaration"), "Go to declaration")
+    set("n", "gr", require("maddawik.pickers").lsp_goto("references"), "References")
+    set("n", "gI", require("maddawik.pickers").lsp_goto("implementation"), "Go to implementation")
+    set("n", "gy", require("maddawik.pickers").lsp_goto("type_definition"), "Go to type definition")
     set("n", "<leader>ss", function()
       require("mini.extra").pickers.lsp({ scope = "document_symbol" })
     end, "Document symbols")
+    set("n", "<leader>sS", function()
+      require("mini.extra").pickers.lsp({ scope = "workspace_symbol_live" })
+    end, "Workspace symbols")
     set("n", "K", vim.lsp.buf.hover, "Hover docs")
     set("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
     set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")

@@ -119,8 +119,8 @@ map("n", "<leader>cl", "<cmd>checkhealth vim.lsp<cr>", { desc = "LSP info" })
 
 -- ── Find / files (Snacks picker) ────────────────────────────────────────────
 map("n", "<leader><space>", function()
-  require("maddawik.pickers").files({}, { source = { cwd = vim.fn.expand("%:p:h") } })
-end, { desc = "Find files (buffer dir)" })
+  require("maddawik.pickers").files()
+end, { desc = "Find files" })
 map("n", "<leader>,", function()
   require("mini.pick").builtin.buffers()
 end, { desc = "Buffers" })
@@ -156,9 +156,6 @@ end, { desc = "Recent files (cwd)" })
 map("n", "<leader>fc", function()
   require("maddawik.pickers").files({}, { source = { cwd = vim.fn.stdpath("config") } })
 end, { desc = "Config files" })
-map("n", "<leader>fg", function()
-  require("mini.extra").pickers.git_files()
-end, { desc = "Git files" })
 
 -- ── Search (Snacks picker) ──────────────────────────────────────────────────
 map("n", "<leader>/", function()
@@ -295,11 +292,6 @@ map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
-
--- ── Terminal ───────────────────────────────────────────────────────
-map({ "n", "t" }, "<C-/>", function()
-  Snacks.terminal.focus(nil, { cwd = vim.fs.root(0, { ".git" }) or vim.fn.getcwd() })
-end, { desc = "Terminal (Root Dir)" })
 
 -- ── UI toggles ──────────────────────────────────────────────────────────────
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
