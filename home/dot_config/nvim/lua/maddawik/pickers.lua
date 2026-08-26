@@ -230,6 +230,158 @@ function M.todo_comments()
   require("mini.pick").builtin.grep({ pattern = [[\b(TODO|FIXME|HACK|NOTE|WARNING|PERF|TEST)\b]] })
 end
 
+local function hidden_ignore_mappings(state, refresh)
+  return {
+    toggle_hidden = {
+      char = "<M-h>",
+      func = function()
+        state.hidden = not state.hidden
+        refresh()
+      end,
+    },
+    toggle_ignored = {
+      char = "<M-i>",
+      func = function()
+        state.no_ignore = not state.no_ignore
+        refresh()
+      end,
+    },
+  }
+end
+
+-- `--hidden` shows `.git` too (it's not covered by `.gitignore`, just normal
+-- dotfile skipping) — exclude it explicitly, matching Snacks.picker's behavior.
+local function append_hidden_glob(cmd, state)
+  if state.hidden then
+    table.insert(cmd, "--glob=!.git")
+  end
+end
+
+local function hidden_ignore_name(prefix, tool, state)
+  local flags = {}
+  if state.hidden then
+    table.insert(flags, "hidden")
+  end
+  if state.no_ignore then
+    table.insert(flags, "no-ignore")
+  end
+  return string.format("%s (%s%s)", prefix, tool, #flags > 0 and (" " .. table.concat(flags, " ")) or "")
+end
+
+--- Find files, with <M-h>/<M-i> to toggle hidden/gitignored files (needs `rg`;
+--- falls back to the plain builtin picker, without the toggles, otherwise).
+function M.files(local_opts, opts)
+  local MiniPick = require("mini.pick")
+  if vim.fn.executable("rg") ~= 1 then
+    return MiniPick.builtin.files(local_opts, opts)
+  end
+
+  local cwd = ((opts or {}).source or {}).cwd or vim.fn.getcwd()
+  local state = { hidden = false, no_ignore = false }
+
+  local build_command = function()
+    local cmd = { "rg", "--files", "--color=never" }
+    if state.hidden then
+      table.insert(cmd, "--hidden")
+    end
+    if state.no_ignore then
+      table.insert(cmd, "--no-ignore")
+    end
+    append_hidden_glob(cmd, state)
+    return cmd
+  end
+  local spawn = function()
+    MiniPick.set_picker_items_from_cli(build_command(), { spawn_opts = { cwd = cwd } })
+  end
+  local refresh = function()
+    MiniPick.set_picker_opts({ source = { name = hidden_ignore_name("Files", "rg", state) } })
+    spawn()
+  end
+
+  local default_opts = {
+    source = {
+      name = hidden_ignore_name("Files", "rg", state),
+      cwd = cwd,
+      show = show_with_icons,
+      items = vim.schedule_wrap(spawn),
+    },
+    mappings = hidden_ignore_mappings(state, refresh),
+  }
+  return MiniPick.start(vim.tbl_deep_extend("force", default_opts, opts or {}))
+end
+
+--- Live grep, with <M-h>/<M-i> to toggle hidden/gitignored files (needs `rg`;
+--- falls back to the plain builtin picker, without the toggles, otherwise).
+function M.grep_live(local_opts, opts)
+  local MiniPick = require("mini.pick")
+  if vim.fn.executable("rg") ~= 1 then
+    return MiniPick.builtin.grep_live(local_opts, opts)
+  end
+
+  local cwd = ((opts or {}).source or {}).cwd or vim.fn.getcwd()
+  local state = { hidden = false, no_ignore = false }
+
+  local build_command = function(pattern)
+    local cmd = {
+      "rg",
+      "--column",
+      "--line-number",
+      "--no-heading",
+      "--field-match-separator",
+      "\\x00",
+      "--color=never",
+      "--no-fixed-strings",
+    }
+    if state.hidden then
+      table.insert(cmd, "--hidden")
+    end
+    if state.no_ignore then
+      table.insert(cmd, "--no-ignore")
+    end
+    append_hidden_glob(cmd, state)
+    local case = vim.o.ignorecase and (vim.o.smartcase and "smart-case" or "ignore-case") or "case-sensitive"
+    vim.list_extend(cmd, { "--" .. case, "--", pattern })
+    return cmd
+  end
+
+  -- Mirrors upstream `grep_live`'s own guard (querytick check) so toggling
+  -- doesn't respawn `rg` on every no-op keypress, only on real query/state changes.
+  local sys = { kill = function() end }
+  local set_items_opts = { do_match = false, querytick = MiniPick.get_querytick() }
+  local match = function(_, _, query)
+    sys:kill()
+    if MiniPick.get_querytick() == set_items_opts.querytick then
+      return
+    end
+    if #query == 0 then
+      sys = { kill = function() end }
+      return MiniPick.set_picker_items({}, set_items_opts)
+    end
+    set_items_opts.querytick = MiniPick.get_querytick()
+    sys = MiniPick.set_picker_items_from_cli(
+      build_command(table.concat(query)),
+      { set_items_opts = set_items_opts, spawn_opts = { cwd = cwd } }
+    )
+  end
+
+  local refresh = function()
+    MiniPick.set_picker_opts({ source = { name = hidden_ignore_name("Grep live", "rg", state) } })
+    MiniPick.set_picker_query(MiniPick.get_picker_query())
+  end
+
+  local default_opts = {
+    source = {
+      name = hidden_ignore_name("Grep live", "rg", state),
+      cwd = cwd,
+      items = {},
+      match = match,
+      show = show_with_icons,
+    },
+    mappings = hidden_ignore_mappings(state, refresh),
+  }
+  return MiniPick.start(vim.tbl_deep_extend("force", default_opts, opts or {}))
+end
+
 --- List all autocmds (like Snacks.picker.autocmds).
 function M.autocmds()
   local MiniPick = require("mini.pick")
