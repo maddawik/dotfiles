@@ -20,15 +20,28 @@ TN_PURPLE=0xfffca7ea
 ##### Bar Appearance #####
 # Floating rounded bar, Moon bg with soft border.
 # height stays 33 so it keeps lining up with the notch/camera.
+BAR_HEIGHT=33
+BAR_RADIUS=14
+# Match AeroSpace's gaps.outer (see ~/.aerospace.toml) so the bands line up
+# with the window edges.
+BAR_MARGIN=10 # inset from the left/right screen edges
+BAR_TOP_PAD=10 # matching inset from the top edge
+BAND_COLOR=0x54222436
+BAND_BORDER=0x40636da6
+
+# The bar itself is an invisible container -- the two bands below draw the
+# visible chrome, so the middle stays open for the laptop camera.
 sketchybar --bar \
   position=top \
-  height=33 \
-  margin=8 \
-  corner_radius=14 \
-  border_width=1 \
-  border_color=0x40636da6 \
+  height=$BAR_HEIGHT \
+  margin=$BAR_MARGIN \
+  y_offset=$BAR_TOP_PAD \
+  padding_left=0 \
+  padding_right=0 \
+  corner_radius=$BAR_RADIUS \
+  border_width=0 \
   blur_radius=15 \
-  color=0x54222436
+  color=0x00000000
 
 ##### Changing Defaults #####
 default=(
@@ -45,39 +58,11 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
-##### Adding Left Items #####
+##### Shared item styling #####
+# sketchybar-app-font renders ":appname:" ligatures as app icons.
+# Install: brew install --cask font-sketchybar-app-font
+APP_FONT="sketchybar-app-font:Regular:16.0"
 
-# Aerospace
-sketchybar --add event aerospace_workspace_change
-for sid in $(aerospace list-workspaces --all | sort -n); do
-  sketchybar --add item space.$sid left \
-    --subscribe space.$sid aerospace_workspace_change \
-    --set space.$sid \
-    background.color=0x2682aaff \
-    background.corner_radius=7 \
-    background.height=24 \
-    background.border_width=1 \
-    background.border_color=0x0082aaff \
-    background.drawing=off \
-    icon="$sid" \
-    icon.color=$TN_MUTED \
-    icon.padding_left=8 \
-    icon.padding_right=8 \
-    click_script="aerospace workspace $sid" \
-    script="$PLUGIN_DIR/aerospace.sh $sid"
-done
-
-sketchybar --add item front_app left \
-  --set front_app \
-  icon.drawing=off \
-  label.color=$TN_MUTED \
-  padding_left=8 \
-  script="$PLUGIN_DIR/front_app.sh" \
-  --subscribe front_app front_app_switched
-
-##### Adding Right Items #####
-
-# Shared styling
 PILL_COLOR=0x732f334d
 PILL_RADIUS=9
 PILL_HEIGHT=26
@@ -116,6 +101,54 @@ group_pill=(
   background.border_width=$PILL_BORDER_WIDTH
   background.border_color=$PILL_BORDER_COLOR
 )
+
+##### Adding Left Items #####
+
+# Aerospace
+sketchybar --add event aerospace_workspace_change
+# 'aerospace list-workspaces --all' only reports workspaces that currently
+# exist (AeroSpace creates them lazily), so empty ones would vanish from the
+# bar. Read the configured set straight from the keybindings instead.
+WORKSPACES=$(sed -n "s/^alt-[0-9]* = 'workspace \\([^']*\\)'/\\1/p" "$HOME/.aerospace.toml" | sort -n -u)
+[ -z "$WORKSPACES" ] && WORKSPACES=$(aerospace list-workspaces --all | sort -n)
+WORKSPACES=$(echo $WORKSPACES) # collapse newlines; this goes into a script= string
+
+SPACE_ITEMS=""
+for sid in $WORKSPACES; do
+  SPACE_ITEMS="$SPACE_ITEMS space.$sid"
+  sketchybar --add item space.$sid left \
+    --set space.$sid \
+    background.color=0x2682aaff \
+    background.corner_radius=7 \
+    background.height=24 \
+    background.border_width=1 \
+    background.border_color=0x0082aaff \
+    background.drawing=off \
+    icon="$sid" \
+    icon.color=$TN_MUTED \
+    icon.padding_left=8 \
+    icon.padding_right=8 \
+    click_script="aerospace workspace $sid"
+done
+
+# One script updates every indicator in a single batched pass -- see the note in
+# plugins/aerospace.sh about why this is not a per-item script. It hangs off the
+# first workspace item because sketchybar runs neither --update nor event scripts
+# for items with drawing=off, so a hidden watcher item would never fire.
+FIRST_WS=${WORKSPACES%% *}
+sketchybar --set space.$FIRST_WS \
+  script="$PLUGIN_DIR/aerospace.sh $WORKSPACES" \
+  --subscribe space.$FIRST_WS aerospace_workspace_change front_app_switched
+
+sketchybar --add item front_app left \
+  --set front_app "${pill[@]}" \
+  icon.font="$APP_FONT" \
+  icon.color=$TN_BLUE \
+  label.color=$TN_FG \
+  script="$PLUGIN_DIR/front_app.sh" \
+  --subscribe front_app front_app_switched
+
+##### Adding Right Items #####
 
 # Right items
 sketchybar \
@@ -156,6 +189,27 @@ if [ "$HAS_BATTERY" -eq 1 ]; then
     update_freq=120 script="$PLUGIN_DIR/battery.sh" \
     --subscribe battery system_woke power_source_change
 fi
+
+##### Split bar halves #####
+# The bar's own background is a single edge-to-edge band, so it cannot be
+# broken around the camera. These two brackets draw the band instead, leaving
+# the middle of the bar open.
+band=(
+  background.drawing=on
+  background.color=$BAND_COLOR
+  background.border_color=$BAND_BORDER
+  background.border_width=1
+  background.corner_radius=$BAR_RADIUS
+  background.height=$BAR_HEIGHT
+)
+
+RIGHT_ITEMS="clock volume cpu memory"
+[ "$HAS_BATTERY" -eq 1 ] && RIGHT_ITEMS="$RIGHT_ITEMS battery"
+
+sketchybar --add bracket left_band $SPACE_ITEMS front_app \
+  --set left_band "${band[@]}" \
+  --add bracket right_band $RIGHT_ITEMS \
+  --set right_band "${band[@]}"
 
 ##### Force all scripts to run the first time #####
 sketchybar --update

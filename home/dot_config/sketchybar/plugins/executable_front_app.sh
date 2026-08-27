@@ -1,10 +1,22 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# Some events send additional information specific to the event in the $INFO
-# variable. E.g. the front_app_switched event sends the name of the newly
-# focused application in the $INFO variable:
-# https://felixkratz.github.io/SketchyBar/config/events#events-and-scripting
+# Shows the frontmost app's name plus its icon from sketchybar-app-font.
+#
+# icon_map.sh maps an app name to a ligature token like ":ghostty:", which the
+# sketchybar-app-font renders as the icon -- so the icon item's font must be
+# that font, not the Nerd Font used elsewhere. Unknown apps map to ":default:".
 
-if [ "$SENDER" = "front_app_switched" ]; then
-  sketchybar --set "$NAME" label="$INFO"
+source "$CONFIG_DIR/plugins/icon_map.sh"
+
+APP="$INFO"
+
+# On --reload/--update there is no $INFO, so ask the window server directly.
+if [ -z "$APP" ]; then
+  APP=$(lsappinfo info -only name "$(lsappinfo front)" 2>/dev/null | sed 's/.*"=*"\(.*\)"/\1/')
 fi
+
+[ -z "$APP" ] && exit 0
+
+__icon_map "$APP"
+
+sketchybar --set "$NAME" label="$APP" icon="$icon_result"
