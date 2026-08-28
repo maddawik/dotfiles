@@ -135,6 +135,22 @@ sketchybar --add item front_app left \
   script="$PLUGIN_DIR/front_app.sh" \
   --subscribe front_app front_app_switched
 
+# Scrolling needs max_chars + scroll_texts and AUTO widths -- a fixed
+# label.width suppresses it. scroll_texts starts off and is flipped on hover.
+MEDIA_MAX_CHARS=32
+sketchybar --add item media left \
+  --set media "${pill[@]}" \
+  drawing=off \
+  scroll_texts=off \
+  icon.font="$APP_FONT" \
+  icon.color=$TN_GREEN \
+  label.color=$TN_FG \
+  label.max_chars=$MEDIA_MAX_CHARS \
+  label.scroll_duration=120 \
+  script="$PLUGIN_DIR/media.sh hover" \
+  click_script="$PLUGIN_DIR/media.sh toggle" \
+  --subscribe media mouse.entered mouse.exited mouse.exited.global
+
 ##### Adding Right Items #####
 
 # Right items
@@ -191,10 +207,15 @@ band=(
 RIGHT_ITEMS="clock volume cpu memory"
 [ "$HAS_BATTERY" -eq 1 ] && RIGHT_ITEMS="$RIGHT_ITEMS battery"
 
-sketchybar --add bracket left_band $SPACE_ITEMS front_app \
+sketchybar --add bracket left_band $SPACE_ITEMS front_app media \
   --set left_band "${band[@]}" \
   --add bracket right_band $RIGHT_ITEMS \
   --set right_band "${band[@]}"
+
+##### Now playing stream #####
+MEDIA_PIDFILE="${TMPDIR:-/tmp}/sketchybar-media.pid"
+[ -f "$MEDIA_PIDFILE" ] && kill "$(cat "$MEDIA_PIDFILE")" 2>/dev/null
+"$PLUGIN_DIR/media.sh" stream >/dev/null 2>&1 &
 
 ##### Force all scripts to run the first time #####
 sketchybar --update
