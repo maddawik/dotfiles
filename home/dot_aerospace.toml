@@ -58,14 +58,11 @@ inner.horizontal = 10
 inner.vertical = 10
 outer.left = 10
 outer.bottom = 10
-# Clears SketchyBar and keeps every gap on the same 10pt grid:
-# bar top inset (10) + bar height (33) + gap (10) = 53 below the screen top.
-# AeroSpace measures outer.top from the VISIBLE frame, so the built-in's 33pt
-# notch inset has to be subtracted from that: 53 - 33 = 20.
-# Keep in sync with BAR_TOP_PAD/BAR_HEIGHT in ~/.config/sketchybar/sketchybarrc.
+# Clears SketchyBar. Built-in is 33 less: outer.top is measured from the
+# visible frame, which already excludes the notch.
 outer.top = [
-  { monitor.'^built-in retina display$' = 20 },
-  53,
+  { monitor.'^built-in retina display$' = 15 },
+  48,
 ]
 outer.right = 10
 

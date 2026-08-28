@@ -18,19 +18,14 @@ TN_ORANGE=0xffff966c
 TN_PURPLE=0xfffca7ea
 
 ##### Bar Appearance #####
-# Floating rounded bar, Moon bg with soft border.
-# height stays 33 so it keeps lining up with the notch/camera.
 BAR_HEIGHT=33
 BAR_RADIUS=14
-# Match AeroSpace's gaps.outer (see ~/.aerospace.toml) so the bands line up
-# with the window edges.
-BAR_MARGIN=10 # inset from the left/right screen edges
-BAR_TOP_PAD=10 # matching inset from the top edge
-BAND_COLOR=0x54222436
-BAND_BORDER=0x40636da6
+BAR_MARGIN=10
+BAR_TOP_PAD=5 # keep in sync with gaps.outer.top in ~/.aerospace.toml
+BAND_COLOR=0xe6222436 # near-opaque: stays readable over light wallpapers
+BAND_BORDER=0x99636da6
 
-# The bar itself is an invisible container -- the two bands below draw the
-# visible chrome, so the middle stays open for the laptop camera.
+# Invisible container; the bands below draw the visible chrome.
 sketchybar --bar \
   position=top \
   height=$BAR_HEIGHT \
@@ -40,7 +35,6 @@ sketchybar --bar \
   padding_right=0 \
   corner_radius=$BAR_RADIUS \
   border_width=0 \
-  blur_radius=15 \
   color=0x00000000
 
 ##### Changing Defaults #####
@@ -59,8 +53,6 @@ default=(
 sketchybar --default "${default[@]}"
 
 ##### Shared item styling #####
-# sketchybar-app-font renders ":appname:" ligatures as app icons.
-# Install: brew install --cask font-sketchybar-app-font
 APP_FONT="sketchybar-app-font:Regular:16.0"
 
 PILL_COLOR=0x732f334d
@@ -92,7 +84,6 @@ pill=(
   label.color=$TN_FG
 )
 
-# Bracket pill style (for cpu+memory group)
 group_pill=(
   background.drawing=on
   background.color=$PILL_COLOR
@@ -106,12 +97,10 @@ group_pill=(
 
 # Aerospace
 sketchybar --add event aerospace_workspace_change
-# 'aerospace list-workspaces --all' only reports workspaces that currently
-# exist (AeroSpace creates them lazily), so empty ones would vanish from the
-# bar. Read the configured set straight from the keybindings instead.
+# From the keybindings: 'list-workspaces --all' omits empty ones.
 WORKSPACES=$(sed -n "s/^alt-[0-9]* = 'workspace \\([^']*\\)'/\\1/p" "$HOME/.aerospace.toml" | sort -n -u)
 [ -z "$WORKSPACES" ] && WORKSPACES=$(aerospace list-workspaces --all | sort -n)
-WORKSPACES=$(echo $WORKSPACES) # collapse newlines; this goes into a script= string
+WORKSPACES=$(echo $WORKSPACES) # collapse newlines
 
 SPACE_ITEMS=""
 for sid in $WORKSPACES; do
@@ -131,10 +120,8 @@ for sid in $WORKSPACES; do
     click_script="aerospace workspace $sid"
 done
 
-# One script updates every indicator in a single batched pass -- see the note in
-# plugins/aerospace.sh about why this is not a per-item script. It hangs off the
-# first workspace item because sketchybar runs neither --update nor event scripts
-# for items with drawing=off, so a hidden watcher item would never fire.
+# One batched update for all indicators. Must hang off a visible item:
+# sketchybar skips scripts for items with drawing=off.
 FIRST_WS=${WORKSPACES%% *}
 sketchybar --set space.$FIRST_WS \
   script="$PLUGIN_DIR/aerospace.sh $WORKSPACES" \
@@ -191,9 +178,7 @@ if [ "$HAS_BATTERY" -eq 1 ]; then
 fi
 
 ##### Split bar halves #####
-# The bar's own background is a single edge-to-edge band, so it cannot be
-# broken around the camera. These two brackets draw the band instead, leaving
-# the middle of the bar open.
+# Two bands instead of one bar background, leaving the middle open.
 band=(
   background.drawing=on
   background.color=$BAND_COLOR
