@@ -156,6 +156,7 @@ return {
     opts = {},
   },
   { "nvim-mini/mini.tabline", event = { "BufReadPost", "BufNewFile" }, opts = {} },
+  { "nvim-mini/mini.statuscolumn", event = { "BufReadPost", "BufNewFile" }, opts = {} },
   { "nvim-mini/mini.hipatterns", event = "VeryLazy", opts = {} },
   {
     "nvim-mini/mini.diff",

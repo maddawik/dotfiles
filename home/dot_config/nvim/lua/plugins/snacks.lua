@@ -25,7 +25,7 @@ return {
         enabled = true,
       },
       scope = { enabled = true },
-      statuscolumn = { enabled = true },
+      statuscolumn = { enabled = false },
       words = { enabled = true },
       notifier = { enabled = false },
       terminal = {
@@ -38,7 +38,7 @@ return {
         },
       },
       zen = {
-        win = { backdrop = { transparent = false } },
+        win = { backdrop = { transparent = true } },
       },
       image = { enabled = true },
       dashboard = {
@@ -62,7 +62,7 @@ return {
               desc = "Chezmoi",
               action = function()
                 local src = vim.fn.system({ "chezmoi", "source-path" }):gsub("%s+$", "")
-                require("mini.pick").builtin.files({}, { source = { cwd = src } })
+                require("maddawik.pickers").files({}, { source = { cwd = src } })
               end,
             },
             { icon = " ", key = "q", desc = "Quit", action = ":qa" },

@@ -19,6 +19,7 @@ return {
     dependencies = {
       "saghen/blink.compat",
       "nvim-lua/plenary.nvim",
+      "nvim-mini/mini.pick",
     },
     event = {
       "BufReadPre " .. personal_vault .. "/**.md",

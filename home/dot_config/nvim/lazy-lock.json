@@ -32,6 +32,7 @@
   "mini.notify": { "branch": "main", "commit": "13df5edffc3e27937b166a0f25a8329b46e15a4e" },
   "mini.pairs": { "branch": "main", "commit": "b1c5a726921b7a8c9321e9a7a208aa0571de5810" },
   "mini.pick": { "branch": "main", "commit": "b27dc13b3d6dafc10e868b6ddc682cc4f047f4d1" },
+  "mini.statuscolumn": { "branch": "main", "commit": "a9cad1a7f954f81742541ad95e804b2217afd721" },
   "mini.surround": { "branch": "main", "commit": "8d5d0c5aa92449368ac251e85451d79d8f69d296" },
   "mini.tabline": { "branch": "main", "commit": "525b27e98de7cd2a6012d99f45b4fc10676e00e5" },
   "neotest": { "branch": "master", "commit": "27bf921498043f7ecd821d6db68d05de244bbd02" },
