@@ -32,7 +32,6 @@ return {
       { "<leader>ob", "<cmd>Obsidian backlinks<CR>", desc = "Backlinks" },
       { "<leader>oe", "<cmd>Obsidian extract_note<CR>", desc = "Extract Note", mode = "v" },
       { "<leader>oh", "<cmd>Obsidian check<CR>", desc = "Check Health" },
-      { "<leader>oH", "<cmd>Obsidian debug<CR>", desc = "Debug Info" },
       { "<leader>ol", "<cmd>Obsidian links<CR>", desc = "List Links" },
       { "<leader>ol", "<cmd>Obsidian link<CR>", desc = "New Link", mode = "v" },
       { "<leader>oL", "<cmd>Obsidian link_new<CR>", desc = "New Link & File", mode = "v" },

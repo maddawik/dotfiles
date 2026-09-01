@@ -10,11 +10,46 @@ return {
     event = "VeryLazy",
     opts = {},
     keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+      {
+        "s",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump()
+        end,
+        desc = "Flash",
+      },
+      {
+        "S",
+        mode = { "n", "o", "x" },
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter",
+      },
+      {
+        "r",
+        mode = "o",
+        function()
+          require("flash").remote()
+        end,
+        desc = "Remote Flash",
+      },
+      {
+        "R",
+        mode = { "o", "x" },
+        function()
+          require("flash").treesitter_search()
+        end,
+        desc = "Treesitter Search",
+      },
+      {
+        "<c-s>",
+        mode = { "c" },
+        function()
+          require("flash").toggle()
+        end,
+        desc = "Toggle Flash Search",
+      },
       {
         "<c-space>",
         mode = { "n", "o", "x" },
@@ -285,7 +320,13 @@ return {
       { "<leader>us", ":CodeSnap<CR>", desc = "CodeSnap (clipboard)", mode = "x", silent = true },
       { "<leader>uS", ":CodeSnapSave<CR>", desc = "CodeSnap (~/codesnap)", mode = "x", silent = true },
       { "<leader>up", ":CodeSnapHighlight<CR>", desc = "CodeSnap Highlight (clipboard)", mode = "x", silent = true },
-      { "<leader>uP", ":CodeSnapSaveHighlight<CR>", desc = "CodeSnap Highlight (~/codesnap)", mode = "x", silent = true },
+      {
+        "<leader>uP",
+        ":CodeSnapSaveHighlight<CR>",
+        desc = "CodeSnap Highlight (~/codesnap)",
+        mode = "x",
+        silent = true,
+      },
       { "<leader>ua", ":CodeSnapASCII<CR>", desc = "CodeSnap ASCII", mode = "x", silent = true },
     },
     opts = {

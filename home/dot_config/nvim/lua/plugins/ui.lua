@@ -106,7 +106,7 @@ return {
 
       return {
         options = {
-          theme = "auto",
+          theme = "tokyonight",
           globalstatus = true,
           disabled_filetypes = { statusline = { "snacks_dashboard" } },
           component_separators = { left = "", right = "" },
@@ -196,7 +196,7 @@ return {
             },
             {
               function()
-                return require("noice").api.status.mode.get():gsub("recording", " ")
+                return require("noice").api.status.mode.get():gsub("recording", "")
               end,
               cond = function()
                 return package.loaded["noice"] and require("noice").api.status.mode.has()
