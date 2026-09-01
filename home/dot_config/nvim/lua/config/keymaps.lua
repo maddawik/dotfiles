@@ -80,6 +80,13 @@ map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
 map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+map("n", "]]", "<cmd>cnext<CR>", { desc = "Next Quickfix Item", silent = true })
+map("n", "]]", "<cmd>cnext<CR>", { desc = "Previous Quickfix Item", silent = true })
+map("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Execute the current file" })
+map("n", "<leader><leader>x", function()
+  vim.cmd("source %")
+  vim.notify("Sourced " .. vim.api.nvim_buf_get_name(0))
+end, { desc = "Execute the current file" })
 
 -- Quickfix / location list toggles
 map("n", "<leader>xl", function()
@@ -107,9 +114,9 @@ end, { desc = "Select Scratch Buffer" })
 -- ── Quit / Lazy / New file ──────────────────────────────────────────────────
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 map("n", "<leader>qQ", "<cmd>qa!<cr>", { desc = "Quit All (force)" })
-map("n", "<leader>uR", "<cmd>restart<cr>", { desc = "Restart Nvim" })
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+map("n", "<leader><leader>r", "<cmd>restart<cr>", { desc = "Restart Nvim" })
 
 -- ── Code / LSP custom ───────────────────────────────────────────────────────
 map({ "n", "x" }, "<leader>cf", function()
@@ -117,10 +124,7 @@ map({ "n", "x" }, "<leader>cf", function()
 end, { desc = "Format" })
 map("n", "<leader>cl", "<cmd>checkhealth vim.lsp<cr>", { desc = "LSP info" })
 
--- ── Find / files (Snacks picker) ────────────────────────────────────────────
-map("n", "<leader><space>", function()
-  require("maddawik.pickers").files()
-end, { desc = "Find files" })
+-- ── Find / files
 map("n", "<leader>,", function()
   require("mini.pick").builtin.buffers()
 end, { desc = "Buffers" })
@@ -141,6 +145,9 @@ map("n", "<leader>?", function()
   require("mini.extra").pickers.keymaps()
 end, { desc = "Keymaps for word" })
 
+map("n", "<leader>fb", function()
+  require("mini.pick").builtin.buffers()
+end, { desc = "Find buffer" })
 map("n", "<leader>ff", function()
   require("maddawik.pickers").files()
 end, { desc = "Find files" })
@@ -157,7 +164,7 @@ map("n", "<leader>fc", function()
   require("maddawik.pickers").files({}, { source = { cwd = vim.fn.stdpath("config") } })
 end, { desc = "Config files" })
 
--- ── Search (Snacks picker) ──────────────────────────────────────────────────
+-- ── Search
 map("n", "<leader>/", function()
   require("mini.extra").pickers.buf_lines({ scope = "all" })
 end, { desc = "Grep open buffers" })
@@ -311,3 +318,7 @@ vim.api.nvim_create_autocmd("FileType", {
     end, { buffer = ev.buf, desc = "Run Lua" })
   end,
 })
+
+map("n", "<leader>uC", function()
+  Snacks.picker.colorschemes()
+end, { desc = "Colorscheme" })

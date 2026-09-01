@@ -128,9 +128,6 @@ return {
           vim.g.disable_autoformat = not state
         end,
       }):map("<leader>uf")
-      vim.keymap.set("n", "<leader>uC", function()
-        require("mini.extra").pickers.colorschemes()
-      end, { desc = "Colorscheme" })
     end,
   },
 }
