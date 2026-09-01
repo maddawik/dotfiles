@@ -11,32 +11,6 @@ if [ "$1" = "toggle" ]; then
   exec media-control toggle-play-pause
 fi
 
-# Scroll the title only while the pointer is over the item.
-if [ "$1" = "hover" ]; then
-  case "$SENDER" in
-  mouse.entered)
-    sketchybar --set "$NAME" scroll_texts=on
-    ;;
-  mouse.exited | mouse.exited.global)
-    # Turning scrolling off just freezes the title mid-way. sketchybar only
-    # redraws when the label VALUE changes, so toggle a trailing zero-width
-    # space: the value differs, the rendered width does not, and the title
-    # snaps back to its start.
-    zwsp=$(printf '\xe2\x80\x8b')
-    cur=$(sketchybar --query "$NAME" | jq -r '.label.value')
-    case "$cur" in
-    *"$zwsp") cur=${cur%"$zwsp"} ;;
-    *) cur="$cur$zwsp" ;;
-    esac
-    # Stop scrolling BEFORE changing the label -- doing both in one call lets
-    # the label change restart the animation, which then freezes mid-wrap.
-    sketchybar --set "$NAME" scroll_texts=off
-    sketchybar --set "$NAME" label="$cur"
-    ;;
-  esac
-  exit 0
-fi
-
 # Locate siblings from this script, not $CONFIG_DIR, which is only set when
 # sketchybar invokes us.
 source "$(dirname "${BASH_SOURCE[0]}")/icon_map.sh"
@@ -49,7 +23,7 @@ TN_COMMENT=0xff636da6
 TN_GREEN=0xffc3e88d
 
 PIDFILE="${TMPDIR:-/tmp}/sketchybar-media.pid"
-echo $$ > "$PIDFILE"
+echo $$ >"$PIDFILE"
 # Only clear the pidfile if it is still ours -- on reload the replacement has
 # usually already written its own, and blindly removing it would leave the next
 # reload with nothing to kill.

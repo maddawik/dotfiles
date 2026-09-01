@@ -135,21 +135,17 @@ sketchybar --add item front_app left \
   script="$PLUGIN_DIR/front_app.sh" \
   --subscribe front_app front_app_switched
 
-# Scrolling needs max_chars + scroll_texts and AUTO widths -- a fixed
-# label.width suppresses it. scroll_texts starts off and is flipped on hover.
-MEDIA_MAX_CHARS=32
+# Titles are truncated at max_chars rather than scrolled, so keep it short
+# enough that the band does not jump around on long track names.
+MEDIA_MAX_CHARS=24
 sketchybar --add item media left \
   --set media "${pill[@]}" \
   drawing=off \
-  scroll_texts=off \
   icon.font="$APP_FONT" \
   icon.color=$TN_GREEN \
   label.color=$TN_FG \
   label.max_chars=$MEDIA_MAX_CHARS \
-  label.scroll_duration=120 \
-  script="$PLUGIN_DIR/media.sh hover" \
-  click_script="$PLUGIN_DIR/media.sh toggle" \
-  --subscribe media mouse.entered mouse.exited mouse.exited.global
+  click_script="$PLUGIN_DIR/media.sh toggle"
 
 ##### Adding Right Items #####
 
