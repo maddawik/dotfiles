@@ -33,12 +33,13 @@ set -gx FZF_DEFAULT_OPTS "\
     --height=70% \
     --ansi \
     --layout=reverse \
-    --border=none
+    --border=none \
+    --color=bg:-1 \
+    --color=gutter:-1 \
+    --color=preview-bg:-1 \
     --color=bg+:#2d3f76 \
-    --color=bg:#1e2030 \
     --color=border:#589ed7 \
     --color=fg:#c8d3f5 \
-    --color=gutter:#1e2030 \
     --color=header:#ff966c \
     --color=hl+:#65bcff \
     --color=hl:#65bcff \
