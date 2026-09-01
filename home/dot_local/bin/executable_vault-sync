@@ -1,0 +1,132 @@
+#!/bin/bash
+# Commit and push the Obsidian vaults. Driven by com.maddawik.vault-sync.plist.
+# Usage: vault-sync [--quiet]   (--quiet suppresses success notifications)
+set -uo pipefail
+
+# launchd gives us almost no environment; git is not on the default PATH.
+export PATH="/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export GIT_TERMINAL_PROMPT=0
+export GIT_SSH_COMMAND="ssh -o BatchMode=yes -o ConnectTimeout=10"
+
+VAULT_ROOT="$HOME/vaults"
+VAULTS=(personal work)
+STATE_DIR="$HOME/.local/state/vault-sync"
+LOG="$STATE_DIR/vault-sync.log"
+LOG_MAX_BYTES=$((512 * 1024))
+STALE_LOCK_MINUTES=60
+
+QUIET=0
+[[ "${1:-}" == "--quiet" ]] && QUIET=1
+
+mkdir -p "$STATE_DIR"
+
+if [[ -f "$LOG" ]] && (( $(stat -f%z "$LOG") > LOG_MAX_BYTES )); then
+  tail -n 500 "$LOG" >"$LOG.tmp" && mv "$LOG.tmp" "$LOG"
+fi
+
+log() { printf '%s  %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >>"$LOG"; }
+
+NOTIFIER="$HOME/Applications/Vault Sync.app/Contents/MacOS/terminal-notifier"
+[[ -x "$NOTIFIER" ]] || NOTIFIER="$(command -v terminal-notifier || true)"
+
+# notify <title> <message> <group> <sound> [execute]
+notify() {
+  [[ -n "$NOTIFIER" && -x "$NOTIFIER" ]] || return 0
+  local args=(-title "$1" -message "$2" -group "$3" -sound "$4")
+  [[ -n "${5:-}" ]] && args+=(-execute "$5")
+  "$NOTIFIER" "${args[@]}" >/dev/null 2>&1 || true
+}
+
+fail() { # fail <vault> <reason>
+  notify "Vault Sync failed — $1" "$2 · click for log" "vault-sync-$1" Basso \
+    "open -a Console '$LOG'"
+}
+
+# `hostname -s` returns the DHCP name (ip-192-168-x-x) on this network.
+HOST=$(scutil --get ComputerName 2>/dev/null || hostname -s)
+HOST=$(printf '%s' "$HOST" | tr ' ' '-' | tr -cd '[:alnum:]._-')
+
+offline() {
+  grep -qiE 'could not resolve|network is unreachable|connection refused|temporary failure|operation timed out|connection timed out|no route to host|network is down' <<<"$1"
+}
+
+sync_vault() {
+  local name=$1 dir="$VAULT_ROOT/$name" out rc count noun
+  local git=(git -C "$dir")
+
+  out=$("${git[@]}" pull --no-rebase --no-edit 2>&1) || {
+    if offline "$out"; then
+      log "[$name] offline, skipping"
+      return 0
+    fi
+    if "${git[@]}" rev-parse -q --verify MERGE_HEAD >/dev/null 2>&1; then
+      "${git[@]}" merge --abort 2>/dev/null || true
+      log "[$name] PULL CONFLICT, merge aborted: $out"
+      fail "$name" "merge conflict"
+      return 1
+    fi
+    log "[$name] PULL FAILED: $out"
+    fail "$name" "pull failed"
+    return 1
+  }
+
+  out=$("${git[@]}" add -A 2>&1) || {
+    log "[$name] STAGE FAILED: $out"
+    fail "$name" "could not stage changes"
+    return 1
+  }
+
+  if "${git[@]}" diff --cached --quiet; then
+    count=0
+    # Nothing new, but an earlier push may have failed and left us ahead.
+    if [[ -z "$("${git[@]}" log --oneline '@{u}..' 2>/dev/null)" ]]; then
+      log "[$name] no changes"
+      return 0
+    fi
+    log "[$name] no new changes, pushing existing local commits"
+  else
+    count=$("${git[@]}" diff --cached --name-only | wc -l | tr -d ' ')
+    out=$("${git[@]}" commit -m "backup[$HOST]: $(date '+%Y-%m-%d %H:%M:%S')" 2>&1) || {
+      log "[$name] COMMIT FAILED: $out"
+      fail "$name" "commit failed"
+      return 1
+    }
+  fi
+
+  out=$("${git[@]}" push 2>&1) || {
+    if offline "$out"; then
+      log "[$name] committed $count file(s), offline so push deferred"
+      return 0
+    fi
+    log "[$name] PUSH FAILED: $out"
+    fail "$name" "push rejected"
+    return 1
+  }
+
+  log "[$name] pushed $count file(s)"
+  if (( QUIET == 0 && count > 0 )); then
+    noun="files"; (( count == 1 )) && noun="file"
+    notify "Vault Sync — $name" "Pushed $count $noun" "vault-sync-$name" Pop
+  fi
+}
+
+status=0
+for name in "${VAULTS[@]}"; do
+  dir="$VAULT_ROOT/$name"
+  [[ -d "$dir/.git" ]] || continue
+
+  lock="$STATE_DIR/$name.lock"
+  if [[ -d "$lock" ]] && [[ -n "$(find "$lock" -maxdepth 0 -mmin +$STALE_LOCK_MINUTES)" ]]; then
+    log "[$name] removing stale lock"
+    rmdir "$lock" 2>/dev/null || true
+  fi
+  if ! mkdir "$lock" 2>/dev/null; then
+    log "[$name] already running, skipping"
+    continue
+  fi
+
+  sync_vault "$name" || status=1
+  rmdir "$lock" 2>/dev/null || true
+done
+
+exit $status

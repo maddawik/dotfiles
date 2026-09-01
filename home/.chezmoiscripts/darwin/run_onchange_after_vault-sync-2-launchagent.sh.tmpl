@@ -1,0 +1,24 @@
+#!/bin/bash
+# Re-register the vault-sync agent whenever its plist changes.
+# plist: {{ include "private_Library/LaunchAgents/com.maddawik.vault-sync.plist.tmpl" | sha256sum }}
+set -eufo pipefail
+
+PLIST="$HOME/Library/LaunchAgents/com.maddawik.vault-sync.plist"
+
+# A LaunchAgent lives in the login user's GUI domain; root has none, so under
+# sudo target the invoking user rather than gui/0.
+DOMAIN="gui/${SUDO_UID:-$(id -u)}"
+
+# launchctl reports a missing plist as a bare "Input/output error", so check first.
+if [[ ! -f "$PLIST" ]]; then
+  echo "vault-sync: $PLIST missing, cannot register agent" >&2
+  exit 1
+fi
+
+mkdir -p "$HOME/.local/state/vault-sync"
+
+# bootout fails on a first-time install; that's expected.
+launchctl bootout "$DOMAIN" "$PLIST" 2>/dev/null || true
+launchctl bootstrap "$DOMAIN" "$PLIST"
+
+echo "vault-sync: agent registered in $DOMAIN"

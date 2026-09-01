@@ -63,3 +63,8 @@
   path = ~/work/.gitconfig
 [includeIf "hasconfig:remote.*.url:https://github.com/vulncheck-oss/**"]
   path = ~/work/.gitconfig
+
+[includeIf "hasconfig:remote.*.url:git@github.com:maddawik/obsidian-**"]
+  path = ~/.config/git/vaults.gitconfig
+[includeIf "hasconfig:remote.*.url:https://github.com/maddawik/obsidian-**"]
+  path = ~/.config/git/vaults.gitconfig

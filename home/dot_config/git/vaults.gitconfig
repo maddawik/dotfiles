@@ -1,0 +1,12 @@
+# Vault config
+[user]
+	name = maddawik-bot
+	email = 111457299+maddawik-bot[bot]@users.noreply.github.com
+[commit]
+	gpgsign = false
+[tag]
+	gpgSign = false
+# This works better for automation
+[pull]
+	ff = true
+	rebase = false
