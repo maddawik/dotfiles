@@ -1,5 +1,7 @@
 status is-interactive || exit
 
+init_xdg
+
 # general env
 set -gx SHELL $(which fish)
 set -gx EDITOR nvim
@@ -10,7 +12,8 @@ set -gx EZA_CONFIG_DIR "$HOME/.config/eza"
 
 set -gx fish_color_valid_path green
 
-fish_config theme choose tokyonight_moon
+set -q FISH_THEME; or set -U FISH_THEME tokyonight_moon
+fish_config theme choose $FISH_THEME
 
 # vi-mode
 set --global fish_key_bindings fish_vi_key_bindings

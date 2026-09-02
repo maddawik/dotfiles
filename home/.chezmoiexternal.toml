@@ -1,4 +1,4 @@
-[".tmux/plugins/tmux-resurrect"]
+[".config/tmux/plugins/tmux-resurrect"]
 type = "git-repo"
 url = "https://github.com/tmux-plugins/tmux-resurrect"
 
