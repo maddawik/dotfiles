@@ -11,7 +11,10 @@ bind -M default \co fish_clipboard_copy
 # Fire a preexecute event before a command runs, so hooks below can
 # rewrite the commandline first.
 function _preprocess_commandline --description 'Emit preexecute event before running a command'
-    emit preexecute (commandline)
+    # Don't run inside nested read prompts, i.e. default confirmation choices
+    if test (status current-command) = fish
+        emit preexecute (commandline)
+    end
     commandline -f execute
 end
 
