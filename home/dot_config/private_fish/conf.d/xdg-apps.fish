@@ -18,6 +18,10 @@ if type -q docker
     set -q DOCKER_CONFIG; or set -gx DOCKER_CONFIG $XDG_CONFIG_HOME/docker
 end
 
+if type -q eza
+    set -q EZA_CONFIG_DIR; or set -gx EZA_CONFIG_DIR $XDG_CONFIG_HOME/eza
+end
+
 if type -q gpg
     set -q GNUPGHOME; or set -gx GNUPGHOME $XDG_DATA_HOME/gnupg
     test -d $GNUPGHOME; or mkdir -p $GNUPGHOME
@@ -63,6 +67,10 @@ end
 
 if type -q sqlite3
     set -q SQLITE_HISTORY; or set -gx SQLITE_HISTORY $XDG_STATE_HOME/sqlite_history
+end
+
+if type -q tldr
+    set -q TEALDEER_CONFIG_DIR; or set -gx TEALDEER_CONFIG_DIR $XDG_CONFIG_HOME/tealdeer
 end
 
 if type -q tmux
