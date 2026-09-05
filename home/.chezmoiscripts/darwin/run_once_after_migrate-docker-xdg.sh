@@ -1,11 +1,4 @@
 #!/bin/bash
-# Docker Desktop drops its CLI-facing config (config.json, contexts, buildx
-# state) into ~/.docker regardless of DOCKER_CONFIG. fish exports
-# DOCKER_CONFIG=$XDG_CONFIG_HOME/docker (dot_config/fish/conf.d/xdg-apps.fish),
-# so those files need to live there instead. Desktop's own app state
-# (daemon.json, desktop-build, mutagen, sandboxes, models, modules, run, bin,
-# .token_seed*, and the cli-plugins symlink targets) stays in ~/.docker since
-# Desktop.app hardcodes that path and never sees DOCKER_CONFIG.
 set -eufo pipefail
 
 if ! command -v docker >/dev/null 2>&1; then
