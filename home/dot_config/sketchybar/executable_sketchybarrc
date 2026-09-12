@@ -21,7 +21,7 @@ TN_PURPLE=0xfffca7ea
 BAR_HEIGHT=33
 BAR_RADIUS=14
 BAR_MARGIN=10
-BAR_TOP_PAD=5 # keep in sync with gaps.outer.top in ~/.aerospace.toml
+BAR_TOP_PAD=5 # keep in sync with gaps.outer.top in ~/.config/aerospace/aerospace.toml
 BAND_COLOR=0xe6222436 # near-opaque: stays readable over light wallpapers
 BAND_BORDER=0x99636da6
 
@@ -98,7 +98,7 @@ group_pill=(
 # Aerospace
 sketchybar --add event aerospace_workspace_change
 # From the keybindings: 'list-workspaces --all' omits empty ones.
-WORKSPACES=$(sed -n "s/^alt-[0-9]* = 'workspace \\([^']*\\)'/\\1/p" "$HOME/.aerospace.toml" | sort -n -u)
+WORKSPACES=$(sed -n "s/^alt-[0-9]* = 'workspace \\([^']*\\)'/\\1/p" "$HOME/.config/aerospace/aerospace.toml" | sort -n -u)
 [ -z "$WORKSPACES" ] && WORKSPACES=$(aerospace list-workspaces --all | sort -n)
 WORKSPACES=$(echo $WORKSPACES) # collapse newlines
 
