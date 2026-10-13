@@ -9,3 +9,5 @@ set -gx MANPAGER "nvim +Man!"
 set -gx BAT_THEME tokyonight
 
 set -gx fish_color_valid_path green
+
+set -gx fish_transient_prompt 1
