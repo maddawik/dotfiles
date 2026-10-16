@@ -1,0 +1,28 @@
+#!/bin/bash
+# Import the git signing key from 1Password if it isn't in the keyring yet.
+# The key is the private-key.asc attachment on the Personal-GPG item in the
+# personal account's Private vault; its passphrase is that item's password.
+set -eufo pipefail
+
+KEY_ID=1208B7724BB2E9CA
+export GNUPGHOME="${XDG_DATA_HOME:-$HOME/.local/share}/gnupg"
+
+for tool in gpg op; do
+  if ! command -v "$tool" >/dev/null 2>&1; then
+    echo "setup-gpg: $tool not installed, skipping" >&2
+    exit 0
+  fi
+done
+
+mkdir -p "$GNUPGHOME"
+chmod 700 "$GNUPGHOME"
+
+if gpg --list-secret-keys "$KEY_ID" >/dev/null 2>&1; then
+  echo "setup-gpg: $KEY_ID already present"
+  exit 0
+fi
+
+op read --account my.1password.com "op://Private/Personal-GPG/private-key.asc" | gpg --batch --import
+FPR=$(gpg --list-keys --with-colons "$KEY_ID" | awk -F: '$1=="fpr"{print $10; exit}')
+echo "$FPR:6:" | gpg --import-ownertrust
+echo "setup-gpg: imported $KEY_ID"
