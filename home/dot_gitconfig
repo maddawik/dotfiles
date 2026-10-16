@@ -14,6 +14,7 @@
 [diff]
   tool = nvimdiff
   colorMoved = default
+  algorithm = histogram
 [init]
   defaultBranch = main
 [url "git@gitlab.com:"]
@@ -30,6 +31,12 @@
 [fetch]
   prune = true
   pruneTags = true
+[rebase]
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
+[branch]
+  sort = -committerdate
 [interactive]
   diffFilter = delta --color-only
 [add.interactive]

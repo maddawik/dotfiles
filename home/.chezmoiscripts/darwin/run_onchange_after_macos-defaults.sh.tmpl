@@ -66,16 +66,20 @@ defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool fa
 defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
 defaults write com.apple.WindowManager HideDesktop -bool true
 
-# Pinned dock apps: Ghostty, Brave, Slack. Only touched when the set differs.
-want_apps=(/Applications/Ghostty.app "/Applications/Brave Browser.app" /Applications/Slack.app)
-have_apps=$(defaults read com.apple.dock persistent-apps 2>/dev/null | grep -o '"_CFURLString" = "[^"]*"' | sed -E 's/.*"file:\/\/([^"]*)\/"/\1/; s/%20/ /g' || true)
-if [[ "$have_apps" != "$(printf '%s\n' "${want_apps[@]}")" ]]; then
-  defaults delete com.apple.dock persistent-apps 2>/dev/null || true
-  for app in "${want_apps[@]}"; do
-    [[ -d "$app" ]] || continue
-    defaults write com.apple.dock persistent-apps -array-add \
-      "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>$app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
-  done
+# Pinned dock: Ghostty, Brave{{ if .work }}, Slack{{ end }} and a Downloads stack.
+# dockutil ships via the install-packages script; skip quietly if it's absent.
+if command -v dockutil >/dev/null 2>&1; then
+  want=(Ghostty "Brave Browser"{{ if .work }} Slack{{ end }} Downloads)
+  have=$(dockutil --list | cut -f1)
+  if [[ "$have" != "$(printf '%s\n' "${want[@]}")" ]]; then
+    dockutil --remove all --no-restart
+    for app in Ghostty "Brave Browser"{{ if .work }} Slack{{ end }}; do
+      [[ -d "/Applications/$app.app" ]] && dockutil --add "/Applications/$app.app" --no-restart
+    done
+    dockutil --add "$HOME/Downloads" --section others --display stack --view fan --sort dateadded --no-restart
+  fi
+else
+  echo "macos-defaults: dockutil not installed, leaving the Dock alone" >&2
 fi
 
 # ----------------------------------------------------------------- finder --

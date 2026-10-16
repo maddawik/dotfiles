@@ -2,6 +2,12 @@
 
 set -eufo pipefail
 
+# A fresh Mac has no Homebrew yet; chezmoi itself comes from the curl installer.
+if [[ ! -x /opt/homebrew/bin/brew ]]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 {{ $taps := list
      "FelixKratz/formulae"
      "nikitabobko/tap" -}}
@@ -14,6 +20,7 @@ set -eufo pipefail
      "cmake"
      "delve"
      "dive"
+     "dockutil"
      "dust"
      "duf"
      "entr"
