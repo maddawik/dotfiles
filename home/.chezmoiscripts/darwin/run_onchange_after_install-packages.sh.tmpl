@@ -110,8 +110,7 @@ export GIT_CONFIG_GLOBAL=/dev/null
        "sops"
        "terragrunt"
        "fluxcd/tap/flux"
-       "hashicorp/tap/packer"
-       "warrensbox/tap/tfswitch") -}}
+       "hashicorp/tap/packer") -}}
 {{   $casks = concat $casks (list
        "gcloud-cli"
        "microsoft-teams"
@@ -132,7 +131,7 @@ export GIT_CONFIG_GLOBAL=/dev/null
 
 brew bundle --file=/dev/stdin <<EOF
 {{ range ($taps | sortAlpha | uniq) -}}
-tap "{{ . }}"
+tap "{{ . }}", trusted: true
 {{ end -}}
 {{ range ($brews | sortAlpha | uniq) -}}
 brew "{{ . }}"
