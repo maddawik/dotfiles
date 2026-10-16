@@ -12,3 +12,8 @@ Library
 .config/sketchybar
 .config/ghostty
 {{ end }}
+
+{{/* ssh keys come from 1Password; skip them until the op CLI exists (first apply on a fresh machine) */}}
+{{ if not (lookPath "op") }}
+.ssh
+{{ end }}
