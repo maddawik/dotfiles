@@ -17,3 +17,6 @@ abbr tg terragrunt
 
 # k8s
 alias k kubectl
+
+# granted: `assume` must be sourced so it can export AWS creds into this shell
+alias assume="source (brew --prefix)/bin/assume.fish"

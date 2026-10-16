@@ -4,18 +4,22 @@ set -eufo pipefail
 
 {{ $taps := list
      "FelixKratz/formulae"
-     "common-fate/granted"
      "nikitabobko/tap" -}}
 {{ $brews := list
      "ast-grep"
      "bat"
      "btop"
+     "bun"
      "chezmoi"
+     "cmake"
+     "delve"
+     "dive"
      "dust"
      "duf"
      "entr"
      "eza"
      "fd"
+     "ffmpeg"
      "fish"
      "fzf"
      "gh"
@@ -23,26 +27,38 @@ set -eufo pipefail
      "git-delta"
      "glow"
      "go"
-     "granted"
+     "go-task"
+     "golangci-lint"
+     "goreleaser"
      "hub"
      "imagemagick"
      "jless"
      "jq"
+     "lazydocker"
+     "lazygit"
      "media-control"
+     "mise"
      "moreutils"
      "neovim"
      "pinentry-mac"
+     "pipx"
      "presenterm"
      "rip2"
      "ripgrep"
      "tealdeer"
      "terminal-notifier"
      "tmux"
+     "tokei"
+     "tree-sitter-cli"
      "uv"
      "vivid"
+     "websocat"
      "wget"
+     "xh"
      "yamllint"
      "yazi"
+     "yq"
+     "yt-dlp"
      "zig"
      "felixkratz/formulae/sketchybar" -}}
 {{ $casks := list
@@ -50,16 +66,59 @@ set -eufo pipefail
      "1password-cli"
      "betterdisplay"
      "brave-browser"
+     "caffeine"
+     "claude-code@latest"
      "docker-desktop"
      "firefox"
      "font-hack-nerd-font"
      "font-jetbrains-mono"
      "font-sketchybar-app-font"
+     "font-symbols-only-nerd-font"
      "ghostty"
      "obsidian"
      "raycast"
      "shottr"
+     "visual-studio-code"
      "nikitabobko/tap/aerospace" -}}
+
+{{ if .work -}}
+{{   $taps = concat $taps (list
+       "common-fate/granted"
+       "fluxcd/tap"
+       "hashicorp/tap"
+       "warrensbox/tap") -}}
+{{   $brews = concat $brews (list
+       "awscli"
+       "doctl"
+       "eksctl"
+       "granted"
+       "helm"
+       "k9s"
+       "mage"
+       "poetry"
+       "sops"
+       "terragrunt"
+       "fluxcd/tap/flux"
+       "hashicorp/tap/packer"
+       "warrensbox/tap/tfswitch") -}}
+{{   $casks = concat $casks (list
+       "gcloud-cli"
+       "microsoft-teams"
+       "pritunl"
+       "slack"
+       "zoom") -}}
+{{ end -}}
+
+{{ if .personal -}}
+{{   $casks = concat $casks (list
+       "discord"
+       "obs"
+       "plex") -}}
+{{ end -}}
+
+{{ if .ephemeral -}}
+{{   $casks = list -}}
+{{ end -}}
 
 brew bundle --file=/dev/stdin <<EOF
 {{ range ($taps | sortAlpha | uniq) -}}

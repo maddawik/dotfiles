@@ -40,3 +40,31 @@ Transitory install (VMs/containers):
 # Install dotfiles - then remove chezmoi, its source-dir and its config-dir
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --one-shot maddawik
 ```
+
+## Machine profiles
+
+`chezmoi init` asks two questions on a host it doesn't recognise:
+
+- **Work machine** — adds aws/k8s/terraform tooling, Slack, Teams, Zoom, Pritunl
+- **Personal machine** — adds Discord, Plex, OBS
+
+Both can be yes. Known hostnames are pre-answered in `.chezmoi.toml.tmpl`;
+re-run `chezmoi init` to change an answer. Containers, codespaces and
+non-interactive runs are treated as ephemeral: no GUI apps, no launch agents.
+
+## New machine checklist
+
+`chezmoi apply` handles packages, macOS defaults (keyboard, trackpad, Dock,
+Finder, disabled Mission Control / Spotlight shortcuts), Caps Lock → Control,
+login items and background services. A few things still need a human:
+
+- Raycast: sign in and confirm hotkey is `cmd+space` (Spotlight's is disabled)
+- 1Password: sign in, enable CLI integration
+- Ghostty / AeroSpace / Shottr / BetterDisplay / Raycast: grant Accessibility
+  and Screen Recording when prompted
+- Ghostty, Fish and Neovim: fisher plugins install on first fish launch
+- GPG: import signing key `1208B7724BB2E9CA` into `~/.local/share/gnupg`
+- SSH: copy keys and `~/.ssh/config` (work-specific, not in this repo)
+- Energy: `sudo pmset -b displaysleep 2 && sudo pmset -c displaysleep 10`
+- Software Update: turn on automatic macOS updates
+- Default browser: pick Brave when it first launches

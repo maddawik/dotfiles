@@ -1,2 +1,36 @@
+{{- /* machine profile flags */ -}}
+{{- $work := false -}}{{/* install work tooling (aws, k8s, slack, ...) */}}
+{{- $personal := false -}}{{/* install personal apps (discord, plex, ...) */}}
+{{- $ephemeral := false -}}{{/* throwaway VM/container: no GUI apps, no agents */}}
+
+{{- /* .chezmoi.hostname is unreliable on darwin (it follows DHCP), ask scutil instead */ -}}
+{{- $hostname := .chezmoi.hostname -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $hostname = output "scutil" "--get" "LocalHostName" | trim -}}
+{{- end -}}
+
+{{- /* codespaces, devcontainers, vagrant boxes and the like */ -}}
+{{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (eq .chezmoi.username "root" "ubuntu" "vagrant" "vscode") -}}
+{{-   $ephemeral = true -}}
+{{- end -}}
+
+{{- if not $ephemeral -}}
+{{-   if eq $hostname "mba-vc" -}}
+{{-     $work = true -}}
+{{-     $personal = true -}}
+{{-   else if stdinIsATTY -}}
+{{-     $work = promptBoolOnce . "work" "Work machine" -}}
+{{-     $personal = promptBoolOnce . "personal" "Personal machine" -}}
+{{-   else -}}
+{{-     $ephemeral = true -}}
+{{-   end -}}
+{{- end -}}
+
+[data]
+    hostname = {{ $hostname | quote }}
+    work = {{ $work }}
+    personal = {{ $personal }}
+    ephemeral = {{ $ephemeral }}
+
 [diff]
-pager = "delta"
+    pager = "delta"

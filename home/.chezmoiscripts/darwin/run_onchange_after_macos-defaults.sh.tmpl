@@ -1,0 +1,119 @@
+#!/bin/bash
+# macOS preferences captured from the previous machine. Re-runs whenever this
+# file changes; every write is idempotent so re-running is harmless.
+set -eufo pipefail
+
+# ---------------------------------------------------------------- keyboard --
+defaults write -g KeyRepeat -int 2
+defaults write -g InitialKeyRepeat -int 18
+defaults write -g ApplePressAndHoldEnabled -bool false
+defaults write -g NSAutomaticPeriodSubstitutionEnabled -bool true
+defaults write -g NSAutomaticCapitalizationEnabled -bool true
+
+# Caps Lock -> Control is applied by the capslock-to-ctrl LaunchAgent (hidutil)
+# registered at the bottom of this script, so it survives reboots and applies
+# to every keyboard rather than one vendor/product id.
+
+# Keyboard shortcuts. Disabled so the keys reach tmux/nvim/Raycast instead.
+#   32/33  Mission Control / App windows      ctrl+up / ctrl+down
+#   79/81  Move left/right a space            ctrl+left / ctrl+right
+#   60/61  Select previous/next input source  ctrl+space / ctrl+opt+space
+#   64/65  Spotlight search / finder window   cmd+space / cmd+opt+space (Raycast owns cmd+space)
+#   118    Switch to Desktop 1                ctrl+1
+disable_hotkey() { # id keycode-charcode keycode modifiers
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add "$1" \
+    "<dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>$2</integer><integer>$3</integer><integer>$4</integer></array><key>type</key><string>standard</string></dict></dict>"
+}
+disable_hotkey 32  65535 126 8650752
+disable_hotkey 33  65535 125 8650752
+disable_hotkey 60  32    49  262144
+disable_hotkey 61  32    49  786432
+disable_hotkey 64  32    49  1048576
+disable_hotkey 65  32    49  1572864
+disable_hotkey 79  65535 123 8650752
+disable_hotkey 81  65535 124 8650752
+disable_hotkey 118 65535 18  262144
+
+# ---------------------------------------------------------- trackpad/mouse --
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write -g com.apple.mouse.tapBehavior -int 1
+defaults write -g com.apple.mouse.tapBehavior -int 1
+defaults write -g com.apple.swipescrolldirection -bool false   # no "natural" scrolling
+defaults write -g com.apple.trackpad.scaling -float 0.6875
+defaults write -g com.apple.mouse.scaling -float 2.0
+defaults write -g com.apple.trackpad.forceClick -bool true
+
+# ------------------------------------------------------------- appearance --
+defaults write -g AppleInterfaceStyle -string Dark
+defaults write -g _HIHideMenuBar -bool true                     # sketchybar replaces the menu bar
+defaults write -g AppleMenuBarVisibleInFullscreen -bool false
+defaults write com.apple.controlcenter AutoHideMenuBarOption -int 0
+defaults write com.apple.menuextra.clock ShowAMPM -bool true
+defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
+
+# ------------------------------------------------------- dock / spaces / wm --
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock launchanim -bool false
+defaults write com.apple.dock show-recents -bool false
+defaults write com.apple.dock tilesize -int 71
+defaults write com.apple.dock mru-spaces -bool false            # don't reorder spaces by use
+defaults write com.apple.dock expose-group-apps -bool true
+defaults write com.apple.dock wvous-br-corner -int 1            # no Quick Note hot corner
+defaults write com.apple.dock wvous-br-modifier -int 0
+defaults write com.apple.spaces spans-displays -bool false
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
+defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
+defaults write com.apple.WindowManager HideDesktop -bool true
+
+# Pinned dock apps: Ghostty, Brave, Slack. Only touched when the set differs.
+want_apps=(/Applications/Ghostty.app "/Applications/Brave Browser.app" /Applications/Slack.app)
+have_apps=$(defaults read com.apple.dock persistent-apps 2>/dev/null | grep -o '"_CFURLString" = "[^"]*"' | sed -E 's/.*"file:\/\/([^"]*)\/"/\1/; s/%20/ /g' || true)
+if [[ "$have_apps" != "$(printf '%s\n' "${want_apps[@]}")" ]]; then
+  defaults delete com.apple.dock persistent-apps 2>/dev/null || true
+  for app in "${want_apps[@]}"; do
+    [[ -d "$app" ]] || continue
+    defaults write com.apple.dock persistent-apps -array-add \
+      "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>$app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
+  done
+fi
+
+# ----------------------------------------------------------------- finder --
+defaults write com.apple.finder FXPreferredViewStyle -string Nlsv  # list view
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+defaults write com.apple.finder ShowSidebar -bool true
+
+# ------------------------------------------------------------ screenshots --
+defaults write com.apple.screencapture location -string "$HOME/Documents"
+defaults write com.apple.screencapture target -string file
+
+# ------------------------------------------------------------------ misc --
+defaults write com.apple.assistant.support "Assistant Enabled" -bool false
+defaults write com.apple.AdLib allowApplePersonalizedAdvertising -bool false
+# universalaccess needs Full Disk Access for the calling terminal; best effort.
+defaults write com.apple.universalaccess closeViewHotkeysEnabled -bool false 2>/dev/null || true
+
+# ------------------------------------------------------------ login items --
+for app in Raycast Ghostty BetterDisplay Caffeine AeroSpace Shottr; do
+  path="/Applications/$app.app"
+  [[ -d "$path" ]] || continue
+  osascript -e "tell application \"System Events\" to if not (exists login item \"$app\") then make login item at end with properties {path:\"$path\", hidden:false}" >/dev/null
+done
+
+# ------------------------------------------------- caps lock -> ctrl agent --
+# plist: {{ include "private_Library/LaunchAgents/com.maddawik.capslock-to-ctrl.plist" | sha256sum }}
+PLIST="$HOME/Library/LaunchAgents/com.maddawik.capslock-to-ctrl.plist"
+DOMAIN="gui/${SUDO_UID:-$(id -u)}"
+if [[ -f "$PLIST" ]]; then
+  launchctl bootout "$DOMAIN" "$PLIST" 2>/dev/null || true
+  launchctl bootstrap "$DOMAIN" "$PLIST"
+fi
+
+# ---------------------------------------------------------------- apply --
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u 2>/dev/null || true
+for proc in Dock Finder SystemUIServer ControlCenter; do
+  killall "$proc" >/dev/null 2>&1 || true
+done
+echo "macos-defaults: applied"

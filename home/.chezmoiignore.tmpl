@@ -2,4 +2,13 @@
 .chezmoiscripts/darwin/**
 Library
 .local/bin/vault-sync
+.local/share/gnupg
+{{ end }}
+
+{{ if .ephemeral }}
+Library
+.local/bin/vault-sync
+.config/aerospace
+.config/sketchybar
+.config/ghostty
 {{ end }}
