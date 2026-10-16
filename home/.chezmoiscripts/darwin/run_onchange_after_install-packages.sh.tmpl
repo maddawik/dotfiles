@@ -8,6 +8,10 @@ if [[ ! -x /opt/homebrew/bin/brew ]]; then
 fi
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+# ~/.gitconfig rewrites github https URLs to ssh; brew taps must clone over
+# https since the ssh key may not exist yet on a first apply.
+export GIT_CONFIG_GLOBAL=/dev/null
+
 {{ $taps := list
      "FelixKratz/formulae"
      "nikitabobko/tap" -}}
