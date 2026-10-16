@@ -22,6 +22,13 @@ albeit less tested.
 > Note: These steps serve as reminder for me, not encouragement for you to
 > blindly use my dotfiles as your own. But ya know, you do you boo.
 
+On a fresh Mac, install the Xcode Command Line Tools first (chezmoi needs
+`git` to clone, and macOS ships only a stub until these are installed):
+
+```sh
+xcode-select --install
+```
+
 With `chezmoi` already installed:
 
 ```sh
