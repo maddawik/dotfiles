@@ -17,10 +17,14 @@
   algorithm = histogram
 [init]
   defaultBranch = main
+{{- /* Only rewrite to ssh once the key is on disk. On a fresh machine this keeps
+       brew, taps and chezmoi itself on https until 1Password has written it. */}}
+{{- if stat (joinPath .chezmoi.homeDir ".ssh" "id_ed25519") }}
 [url "git@gitlab.com:"]
   insteadOf = https://gitlab.com/
 [url "git@github.com:"]
   insteadOf = https://github.com/
+{{- end }}
 
 [push]
   useForceIfIncludes = true

@@ -65,6 +65,8 @@ defaults write com.apple.spaces spans-displays -bool false
 defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
 defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
 defaults write com.apple.WindowManager HideDesktop -bool true
+defaults write com.apple.WindowManager StandardHideWidgets -bool true   # no desktop widgets
+defaults write com.apple.WindowManager StageManagerHideWidgets -bool true
 
 # Pinned dock: Ghostty, Brave{{ if .work }}, Slack{{ end }} and a Downloads stack.
 # dockutil ships via the install-packages script; skip quietly if it's absent.
@@ -117,7 +119,7 @@ fi
 
 # ---------------------------------------------------------------- apply --
 /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u 2>/dev/null || true
-for proc in Dock Finder SystemUIServer ControlCenter; do
+for proc in Dock Finder SystemUIServer ControlCenter NotificationCenter; do
   killall "$proc" >/dev/null 2>&1 || true
 done
 echo "macos-defaults: applied"

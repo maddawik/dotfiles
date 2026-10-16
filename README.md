@@ -61,6 +61,17 @@ non-interactive runs are treated as ephemeral: no GUI apps, no launch agents.
 
 ## New machine checklist
 
+The first apply runs over https on purpose: the ssh URL rewrite in
+`.gitconfig` only switches on once `~/.ssh/id_ed25519` exists, and that key
+comes from 1Password. So the order is:
+
+1. `xcode-select --install`, then the one-liner above. It installs Homebrew,
+   packages (including the 1Password app and CLI) and macOS defaults.
+2. Open 1Password, sign in to the personal account, and turn on
+   Settings → Developer → "Integrate with 1Password CLI".
+3. `chezmoi apply` again. It reads the GitHub key from 1Password into `~/.ssh`.
+4. `chezmoi apply` once more. The gitconfig now rewrites GitHub to ssh.
+
 `chezmoi apply` handles packages, macOS defaults (keyboard, trackpad, Dock,
 Finder, disabled Mission Control / Spotlight shortcuts), Caps Lock → Control,
 login items and background services. A few things still need a human:
