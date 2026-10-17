@@ -1,0 +1,7 @@
+status is-interactive || exit
+
+# LS_COLORS rendered by chezmoi at apply time; running vivid here cost ~8ms per
+# shell. Empty on a fresh machine's first apply (vivid not installed yet).
+{{ if lookPath "vivid" -}}
+set -gx LS_COLORS '{{ output "vivid" "generate" "tokyonight-moon" | trim }}'
+{{ end -}}

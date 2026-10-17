@@ -7,7 +7,6 @@ set -gx SHELL $(which fish)
 set -gx EDITOR nvim
 set -gx MANPAGER "nvim +Man!"
 set -gx BAT_THEME tokyonight_moon # also delta's syntax theme
-type -q vivid; and set -gx LS_COLORS (vivid generate tokyonight-moon)
 
 # nvm.fish activates this on startup; a major version picks the newest installed
 set -q nvm_default_version; or set -g nvm_default_version 26
