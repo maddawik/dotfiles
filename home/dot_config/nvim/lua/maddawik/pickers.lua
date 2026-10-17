@@ -1,6 +1,28 @@
 -- Custom mini.pick sources for things Snacks.picker had that mini.extra doesn't.
 local M = {}
 
+--- Project root for a buffer, LazyVim-style: the root of an attached LSP
+--- client whose workspace contains the file, then the nearest root marker,
+--- then the buffer's own dir (or cwd for buffers with no file).
+---@param buf? integer
+---@return string
+function M.root(buf)
+  buf = buf or 0
+  local path = vim.api.nvim_buf_get_name(buf)
+  path = path ~= "" and vim.fs.normalize(vim.uv.fs_realpath(path) or path) or nil
+
+  if path then
+    for _, client in ipairs(vim.lsp.get_clients({ bufnr = buf })) do
+      local root = client.root_dir and vim.fs.normalize(client.root_dir)
+      if root and (path == root or vim.startswith(path, root .. "/")) then
+        return root
+      end
+    end
+  end
+
+  return vim.fs.root(buf, { ".git", "lua" }) or (path and vim.fs.dirname(path)) or vim.fn.getcwd()
+end
+
 local function show_with_icons(buf_id, items, query)
   require("mini.pick").default_show(buf_id, items, query, { show_icons = true })
 end
