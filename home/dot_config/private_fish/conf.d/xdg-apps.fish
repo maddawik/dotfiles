@@ -1,3 +1,11 @@
+# GNUPGHOME must be set before the interactive guard: git signs commits from
+# non-interactive shells too, and without it gpg falls back to an empty ~/.gnupg.
+# init_xdg hasn't run yet for those shells, hence the fallback.
+if type -q gpg
+    set -q GNUPGHOME; or set -gx GNUPGHOME (set -q XDG_DATA_HOME; and echo $XDG_DATA_HOME; or echo $HOME/.local/share)/gnupg
+    test -d $GNUPGHOME; or mkdir -p $GNUPGHOME
+end
+
 status is-interactive || exit
 
 # Point CLI tools at XDG base dirs instead of cluttering $HOME.
@@ -20,11 +28,6 @@ end
 
 if type -q eza
     set -q EZA_CONFIG_DIR; or set -gx EZA_CONFIG_DIR $XDG_CONFIG_HOME/eza
-end
-
-if type -q gpg
-    set -q GNUPGHOME; or set -gx GNUPGHOME $XDG_DATA_HOME/gnupg
-    test -d $GNUPGHOME; or mkdir -p $GNUPGHOME
 end
 
 if type -q kubectl
