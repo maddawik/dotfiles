@@ -5,6 +5,11 @@ exact = true
 stripComponents = 1
 refreshPeriod = "168h"
 
+[".config/tmux/plugins/flash.tmux"]
+type = "archive"
+url = "https://github.com/and-rs/flash.tmux/archive/refs/tags/v0.2.2.tar.gz"
+stripComponents = 1
+
 [".config/sketchybar/plugins/icon_map.sh"]
 type = "file"
 url = "https://github.com/kvndrsslr/sketchybar-app-font/releases/latest/download/icon_map.sh"
