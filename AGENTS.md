@@ -49,6 +49,9 @@ If git ever wants ssh before the key exists: `GIT_CONFIG_GLOBAL=/dev/null chezmo
 - Touch ID for sudo lives in `/etc/pam.d/sudo_local`, with `pam-reattach` so it
   works inside tmux. The script never prompts: it skips unless sudo credentials
   are cached, so run `sudo -v && chezmoi apply` once per machine.
+- Granted (`assume -c`) launches Firefox from the terminal, so the terminal
+  app needs Full Disk Access or Firefox shows "Profile Missing". Restart the
+  tmux server after granting it.
 - Dock is managed with `dockutil`; it skips if dockutil isn't installed yet.
 - Claude Code: only `home/dot_claude/executable_statusline-command.sh` is
   managed. Point `statusLine.command` in `~/.claude/settings.json` at it
