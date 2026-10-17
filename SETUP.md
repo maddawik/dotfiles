@@ -34,10 +34,9 @@ comes from 1Password. So the order is:
 
 ## Still manual
 
-- Raycast: sign in and confirm the hotkey is `cmd+space` (Spotlight's is disabled)
+- Raycast: Confirm the hotkey is `cmd+space` (Spotlight's is disabled)
 - Ghostty / AeroSpace / Shottr / BetterDisplay / Raycast: grant Accessibility
   and Screen Recording when prompted
-- SSH: copy `~/.ssh/config` (work-specific, not in this repo)
 - Energy: `sudo pmset -b displaysleep 2 && sudo pmset -c displaysleep 10`
 - Software Update: turn on automatic macOS updates
 - Default browser: pick Brave when it first launches

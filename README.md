@@ -41,4 +41,4 @@ Transitory install (VMs/containers):
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --one-shot maddawik
 ```
 
-Setting up a new machine: see [SETUP.md](SETUP.md).
+Setting up a new machine: see [SETUP.md](./SETUP.md).
