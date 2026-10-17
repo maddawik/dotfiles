@@ -22,10 +22,6 @@ if type -q aws
     set -q AWS_CONFIG_FILE; or set -gx AWS_CONFIG_FILE $XDG_CONFIG_HOME/aws/config
 end
 
-if type -q docker
-    set -q DOCKER_CONFIG; or set -gx DOCKER_CONFIG $XDG_CONFIG_HOME/docker
-end
-
 if type -q eza
     set -q EZA_CONFIG_DIR; or set -gx EZA_CONFIG_DIR $XDG_CONFIG_HOME/eza
 end
@@ -40,11 +36,9 @@ if type -q less
     set -q LESSHISTFILE; or set -gx LESSHISTFILE $XDG_STATE_HOME/lesshst
 end
 
-if type -q node
+# nvm.fish puts node/npm on PATH after conf.d runs, so guard on nvm itself
+if type -q nvm
     set -q NODE_REPL_HISTORY; or set -gx NODE_REPL_HISTORY $XDG_DATA_HOME/node_repl_history
-end
-
-if type -q npm
     set -q NPM_CONFIG_USERCONFIG; or set -gx NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
     set -q NPM_CONFIG_CACHE; or set -gx NPM_CONFIG_CACHE $XDG_CACHE_HOME/npm
 end
@@ -74,10 +68,6 @@ end
 
 if type -q tldr
     set -q TEALDEER_CONFIG_DIR; or set -gx TEALDEER_CONFIG_DIR $XDG_CONFIG_HOME/tealdeer
-end
-
-if type -q tmux
-    set -q TMUX_CONFIG; or set -gx TMUX_CONFIG $XDG_CONFIG_HOME/tmux/tmux.conf
 end
 
 if type -q wget
