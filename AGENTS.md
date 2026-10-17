@@ -50,6 +50,10 @@ If git ever wants ssh before the key exists: `GIT_CONFIG_GLOBAL=/dev/null chezmo
   works inside tmux. The script never prompts: it skips unless sudo credentials
   are cached, so run `sudo -v && chezmoi apply` once per machine.
 - Dock is managed with `dockutil`; it skips if dockutil isn't installed yet.
+- Claude Code: only `home/dot_claude/executable_statusline-command.sh` is
+  managed. Point `statusLine.command` in `~/.claude/settings.json` at it
+  (`bash ~/.claude/statusline-command.sh`). Settings, skills and hooks are
+  deliberately not in the repo.
 
 ## Status (2026-10-16)
 
