@@ -1,0 +1,10 @@
+status is-interactive || exit
+
+# Theme: themes/tokyonight_moon.theme rendered by chezmoi at apply time;
+# `fish_config theme choose` cost ~7ms per shell. Edit the theme file, then
+# `chezmoi apply`.
+{{ range (include "dot_config/private_fish/themes/tokyonight_moon.theme" | splitList "\n") -}}
+{{ if hasPrefix "fish_" . -}}
+set -g {{ . }}
+{{ end -}}
+{{ end -}}
