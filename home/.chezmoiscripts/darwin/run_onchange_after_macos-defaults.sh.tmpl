@@ -51,9 +51,12 @@ defaults write -g com.apple.trackpad.forceClick -bool true
 defaults write -g AppleInterfaceStyle -string Dark
 defaults write -g _HIHideMenuBar -bool true                     # sketchybar replaces the menu bar
 defaults write -g AppleMenuBarVisibleInFullscreen -bool false
+defaults write -g SLSMenuBarUseBlurredAppearance -bool true      # "Show menu bar background": readable over sketchybar
 defaults write com.apple.controlcenter AutoHideMenuBarOption -int 0
-defaults write com.apple.menuextra.clock ShowAMPM -bool true
-defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
+defaults write com.apple.menuextra.clock IsAnalog -bool true
+defaults write com.apple.menuextra.clock ShowAMPM -bool false
+defaults write com.apple.menuextra.clock ShowDayOfWeek -bool false
+defaults write com.apple.menuextra.clock ShowDate -int 2        # never
 
 # ------------------------------------------------------- dock / spaces / wm --
 defaults write com.apple.dock autohide -bool true
