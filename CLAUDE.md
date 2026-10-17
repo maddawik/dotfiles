@@ -9,7 +9,8 @@ work hostnames, or `~/.ssh/config`.
   no body, no AI attribution lines.
 - Scripts live in `home/.chezmoiscripts/darwin/` and run alphabetically after
   files are written: install-packages → macos-defaults → setup-fish-plugins →
-  setup-gh-extensions → setup-gpg → start-services → vault-sync-*. Templates render *before* any script runs, so
+  setup-gh-extensions → setup-gpg → setup-sudo-touchid → start-services →
+  vault-sync-*. Templates render *before* any script runs, so
   a template can't see a tool a script installs in the same apply.
 - Package lists are in `run_onchange_after_install-packages.sh.tmpl`, gated by
   the profile flags below. Every tap line carries `trusted: true` (Homebrew
@@ -45,6 +46,8 @@ If git ever wants ssh before the key exists: `GIT_CONFIG_GLOBAL=/dev/null chezmo
 - sketchybar fonts: `font-hack-nerd-font` and `font-sketchybar-app-font` casks;
   `icon_map.sh` is a chezmoi external. Restart sketchybar after fonts land.
 - Caps Lock → Control is a hidutil LaunchAgent, not the System Settings mapping.
+- Touch ID for sudo lives in `/etc/pam.d/sudo_local`, with `pam-reattach` so it
+  works inside tmux. The script asks for the password once to write it.
 - Dock is managed with `dockutil`; it skips if dockutil isn't installed yet.
 
 ## Status (2026-10-16)
