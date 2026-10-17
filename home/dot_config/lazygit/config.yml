@@ -7,26 +7,12 @@ git:
     - colorArg: always
       command: delta --paging=never --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 gui:
-  authorColors:
-    "EJ": "#589ed7"
-    "maddawik": "#589ed7"
-    # "*": "#ff966c"
   sidePanelWidth: 0.25
   showIcons: true
   showFileIcons: true
   nerdFontsVersion: "3"
   spinner:
-    frames:
-      [
-        "\U0001F311 ",
-        "\U0001F312 ",
-        "\U0001F313 ",
-        "\U0001F314 ",
-        "\U0001F315 ",
-        "\U0001F316 ",
-        "\U0001F317 ",
-        "\U0001F318 ",
-      ]
+    frames: ["\U0001F311 ", "\U0001F312 ", "\U0001F313 ", "\U0001F314 ", "\U0001F315 ", "\U0001F316 ", "\U0001F317 ", "\U0001F318 "]
     rate: 80
   theme:
     activeBorderColor:
@@ -55,13 +41,17 @@ gui:
       - "#c53b53"
     defaultFgColor:
       - "#c8d3f5"
-  branchColorPatterns:
-    "^main": "blue"
-    "^master": "blue"
-    '^\d+-*': "#c099ff"
-    "^feature": "green"
-    "^release": "yellow"
-    "^hotfix": "red"
+    authorColors:
+      "EJ": "#589ed7"
+      "maddawik": "#589ed7"
+      # "*": "#ff966c"
+    branchColorPatterns:
+      "^main": "blue"
+      "^master": "blue"
+      '^\d+-*': "#c099ff"
+      "^feature": "green"
+      "^release": "yellow"
+      "^hotfix": "red"
   expandFocusedSidePanel: true
   expandedSidePanelWeight: 3
 customCommands:
