@@ -4,6 +4,9 @@
 # attributed to Script Editor or terminal-notifier.
 set -eufo pipefail
 
+# Scripts inherit the caller's PATH; a fresh zsh has no brew in it yet.
+[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
 SRC=/opt/homebrew/opt/terminal-notifier/terminal-notifier.app
 APP="$HOME/Applications/Vault Sync.app"
 PLIST="$APP/Contents/Info.plist"

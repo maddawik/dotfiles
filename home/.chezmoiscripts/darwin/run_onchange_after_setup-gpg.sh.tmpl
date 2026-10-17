@@ -4,6 +4,9 @@
 # personal account's Private vault; its passphrase is that item's password.
 set -eufo pipefail
 
+# Scripts inherit the caller's PATH; a fresh zsh has no brew in it yet.
+[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
 KEY_ID=1208B7724BB2E9CA
 export GNUPGHOME="${XDG_DATA_HOME:-$HOME/.local/share}/gnupg"
 
