@@ -24,7 +24,15 @@ if [[ -f "$TARGET" ]] && [[ "$(cat "$TARGET")" == "${want%$'\n'}" ]]; then
   exit 0
 fi
 
-echo "setup-sudo-touchid: writing $TARGET (needs sudo)"
-printf '%s' "$want" | sudo tee "$TARGET" >/dev/null
-sudo chown root:wheel "$TARGET"
-sudo chmod 444 "$TARGET"
+# Never prompt for a password from inside an apply: it fights the pager and
+# aborts the whole run on a typo. Only proceed with cached sudo credentials.
+if ! sudo -n true 2>/dev/null; then
+  echo "setup-sudo-touchid: no cached sudo credentials, skipping." >&2
+  echo "setup-sudo-touchid: run 'sudo -v && chezmoi apply' to set up Touch ID for sudo." >&2
+  exit 0
+fi
+
+echo "setup-sudo-touchid: writing $TARGET"
+printf '%s' "$want" | sudo -n tee "$TARGET" >/dev/null
+sudo -n chown root:wheel "$TARGET"
+sudo -n chmod 444 "$TARGET"

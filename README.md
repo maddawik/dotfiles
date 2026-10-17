@@ -83,6 +83,7 @@ login items and background services. A few things still need a human:
 - Ghostty, Fish and Neovim: fisher plugins install on first fish launch
 - GPG: import signing key `1208B7724BB2E9CA` into `~/.local/share/gnupg`
 - SSH: copy keys and `~/.ssh/config` (work-specific, not in this repo)
+- Touch ID for sudo: `sudo -v && chezmoi apply` (the script skips without cached credentials)
 - Energy: `sudo pmset -b displaysleep 2 && sudo pmset -c displaysleep 10`
 - Software Update: turn on automatic macOS updates
 - Default browser: pick Brave when it first launches

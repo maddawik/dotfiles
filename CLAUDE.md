@@ -47,7 +47,8 @@ If git ever wants ssh before the key exists: `GIT_CONFIG_GLOBAL=/dev/null chezmo
   `icon_map.sh` is a chezmoi external. Restart sketchybar after fonts land.
 - Caps Lock → Control is a hidutil LaunchAgent, not the System Settings mapping.
 - Touch ID for sudo lives in `/etc/pam.d/sudo_local`, with `pam-reattach` so it
-  works inside tmux. The script asks for the password once to write it.
+  works inside tmux. The script never prompts: it skips unless sudo credentials
+  are cached, so run `sudo -v && chezmoi apply` once per machine.
 - Dock is managed with `dockutil`; it skips if dockutil isn't installed yet.
 
 ## Status (2026-10-16)
