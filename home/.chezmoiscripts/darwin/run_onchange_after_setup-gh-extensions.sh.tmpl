@@ -1,0 +1,30 @@
+#!/bin/bash
+# Install gh extensions (latest release). Re-runs when this list changes;
+# extensions already installed are skipped, upgrade with `gh extension upgrade --all`.
+set -eufo pipefail
+
+EXTENSIONS=(
+  dlvhdr/gh-dash
+  dlvhdr/gh-enhance
+  github/gh-stack
+)
+
+if ! command -v gh >/dev/null 2>&1; then
+  echo "setup-gh-extensions: gh not installed, skipping" >&2
+  exit 0
+fi
+
+if ! gh auth status >/dev/null 2>&1; then
+  echo "setup-gh-extensions: gh not logged in, skipping (run gh auth login, then chezmoi apply)" >&2
+  exit 0
+fi
+
+installed=$(gh extension list | awk -F'\t' '{print $2}')
+
+for ext in "${EXTENSIONS[@]}"; do
+  if grep -qxF "$ext" <<<"$installed"; then
+    echo "setup-gh-extensions: $ext already installed"
+  else
+    gh extension install "$ext"
+  fi
+done

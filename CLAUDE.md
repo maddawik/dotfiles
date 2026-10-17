@@ -9,7 +9,7 @@ work hostnames, or `~/.ssh/config`.
   no body, no AI attribution lines.
 - Scripts live in `home/.chezmoiscripts/darwin/` and run alphabetically after
   files are written: install-packages → macos-defaults → setup-fish-plugins →
-  start-services → vault-sync-*. Templates render *before* any script runs, so
+  setup-gh-extensions → setup-gpg → start-services → vault-sync-*. Templates render *before* any script runs, so
   a template can't see a tool a script installs in the same apply.
 - Package lists are in `run_onchange_after_install-packages.sh.tmpl`, gated by
   the profile flags below. Every tap line carries `trusted: true` (Homebrew
