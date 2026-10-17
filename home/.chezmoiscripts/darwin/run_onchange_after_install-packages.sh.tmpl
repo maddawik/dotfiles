@@ -130,7 +130,11 @@ export GIT_CONFIG_GLOBAL=/dev/null
 {{   $casks = list -}}
 {{ end -}}
 
-brew bundle --file=/dev/stdin <<EOF
+# Brewfile goes in a temp file, not stdin: casks that sudo (pkg installers,
+# upgrades) need stdin to stay on the terminal to read the password.
+brewfile=$(mktemp -t Brewfile)
+trap 'rm -f "$brewfile"' EXIT
+cat >"$brewfile" <<EOF
 {{ range ($taps | sortAlpha | uniq) -}}
 tap "{{ . }}", trusted: true
 {{ end -}}
@@ -141,3 +145,5 @@ brew "{{ . }}"
 cask "{{ . }}"
 {{ end -}}
 EOF
+
+brew bundle --file="$brewfile"
