@@ -77,7 +77,7 @@ that you could jump to.”
   [[
 “This shouldn't change anything on your box.”
 
-• Andrew Rhiem
+• Andrew Riehm
 ]],
   [[
 “A fool with a tool is still a fool.”
