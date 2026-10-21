@@ -158,6 +158,10 @@ return {
   -- Better splits and tmux navigation
   {
     "mrjones2014/smart-splits.nvim",
+    -- v3 moved multiplexer support into separate backend plugins
+    dependencies = {
+      { "smart-splits-nvim/backend-tmux", main = "smart-splits-backend-tmux" },
+    },
     keys = {
       { "<C-h>", "<cmd>SmartCursorMoveLeft<CR>", mode = { "n", "t" }, desc = "Move to left split" },
       { "<C-j>", "<cmd>SmartCursorMoveDown<CR>", mode = { "n", "t" }, desc = "Move to lower split" },
@@ -168,7 +172,9 @@ return {
       { "<C-Left>", "<cmd>SmartResizeLeft<CR>", mode = { "n", "t" }, desc = "Resize split left" },
       { "<C-Right>", "<cmd>SmartResizeRight<CR>", mode = { "n", "t" }, desc = "Resize split right" },
     },
-    opts = {},
+    opts = {
+      mux = { backend = "smart-splits-backend-tmux" },
+    },
   },
 
   -- Smart sort
