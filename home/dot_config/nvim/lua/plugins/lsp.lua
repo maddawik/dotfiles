@@ -57,6 +57,8 @@ return {
         -- TypeScript/JavaScript
         "vtsls",
         "prettierd",
+        -- Astro
+        "astro-language-server",
         -- Python
         "ty",
         "ruff",
@@ -189,6 +191,17 @@ return {
           settings = {
             complete_function_calls = true,
             vtsls = {
+              tsserver = {
+                -- Lets TS/JS files resolve imports from .astro components.
+                globalPlugins = {
+                  {
+                    name = "@astrojs/ts-plugin",
+                    location = vim.fn.stdpath("data")
+                      .. "/mason/packages/astro-language-server/node_modules/@astrojs/ts-plugin",
+                    enableForWorkspaceTypeScriptVersions = true,
+                  },
+                },
+              },
               enableMoveToFileCodeAction = true,
               autoUseWorkspaceTsdk = true,
               experimental = {
@@ -220,6 +233,7 @@ return {
             })
           end,
         },
+        astro = {},
         dockerls = {},
         docker_compose_language_service = {},
         fish_lsp = {},

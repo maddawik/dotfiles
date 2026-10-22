@@ -7,6 +7,7 @@ return {
     cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
     opts = {
       ensure_installed = {
+        "astro",
         "bash",
         "c",
         "css",
