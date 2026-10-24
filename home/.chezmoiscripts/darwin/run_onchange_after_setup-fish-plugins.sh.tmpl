@@ -12,9 +12,16 @@ if ! command -v fish >/dev/null 2>&1; then
   exit 0
 fi
 
-# fisher bootstraps itself; afterwards `fisher update` installs everything in fish_plugins.
+# fisher bootstraps itself; afterwards `fisher update` installs everything in
+# fish_plugins. Every plugin there is pinned to a commit, and the bootstrap
+# uses the same commit as fisher's own entry, so nothing tracks a branch.
+{{- $fisher := "" }}
+{{- range (include "dot_config/private_fish/fish_plugins" | splitList "\n") }}
+{{-   if hasPrefix "jorgebucaran/fisher@" . }}{{ $fisher = trimPrefix "jorgebucaran/fisher@" . }}{{ end }}
+{{- end }}
+{{- if not $fisher }}{{ fail "fish_plugins must pin jorgebucaran/fisher@<commit>" }}{{ end }}
 if ! fish -c 'functions -q fisher'; then
-  fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher update'
+  fish -c 'curl -fsSL https://raw.githubusercontent.com/jorgebucaran/fisher/{{ $fisher }}/functions/fisher.fish | source && fisher update'
 else
   fish -c 'fisher update'
 fi

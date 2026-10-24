@@ -1,17 +1,23 @@
+# Everything here runs as you (tmux and sketchybar execute it), so each source
+# is pinned to an immutable ref and checked against a sha256. To update: pick
+# the new tag or commit, read the diff, then refresh url and checksum.
+
+# master as of 2023-03-06; the last tag (v4.0.0) predates fixes in use.
 [".config/tmux/plugins/tmux-resurrect"]
 type = "archive"
-url = "https://github.com/tmux-plugins/tmux-resurrect/archive/master.tar.gz"
+url = "https://github.com/tmux-plugins/tmux-resurrect/archive/cff343cf9e81983d3da0c8562b01616f12e8d548.tar.gz"
+checksum.sha256 = "9f1dda18554291ee7f8a0f499e2af90bbadc2ebceb7a995bb13b76529fe0c5c9"
 exact = true
 stripComponents = 1
-refreshPeriod = "168h"
 
 [".config/tmux/plugins/flash.tmux"]
 type = "archive"
 url = "https://github.com/and-rs/flash.tmux/archive/refs/tags/v0.2.2.tar.gz"
+checksum.sha256 = "ecdbb4f4ed2b738596ece2d5d7f7f96f1c7bfbed2436109f7321d743df26e36c"
 stripComponents = 1
 
 [".config/sketchybar/plugins/icon_map.sh"]
 type = "file"
-url = "https://github.com/kvndrsslr/sketchybar-app-font/releases/latest/download/icon_map.sh"
+url = "https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v3.0.12/icon_map.sh"
+checksum.sha256 = "0924fd8630c027f644280951c87c17012a724931893dbdf6cb6a2dc96e59847e"
 executable = true
-refreshPeriod = "168h"

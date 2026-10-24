@@ -1,15 +1,17 @@
 #!/bin/bash
-# Install gh extensions (latest release). Re-runs when this list changes;
-# extensions already installed are skipped, upgrade with `gh extension upgrade --all`.
+# Install gh extensions at pinned release tags. They run as you with your gh
+# token, so they never follow "latest". Re-runs when this list changes; an
+# extension at a different version (or unpinned) is reinstalled at its pin.
+# To upgrade: bump the tag here after reading the release.
 set -eufo pipefail
 
 # Scripts inherit the caller's PATH; a fresh zsh has no brew in it yet.
 [[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 EXTENSIONS=(
-  dlvhdr/gh-dash
-  dlvhdr/gh-enhance
-  github/gh-stack
+  dlvhdr/gh-dash@v4.19.1
+  dlvhdr/gh-enhance@v0.8.1
+  github/gh-stack@v0.2.1
 )
 
 if ! command -v gh >/dev/null 2>&1; then
@@ -22,12 +24,23 @@ if ! gh auth status >/dev/null 2>&1; then
   exit 0
 fi
 
-installed=$(gh extension list | awk -F'\t' '{print $2}')
+# Columns: name, owner/repo, version
+installed=$(gh extension list)
 
 for ext in "${EXTENSIONS[@]}"; do
-  if grep -qxF "$ext" <<<"$installed"; then
-    echo "setup-gh-extensions: $ext already installed"
-  else
-    gh extension install "$ext"
+  repo=${ext%@*}
+  tag=${ext#*@}
+  have=$(awk -F'\t' -v r="$repo" '$2 == r { print $3 }' <<<"$installed")
+  # Only a pinned install is skipped by `gh extension upgrade --all`; the
+  # same version installed without --pin would still drift.
+  manifest="${XDG_DATA_HOME:-$HOME/.local/share}/gh/extensions/${repo#*/}/manifest.yml"
+  if [[ "$have" == "$tag" ]] && grep -qx 'ispinned: true' "$manifest" 2>/dev/null; then
+    echo "setup-gh-extensions: $repo already pinned at $tag"
+    continue
   fi
+  if [[ -n "$have" ]]; then
+    echo "setup-gh-extensions: $repo is at ${have}, reinstalling at $tag"
+    gh extension remove "${repo#*/}"
+  fi
+  gh extension install "$repo" --pin "$tag"
 done
