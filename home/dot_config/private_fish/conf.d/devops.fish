@@ -16,7 +16,7 @@ abbr tf terraform
 abbr tg terragrunt
 
 # k8s
-alias k kubectl
+function k --wraps kubectl; kubectl $argv; end
 
 # granted: `assume` must be sourced so it can export AWS creds into this shell
-alias assume="source (brew --prefix)/bin/assume.fish"
+function assume --wraps assumego; source (brew --prefix)/bin/assume.fish $argv; end

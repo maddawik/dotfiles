@@ -13,6 +13,7 @@ fish_color_param fca7ea
 fish_color_comment 636da6
 fish_color_selection --background=2d3f76
 fish_color_search_match --background=2d3f76
+fish_color_match --background=brblue
 fish_color_operator c3e88d
 fish_color_escape c099ff
 fish_color_autosuggestion 636da6

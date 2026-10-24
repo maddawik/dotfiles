@@ -1,20 +1,20 @@
 status is-interactive || exit
 
-alias reload 'exec fish'
+function reload; exec fish $argv; end
 
 # fancy pants
-alias git hub
-alias vim nvim
-alias ls 'eza --icons --group-directories-first'
+function git --wraps hub; hub $argv; end
+function vim --wraps nvim; nvim $argv; end
+function ls --wraps eza; eza --icons --group-directories-first $argv; end
 abbr nv nvim
 abbr yless 'jless --yaml'
 
 # copy/pasta
-alias c pbcopy
-alias v pbpaste
+function c --wraps pbcopy; pbcopy $argv; end
+function v --wraps pbpaste; pbpaste $argv; end
 
 # ls shortcuts
-alias l ls
+function l --wraps ls; ls $argv; end
 abbr lla ls -al
 abbr lt ls --tree
 abbr lt2 ls --tree --level=2
@@ -65,8 +65,8 @@ abbr cmR chezmoi remove
 abbr cms chezmoi status
 
 # lazygit
-alias lz lazygit
-alias lzc "lz --path ~/.local/share/chezmoi/"
+function lz --wraps lazygit; lazygit $argv; end
+function lzc --wraps lazygit; lz --path ~/.local/share/chezmoi/ $argv; end
 
 # lazydocker
-alias lzd lazydocker
+function lzd --wraps lazydocker; lazydocker $argv; end

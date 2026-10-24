@@ -1,4 +1,4 @@
 status is-interactive || exit
 
 # godot
-alias nvg 'nvim --listen /tmp/godot.pipe .'
+function nvg --wraps nvim; nvim --listen /tmp/godot.pipe . $argv; end
