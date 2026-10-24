@@ -29,12 +29,25 @@ To simulate prompts: `chezmoi execute-template --init --promptBool "Work machine
 1. `xcode-select --install` (dialog may hide behind other windows).
 2. One-liner from README. First apply runs over https on purpose: the
    `insteadOf` ssh rewrite in `dot_gitconfig.tmpl` only renders once
-   `~/.ssh/id_ed25519` exists.
+   `~/.ssh/gh_rsa.pub` exists.
 3. Open 1Password, sign in to the personal account, enable
-   Settings → Developer → "Integrate with 1Password CLI".
-4. `chezmoi apply` writes the GitHub key from `op://dev/ssh github` (personal
-   account, `my.1password.com`). `.ssh` is ignored until `op` is on PATH.
+   Settings → Developer → "Integrate with 1Password CLI" and "Use the SSH agent".
+4. `chezmoi apply` writes the ssh public keys from the personal account's
+   `dev` vault (`my.1password.com`). `.ssh` is ignored until `op` is on PATH.
 5. `chezmoi apply` again turns the ssh rewrite on.
+
+## SSH
+
+Private keys never touch disk: ssh uses the 1Password agent
+(`private_dot_ssh/config.tmpl`, keys offered per `dot_config/private_1Password/ssh/agent.toml`).
+Only `.pub` files are managed, named after their 1Password items: personal
+keys in `dev` (`gh_rsa` GitHub, `gl_ed25519` GitLab, `hl_rsa` homelab hosts,
+`hl_f_ed25519` Forgejo on rex), and on work machines `gh_ed25519` from the
+work account's `Employee` vault, which VulnCheck repos use via
+`dot_config/git/work-ssh.gitconfig`. Host entries go in `~/.ssh/config.local`,
+which is per machine and never committed. The one exception is vault-sync,
+which runs unattended and pushes with per-vault GitHub deploy keys at
+`~/.ssh/vault-sync-<vault>`, generated on each machine.
 
 If git ever wants ssh before the key exists: `GIT_CONFIG_GLOBAL=/dev/null chezmoi apply`.
 

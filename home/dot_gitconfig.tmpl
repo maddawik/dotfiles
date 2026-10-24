@@ -17,9 +17,10 @@
   algorithm = histogram
 [init]
   defaultBranch = main
-{{- /* Only rewrite to ssh once the key is on disk. On a fresh machine this keeps
-       brew, taps and chezmoi itself on https until 1Password has written it. */}}
-{{- if stat (joinPath .chezmoi.homeDir ".ssh" "id_ed25519") }}
+{{- /* Only rewrite to ssh once 1Password is set up (the public key is written
+       from it). On a fresh machine this keeps brew, taps and chezmoi itself on
+       https until then. */}}
+{{- if stat (joinPath .chezmoi.homeDir ".ssh" "gh_rsa.pub") }}
 [url "git@gitlab.com:"]
   insteadOf = https://gitlab.com/
 [url "git@github.com:"]
@@ -66,14 +67,18 @@
   conflictstyle = zdiff3
 
 
+{{- $workSsh := "" }}
+{{- if .work }}
+{{-   $workSsh = "\n  path = ~/.config/git/work-ssh.gitconfig" }}
+{{- end }}
 [includeIf "hasconfig:remote.*.url:git@github.com:vulncheck/**"]
-  path = ~/work/.gitconfig
+  path = ~/work/.gitconfig{{ $workSsh }}
 [includeIf "hasconfig:remote.*.url:https://github.com/vulncheck/**"]
-  path = ~/work/.gitconfig
+  path = ~/work/.gitconfig{{ $workSsh }}
 [includeIf "hasconfig:remote.*.url:git@github.com:vulncheck-oss/**"]
-  path = ~/work/.gitconfig
+  path = ~/work/.gitconfig{{ $workSsh }}
 [includeIf "hasconfig:remote.*.url:https://github.com/vulncheck-oss/**"]
-  path = ~/work/.gitconfig
+  path = ~/work/.gitconfig{{ $workSsh }}
 
 [includeIf "hasconfig:remote.*.url:git@github.com:maddawik/obsidian-**"]
   path = ~/.config/git/vaults.gitconfig

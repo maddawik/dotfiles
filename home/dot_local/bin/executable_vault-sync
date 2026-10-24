@@ -6,7 +6,6 @@ set -uo pipefail
 # launchd gives us almost no environment; git is not on the default PATH.
 export PATH="/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export GIT_TERMINAL_PROMPT=0
-export GIT_SSH_COMMAND="ssh -o BatchMode=yes -o ConnectTimeout=10"
 
 VAULT_ROOT="$HOME/vaults"
 VAULTS=(personal work)
@@ -53,6 +52,18 @@ offline() {
 sync_vault() {
   local name=$1 dir="$VAULT_ROOT/$name" out rc count noun
   local git=(git -C "$dir")
+
+  # Each vault pushes with its own GitHub deploy key, kept on disk because
+  # this runs unattended and the 1Password agent may be locked. A deploy key
+  # only reaches its one repo. -F /dev/null keeps ~/.ssh/config (and its
+  # agent) out of it.
+  local key="$HOME/.ssh/vault-sync-$name"
+  if [[ ! -f "$key" ]]; then
+    log "[$name] NO DEPLOY KEY at $key"
+    fail "$name" "no deploy key"
+    return 1
+  fi
+  local -x GIT_SSH_COMMAND="ssh -F /dev/null -i $key -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=10"
 
   out=$("${git[@]}" pull --no-rebase --no-edit 2>&1) || {
     if offline "$out"; then

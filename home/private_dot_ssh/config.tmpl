@@ -1,0 +1,12 @@
+# Managed by chezmoi. Host entries (names, users, which key opens what) live in
+# ~/.ssh/config.local, which stays out of this public repo. It comes first so
+# its settings win.
+Include ~/.ssh/config.local
+{{- if eq .chezmoi.os "darwin" }}
+
+# Private keys stay in 1Password and ssh asks its agent for them, so none are
+# on disk. To pick the key for a host, point IdentityFile at its .pub and set
+# IdentitiesOnly, or the agent offers every key it holds.
+Host *
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{- end }}

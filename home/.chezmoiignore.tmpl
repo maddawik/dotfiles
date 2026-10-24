@@ -9,9 +9,15 @@ Library
 Library
 .claude
 .local/bin/vault-sync
+.config/1Password
 .config/aerospace
 .config/sketchybar
 .config/ghostty
+{{ end }}
+
+{{ if not .work }}
+.ssh/gh_ed25519.pub
+.config/git/work-ssh.gitconfig
 {{ end }}
 
 {{/* ssh keys come from 1Password; skip them until the op CLI exists (first apply on a fresh machine) */}}

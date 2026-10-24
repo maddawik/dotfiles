@@ -1,0 +1,11 @@
+# Keys the 1Password SSH agent offers. Personal keys all live in the personal
+# account's dev vault.
+[[ssh-keys]]
+vault = "dev"
+{{- if .work }}
+
+# Work GitHub key, used only for VulnCheck repos (see work-ssh.gitconfig).
+[[ssh-keys]]
+item = "gh_ed25519"
+vault = "Employee"
+{{- end }}

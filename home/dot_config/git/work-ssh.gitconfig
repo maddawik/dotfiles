@@ -1,0 +1,5 @@
+# VulnCheck repos authenticate with the work GitHub key from the 1Password
+# agent instead of the personal one ~/.ssh/config picks for github.com.
+# Included from ~/.gitconfig on work machines only.
+[core]
+  sshCommand = ssh -o IdentitiesOnly=yes -i ~/.ssh/gh_ed25519.pub
