@@ -94,3 +94,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
     set("n", "<leader>cd", vim.diagnostic.open_float, "Line diagnostics")
   end,
 })
+
+-- A zoomed terminal (e.g. Claude Code) errors in snacks' BufWinEnter handler when
+-- its buffer is deleted on exit, so drop the zoom before the buffer goes away.
+vim.api.nvim_create_autocmd("TermClose", {
+  group = group,
+  callback = function(ev)
+    local zen = Snacks.zen.win
+    if zen and zen:valid() and zen.buf == ev.buf then
+      zen:close()
+    end
+  end,
+})
