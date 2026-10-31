@@ -111,7 +111,10 @@ return {
       Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
       Snacks.toggle.dim():map("<leader>uD")
       Snacks.toggle.indent():map("<leader>ug")
-      Snacks.toggle.zoom():map("<leader>wm"):map("<leader>uZ"):map("<M-z>", { mode = { "n", "t" } })
+      Snacks.toggle.zoom():map("<leader>wm"):map("<leader>uZ")
+      local quiet_zoom = Snacks.toggle.zoom()
+      quiet_zoom.opts.notify = false
+      quiet_zoom:map("<M-z>", { mode = { "n", "t" } })
       Snacks.toggle.zen():map("<leader>uz")
       if vim.lsp.inlay_hint then
         Snacks.toggle.inlay_hints():map("<leader>uh")
