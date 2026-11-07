@@ -65,7 +65,7 @@ return {
         -- Helm
         "helm-ls",
         -- TOML
-        "taplo",
+        "tombi",
         -- OPA
         "regols",
       },
@@ -239,7 +239,7 @@ return {
         fish_lsp = {},
         bashls = {},
         marksman = {},
-        taplo = {},
+        tombi = {},
         regols = {},
       }
 
