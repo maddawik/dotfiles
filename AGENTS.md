@@ -5,12 +5,11 @@ work hostnames, or `~/.ssh/config`.
 
 ## Conventions
 
-- Commits: one-line conventional message (`feat:`, `fix:`, `chore:`, `docs:`),
-  no body, no AI attribution lines.
+- Commits: one-line conventional message (`feat:`, `fix:`, `chore:`, `docs:`).
 - Scripts live in `home/.chezmoiscripts/darwin/` and run alphabetically after
   files are written: install-packages → macos-defaults → setup-fish-plugins →
   setup-gh-extensions → setup-gpg → setup-sudo-touchid → start-services →
-  vault-sync-*. Templates render *before* any script runs, so
+  vault-sync-*. Templates render *before\* any script runs, so
   a template can't see a tool a script installs in the same apply.
 - Package lists are in `run_onchange_after_install-packages.sh.tmpl`, gated by
   the profile flags below. Every tap line carries `trusted: true` (Homebrew
@@ -70,9 +69,3 @@ If git ever wants ssh before the key exists: `GIT_CONFIG_GLOBAL=/dev/null chezmo
   managed. Point `statusLine.command` in `~/.claude/settings.json` at it
   (`bash ~/.claude/statusline-command.sh`). Settings, skills and hooks are
   deliberately not in the repo.
-
-## Status (2026-10-16)
-
-Old machine `mba-vc` is the source of truth for captured defaults. New work
-laptop was mid-setup: packages, defaults, ssh key and fish plugins done;
-sketchybar font rendering still looked wrong and was being diagnosed.
